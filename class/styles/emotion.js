@@ -27,6 +27,9 @@ export const TagName = styled.span`
 export const MyInput = styled.input`
     width: 170px;
     height: 15px;
-    margin-top: 3px;
+    margin-top: px;
 `
 
+export const Error = styled.div`
+    color: red;
+`
