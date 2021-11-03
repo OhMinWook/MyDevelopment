@@ -7,31 +7,38 @@ import { useState } from "react"
 export default function BoardsNew() {
 
     const [ name, setName ] = useState("")
-    const [ nameError, setNameError ] = useState("")
     const [ password, setPassword ] = useState("")
-    const [ passwordError, setPasswordError ] = useState("")
     const [ title, setTitle ] = useState("")
-    const [ titleError, setTitleError ] = useState("")
     const [ content, setContent ] = useState("")
+
+    const [ nameError, setNameError ] = useState("")
+    const [ passwordError, setPasswordError ] = useState("")
+    const [ titleError, setTitleError ] = useState("")
     const [ contentError, setContentError ] = useState("")
 
-
     function InputName(event) {
-        event.target.value
         setName(event.target.value)
+        if (event.target.value !== "") {
+            setNameError("");
+          }
     }
     function InputPassword(event) {
-        event.target.value
         setPassword(event.target.value)
+        if (event.target.value !== "") {
+            setPasswordError("");
+          }
     }
     function InputTitle(event) {
-        event.target.value
         setTitle(event.target.value)
+        if (event.target.value !== "") {
+            setTitleError("");
+          }
     }                                          
     function InputInfo(event) {
-        event.target.value
         setContent(event.target.value)
-  
+        if (event.target.value !== "") {
+            setContentError("");
+          }
     }
 
     function ErrorMessage() {  
@@ -48,10 +55,7 @@ export default function BoardsNew() {
             setContentError("내용을 입력해 주세요.")
         }
       
-        
     }
-
-
 
 
     return(
