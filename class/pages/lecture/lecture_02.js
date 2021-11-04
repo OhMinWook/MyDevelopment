@@ -31,4 +31,4 @@
 // apollo-client - MUTATION(생성, 수정, 삭제), QUERY(조회)
 
 // vs code에서 사용
-// 편집 첨부 삽입
+// 캡처 첨부 삽입

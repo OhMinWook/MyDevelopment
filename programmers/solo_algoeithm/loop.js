@@ -5,7 +5,7 @@ function sum(num) {
 }
 
 for(let i = 0; i <=num; i++){
-    count += count[i]
+    count += i
 }
 
 // 문자열에서 "a"가 몇 변 등장하는지 횟수를 구하는 함수를 만들려고 합니다.,
@@ -16,7 +16,7 @@ function countLetter(str) {
 }
 
 for(let i = 0; i<= str.length; i++){
-    if(str[i] === "a") {
+    if(str[i] === "a" || str[i] === "A") {
         count += 1;
     }
 }
@@ -27,13 +27,16 @@ for(let i = 0; i<= str.length; i++){
 // num은 숫자열입니다.
 
 function makeNumber(num) {
-	let str = '1';
+    let str = ""
 
-    for(let i = 2; i < num; i++) {
-        str = str + "-" + i
+    for(let i = 1; i <= num; i++) {
+        
+        str += i;
+
+        if(i !== num) {
+            str += '-';
+        }
     }
-
-    console.log(makeNumber(num))
 }
 
 // 홀수 문자열
@@ -43,9 +46,9 @@ function makeNumber(num) {
 function makeOdd(num) { 
 	let str = '';
 
-    for(let i = 0; i < num; i++) {
+    for(let i = 1; i < num; i++) {
         if(i % 2 === 1) {
-            str = str[i]
+            str += i
         }
     }
 
@@ -57,6 +60,18 @@ function makeOdd(num) {
 // str은 무작위 숫자인 문자열입니다. 해당 문자열에서 가장 큰 수를 구하는 함수를 만들어야합니다.
 // 만약 str에 "12345"가 들어온다면 "5"를 나타내야 합니다.
 function bigNum(str) {
-	let biggest = '';
-
+    
+        let biggest = 0;
+    
+    
+        for(let i = 0; i < str.length; i++) {
+            if(biggest < Number(str[i])) {
+                biggest = Number(str[i]);
+            }
+        }
+    return String(biggest)
 }
+
+
+
+

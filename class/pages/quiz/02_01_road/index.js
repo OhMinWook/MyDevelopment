@@ -1,8 +1,32 @@
+import { useState } from 'react'
 import { Logo, Wrapper, Header, Title, Body, Footer, 
          Menu, Input,BodyLine, BodyLogin, UnderLogo, 
-         LogoWrapper, MenuLine, MenuTitle, FooterLogin, BodyInput  } from '../../../styles/road_emotion'
+         LogoWrapper, MenuLine, MenuTitle, FooterLogin, BodyInput, Error  } from '../../../styles/road_emotion'
 
 export default function RoadPage() {
+
+    const [email, setEmail] = useState("")
+    const [emailerror, setEmailError] = useState("")
+    const [password, setPassword] = useState("")
+    const [passworderror, setPasswordError] = useState("")
+
+    function SingupEmail(event) {
+        setEmail(event.target.value)
+    }
+
+    function SingupPassword(event) {
+        setEmail(event.target.value)
+    }
+
+    function ErrorMessage() {
+        if(email.includes("@") === false ) {
+            setEmailError("이메일 주소를 다시 확인해주세요!")
+        }
+        
+        if(password.length < 8 || password.length > 16) {
+            setPasswordError("8-16자의 영문, 숫자, 특수 문자만 사용가능합니다.")
+        }
+    }
 
 
     return (
@@ -17,16 +41,16 @@ export default function RoadPage() {
             </Header>
             <Body>
                 <BodyInput>
-                    <Input type="text" />
+                    <Input type="text" onChange={SingupEmail}/>
                     <img src="/images/ic-20-delete-white.png"/>
                 </BodyInput>
-                <div></div>
+                <Error>{emailerror}</Error>
                 <BodyInput>
-                    <Input type="text" />
+                    <Input type="password" onChange={SingupPassword}/>
                     <img src="/images/ic-20-delete-white.png"/>
                 </BodyInput>
-                <div></div>
-                <BodyLogin>로그인</BodyLogin>
+                <Error>{passworderror}</Error>
+                <BodyLogin onClick={ErrorMessage}>로그인</BodyLogin>
             </Body>
             <Menu>
                 <MenuTitle>이메일 찾기</MenuTitle><MenuLine></MenuLine>

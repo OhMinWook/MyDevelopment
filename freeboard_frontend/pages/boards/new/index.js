@@ -1,10 +1,23 @@
-import { WholeWrapper, BoardsTitle, Wrapper__Header, HeadWriter,HeadWriterInput, HeadPassword, HeadPasswordInput, Wrapper__Body1, BodyTitle, BodyTitleInput, BodyContent, BodyContentInput,
- Wrapper__Body2, BodyAddress, BodyAddressButton, BodyAddressInput1, BodyAddressInput2, BodyAddressNumber, FooterYoutube, FooterYoutubeInput, FooterPicture,
-FooterPictureGroup, FooterPictureUpload, FooterMain, FooterMainSettingSelect, FooterMainSetting, SignupButton, Writer, Password, FooterInput, Picture, Error } from '../../../styles/BoardsNewEmotion'
+import { WholeWrapper, BoardsTitle, Wrapper__Header, HeadWriter,HeadWriterInput, HeadPassword, HeadPasswordInput, 
+         Wrapper__Body1, BodyTitle, BodyTitleInput, BodyContent, BodyContentInput,
+         Wrapper__Body2, BodyAddress, BodyAddressButton, BodyAddressInput1, BodyAddressInput2, BodyAddressNumber, 
+         FooterYoutube, FooterYoutubeInput, FooterPicture, FooterPictureGroup, FooterPictureUpload, FooterMain, 
+         FooterMainSettingSelect, FooterMainSetting, SignupButton, Writer, Password, FooterInput, Picture, Error } from '../../../styles/BoardsNewEmotion'
 
 import { useState } from "react"
+import { useMutation, gql } from '@apollo/client'
+
+const CREATE_BOARD = gql`
+    mutation createBoard($createBoardInput: CreateBoardInput!) {
+        createBoard(createBoardInput: $createBoardInput){
+            _id
+            writer
+        }
+    }
+`
 
 export default function BoardsNew() {
+    const [ createBoard ] = useMutation(CREATE_BOARD)
 
     const [ name, setName ] = useState("")
     const [ password, setPassword ] = useState("")
@@ -15,6 +28,8 @@ export default function BoardsNew() {
     const [ passwordError, setPasswordError ] = useState("")
     const [ titleError, setTitleError ] = useState("")
     const [ contentError, setContentError ] = useState("")
+
+    
 
     function InputName(event) {
         setName(event.target.value)
@@ -41,7 +56,18 @@ export default function BoardsNew() {
           }
     }
 
-    function ErrorMessage() {  
+    async function ErrorMessage() { 
+        const result = await createBoard({
+            variables: { 
+                createBoardInput: {
+                writer: name,
+                password: password,
+                title: title,
+                contents: content
+                }
+            }
+        }) 
+        console.log(result)
         if(name === "") {
             setNameError("이름을 입력해 주세요.")
         }
@@ -54,8 +80,9 @@ export default function BoardsNew() {
         if(content === "") {
             setContentError("내용을 입력해 주세요.")
         }
-      
+       
     }
+    
 
 
     return(

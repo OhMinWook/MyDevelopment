@@ -77,6 +77,7 @@ export const Input = styled.input`
     &:focus {
         outline: none;
     }
+    font-size: 24px;
 `
 
 
@@ -144,3 +145,8 @@ export const FooterLogin = styled.button`
     background-color: transparent;
 `
 
+export const Error = styled.div`
+    color: #ff1b6d;
+    font-size: 18px;
+    width: 100%;
+`
