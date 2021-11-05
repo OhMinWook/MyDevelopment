@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Logo, Wrapper, Header, Title, Body, Footer, 
-         Menu, Input,BodyLine, BodyLogin, UnderLogo, 
+         Menu, Input, BodyLine, BodyLogin, UnderLogo, 
          LogoWrapper, MenuLine, MenuTitle, FooterLogin, BodyInput, Error  } from '../../../styles/road_emotion'
 
 export default function RoadPage() {
@@ -15,7 +15,7 @@ export default function RoadPage() {
     }
 
     function SingupPassword(event) {
-        setEmail(event.target.value)
+        setPassword(event.target.value)
     }
 
     function ErrorMessage() {

@@ -164,10 +164,10 @@ function solution(arr){
 function solution (phone_number) {
     let answer = "";
 
-    for(let i = 0; i < phone_number.length; i++) {
+    for(let i = 1; i <= phone_number.length; i++) {
         // 뒤에서 4자리 수가 아닐 경우 *로 바꿔주는 코드 작성
-        if(phone_number[i].slice(-4, phone_number.length)) {
-
+        if(phone_number.length-4) {
+            answer += phone_number[i]
         } else {
             answer.push("*");
         }

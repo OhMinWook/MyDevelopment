@@ -109,8 +109,6 @@ export const Menu = styled.div`
     align-items: center;
 
     color: white;
-
-    
 `
 
 export const MenuTitle = styled.div`
