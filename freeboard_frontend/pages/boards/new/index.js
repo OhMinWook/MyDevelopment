@@ -4,6 +4,7 @@ import { WholeWrapper, BoardsTitle, Wrapper__Header, HeadWriter,HeadWriterInput,
          FooterYoutube, FooterYoutubeInput, FooterPicture, FooterPictureGroup, FooterPictureUpload, FooterMain, 
          FooterMainSettingSelect, FooterMainSetting, SignupButton, Writer, Password, FooterInput, Picture, Error } from '../../../styles/BoardsNewEmotion'
 
+import { useRouter } from 'next/router'
 import { useState } from "react"
 import { useMutation, gql } from '@apollo/client'
 
@@ -12,11 +13,16 @@ const CREATE_BOARD = gql`
         createBoard(createBoardInput: $createBoardInput){
             _id
             writer
+            title
+            
         }
     }
 `
 
 export default function BoardsNew() {
+
+    const router = useRouter();
+
     const [ createBoard ] = useMutation(CREATE_BOARD)
 
     const [ name, setName ] = useState("")
@@ -56,18 +62,26 @@ export default function BoardsNew() {
           }
     }
 
-    async function ErrorMessage() { 
-        const result = await createBoard({
-            variables: { 
-                createBoardInput: {
-                writer: name,
-                password: password,
-                title: title,
-                contents: content
+    async function onSignupButton() { 
+        try{
+            const result = await createBoard({
+                variables: { 
+                    createBoardInput: {
+                    writer: name,
+                    password: password,
+                    title: title,
+                    contents: content
+                    }
                 }
-            }
-        }) 
+            }) 
+
+        }catch(error) {
+
+            console.log(error.message)
+        }
         console.log(result)
+        router.push(`/boards/new/${result.data.createBoard._id}`)
+
         if(name === "") {
             setNameError("이름을 입력해 주세요.")
         }
@@ -140,7 +154,7 @@ export default function BoardsNew() {
                     <FooterMainSettingSelect type="radio" name="mainset"/>사진
                 </FooterInput>
             </FooterMain>
-            <SignupButton onClick={ErrorMessage}>등록하기</SignupButton>
+            <SignupButton onClick={onSignupButton}>등록하기</SignupButton>
         </WholeWrapper>
     )
 

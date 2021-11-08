@@ -109,6 +109,13 @@
   dependencies:
     regenerator-runtime "^0.13.4"
 
+"@babel/runtime@^7.14.0", "@babel/runtime@^7.15.3":
+  version "7.16.0"
+  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.16.0.tgz#e27b977f2e2088ba24748bf99b5e1dece64e4f0b"
+  integrity sha512-Nht8L0O8YCktmsDV6FqFue7vQLRx3Hb0B37lS5y0jDRqRxlBG4wIJHnf9/bgSE2UyipKFA01YtS+npRdTWBUyw==
+  dependencies:
+    regenerator-runtime "^0.13.4"
+
 "@babel/types@7.15.0":
   version "7.15.0"
   resolved "https://registry.npmjs.org/@babel/types/-/types-7.15.0.tgz"
@@ -129,6 +136,37 @@
   version "3.4.0"
   resolved "https://registry.npmjs.org/@ctrl/tinycolor/-/tinycolor-3.4.0.tgz"
   integrity sha512-JZButFdZ1+/xAfpguQHoabIXkcqRRKpMrWKBkpEZZyxfY9C1DpADFB8PEqGSTeFr135SaTRfKqGKx5xSCLI7ZQ==
+
+"@emotion-icons/emotion-icon@4.1.0":
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/@emotion-icons/emotion-icon/-/emotion-icon-4.1.0.tgz#587667e92a72dc3b271713eed4b72c6bf3b22df1"
+  integrity sha512-bOUbWj8DPjUK5MtRx2ApMudOnh/tasqJwa+sdRbqsZD0g0hYf0jCsTDNs/57VvGOJH2PfWDKD1jbLjwajAYT9A==
+  dependencies:
+    "@babel/runtime" "^7.14.0"
+
+"@emotion-icons/fa-brands@^3.19.0":
+  version "3.19.0"
+  resolved "https://registry.yarnpkg.com/@emotion-icons/fa-brands/-/fa-brands-3.19.0.tgz#5b62224ee4cd84d32351c197fa8ed589bfec649f"
+  integrity sha512-uzGhn+ydKjc9ju+oHYCYgQOHJBf1RhKdj7I8CV+RirlbuzY9rORvqRPu6OqJpQ/j2MbS2qN/zzFlTJt4JA0q4w==
+  dependencies:
+    "@babel/runtime" "^7.15.3"
+    "@emotion-icons/emotion-icon" "4.1.0"
+
+"@emotion-icons/fa-regular@^3.14.0":
+  version "3.14.0"
+  resolved "https://registry.yarnpkg.com/@emotion-icons/fa-regular/-/fa-regular-3.14.0.tgz#914b071722d96221dd344a9e17eb17b1a89417e0"
+  integrity sha512-46LGFssGApBQjYEypkdaMEGzpVCadPblwIx/zIom1i63SHuoAeDSZOaPLMuqYiBIL0iKeKgTntD9HTvpz/tB/A==
+  dependencies:
+    "@babel/runtime" "^7.14.0"
+    "@emotion-icons/emotion-icon" "4.1.0"
+
+"@emotion-icons/fa-solid@^3.14.0":
+  version "3.14.0"
+  resolved "https://registry.yarnpkg.com/@emotion-icons/fa-solid/-/fa-solid-3.14.0.tgz#b765d711d7aabdc0aeb3374d45861de17382a1ff"
+  integrity sha512-NEmiShaIsHouBfKcTxke1CYpzHrgZA20YXDN/c8dqxPpm6TIVS8dga/cJWBBlAxsR+2PbWMBMtC1z6Ie42zuCg==
+  dependencies:
+    "@babel/runtime" "^7.14.0"
+    "@emotion-icons/emotion-icon" "4.1.0"
 
 "@emotion/babel-plugin@^11.3.0":
   version "11.3.0"

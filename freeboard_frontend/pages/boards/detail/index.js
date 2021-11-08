@@ -1,8 +1,29 @@
+import { useRouter } from "next/router"
+import { useQuery, gql } from '@apollo/client'
 import { Wrapper, Header, Body, LeftIcon,HeadLeft, Name, HeadInfo, Data, Line, 
         RightIcon, Footer, FootIcons, Icon1, Icon2, FootImg, Title, LeftCount, 
         WholeWrapper, Buttons, Button, HeadRight, Content, RightCount} from '../../../styles/DetailEmotion'
 
+const FETCH_BOARD = gql`
+    query fetchBoard($boardId: ID!) {
+        fetchBoard(boardId: $boardId) {
+        writer
+        title
+        contents
+        }
+    }
+`
+ 
 export default function BoardsDetail() {
+
+   
+    const router = useRouter()
+
+    const { data } = useQuery(FETCH_BOARD, {
+        variables: {
+            boardId: router.query.signup
+        }
+    })
 
 
 
@@ -13,7 +34,7 @@ export default function BoardsDetail() {
                     <HeadLeft>
                         <LeftIcon src="/images/Profile.png"/>
                         <HeadInfo>
-                            <Name>오민욱</Name>
+                            <Name>{data && data.fetchBoard.writer}</Name>
                             <Data>Date:2021.02.18</Data>
                         </HeadInfo>
                     </HeadLeft>
@@ -24,13 +45,9 @@ export default function BoardsDetail() {
                 </Header>
                 <Line></Line>
                 <Body>
-                    <Title>게시글 제목입니다.</Title>
+                    <Title>{data && data.fetchBoard.title}</Title>
                     <img src="/images/image.png"/>
-                    <Content>가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나
-                        다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마
-                        바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아
-                        자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카
-                        타파하가나다라마바사아자차카타파하가나다라</Content>
+                    <Content>{data && data.fetchBoard.Content}</Content>
                 </Body>
                 <Footer>
                     <FootImg></FootImg>
