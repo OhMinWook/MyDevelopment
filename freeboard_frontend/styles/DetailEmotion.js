@@ -1,156 +1,153 @@
 import styled from "@emotion/styled";
 
-export const WholeWrapper = styled.div`
-    
-    padding: 0px 50% 0px 50%;
+export const Html = styled.div`
+    padding: 100px 50px;
     display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
+    flex-direction: row;
+    margin-left: 50px;
 `
 
 export const Wrapper = styled.div`
-    
+    margin: 0 auto;
+    padding: 20px 50px 20px 65px;
     width: 1200px;
-    border: 1px solid #999999;
-    padding: 80px 102px 80px 102px;
-    margin-bottom: 87px;
-
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    align-items: center;
-`
-export const Header = styled.div`
-    width: 100%;
-    height: 116px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-`
-export const HeadLeft = styled.div`
-    width: 189px;
-    height: 47px;
-    display: flex;
-    justify-content: space-between;
-    
+    align-items: flex-start;
+    border: 1px solid black;
+    box-shadow: 0px 0px 1px 3px;
 `
 
-export const HeadInfo = styled.div`
+export const LeftWrapper = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    align-items: flex-start;
 `
 
-export const LeftIcon = styled.img`
-   
-    /* background-color: #999999; */
-`
-
-export const HeadRight = styled.div`
-    display: flex;
-    justify-content: center;
-    
-`
-export const RightIcon = styled.img`
-    
-    margin-left: 35px;
-`
-
-export const Name = styled.div`
-    font-size: 24px;
-    font-weight: 500;
-`
-export const Data = styled.div`
-    font-size: 16px;
-    font-weight: 400;
-`
-
-export const Line = styled.div`
-    width: 100%;
-    border-top: 1px solid #000000;
-    margin-top: 20px;
-`
-
-export const Body = styled.div`
-    width: 100%;
-    height: 811px;
+export const DetailInput = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    align-self: center;
-    margin-bottom: 120px;
+    align-items: flex-start;
 `
 
 export const Title = styled.div`
-    font-size: 36px;
-    font-weight: 700;
-    margin-top: 80px;
-`
-
-export const Content = styled.div`
-    font-size: 16px;
+    font-size: 50px;
+    color: #ffffff;
+    font-weight: bold;
+    text-shadow: 0 1px 0 #CCC, 0 2px 0 #C9C9C9, 0 3px 0 #BBB, 0 4px 0 #B9B9B9, 
+                 0 5px 0 #AAA, 0 6px 1px rgba(0, 0, 0, .1), 0 0 5px rgba(0, 0, 0, .1), 
+                 0 1px 3px rgba(0, 0, 0, .3), 0 3px 5px rgba(0, 0, 0, .2), 0 5px 10px 
+                 rgba(0, 0, 0, .25), 0 10px 10px rgba(0, 0, 0, .2), 0 20px 20px 
+                 rgba(0, 0, 0, .15);
     
 `
 
-export const Footer = styled.div`
-    width: 100%;
-    height: 531px;
+export const Input = styled.input`
+    margin-top: 25px;
+    width: 500px;
+    height: 45px;
+    padding: 10px;
+    ::placeholder,
+    ::-webkit-input-placeholder {
+    color: pink;
+  }
+`
+export const NameWrapper = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    align-items: center ;
 `
 
-export const FootImg = styled.div`
-    width: 486px;
-    height: 240px;
-    background-color: #999999;
-`
-
- export const FootIcons = styled.div`
-    display: flex;
-    justify-content: space-between;
- `
-
- export const Icon1 = styled.div`
-    margin-right: 40px;
-    display: flex;
-    flex-direction : column;
-    justify-content: center;
- `
-
-export const Icon2 = styled.div`
-    
-    display: flex;
-    flex-direction : column;
-    justify-content: center;
-`
-
-export const LeftCount = styled.div`
-    padding-top: 4px;
-    color: #FFD600;
-
-`
-
-export const RightCount = styled.div`
-
-`
-
-export const Buttons = styled.div`
-    
-    display: flex;
-    justify-content: space-between;
-    text-align: center;
-    padding-bottom: 50px;
+export const AdInput = styled.input`
+    width: 250px;
+    height: 45px;
+    margin-top: 25px;
 `
 
 export const Button = styled.button`
-    width: 179px;
     height: 45px;
-    margin-right: 24px;
-    background-color: #ffffff;
+    width: 130px;
+    margin-left: 10px;
+    background-color: #ff0000;
+    color: #ffffff;
     font-weight: bold;
-    color: #000000;
     font-size: 16px;
+`
+
+export const HeadWrapper = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 500px;
+    height: 45px;
+    margin-top: 25px;
+`
+export const TitleWrapper = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+`
+
+export const Pictures = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-self: flex-start;
+
+    width: 65%;
+    margin-top: 20px;
+`
+
+export const Picture = styled.div`
+    width: 100px;
+    height: 100px;
+    background-color: #999999;
+   
+`
+
+export const Radios = styled.div`
+    margin-top: 10px;
+`
+
+export const FooterButton = styled.div`
+
+`
+
+export const SignupButton = styled.button`
+    width: 100px;
+    height: 40px;
+    margin-top: 10px;
+    background-color: #ff0000;
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 16px;
+    margin-right: 20px;
+`
+
+export const RightWrapper = styled.div`
+    width: 500px;
+    height: 735px;
+    margin-right: 90px;
+    border: 1px solid #999999;
+    box-shadow: 0px 0px 1px 3px;
+    background-image: url("/images/darkbackground.png");
+`
+
+export const Error = styled.div`
+    font-size: 11px;
+    color: #ff0000;
+`
+
+export const TitleError = styled.div`
+    margin-left: 20px;
+    font-size: 11px;
+    color: #ff0000;
+`
+
+export const NameError = styled.div`
+    font-size: 11px;
+    color: #ff0000;
 `

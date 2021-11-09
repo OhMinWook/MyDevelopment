@@ -6,14 +6,12 @@ export const Html = styled.div`
     display: flex;
     flex-direction: row;
     margin-left: 50px;
-    
-    
 `
 
 export const Wrapper = styled.div`
     margin: 0 auto;
     padding: 20px 50px 20px 65px;
-    width: 1000px;
+    width: 1200px;
 
     display: flex;
     flex-direction: column;
@@ -23,7 +21,6 @@ export const Wrapper = styled.div`
     border: 1px solid black;
     
     box-shadow: 0px 0px 1px 3px;
-
 `
 
 export const LeftWrapper = styled.div`
@@ -31,7 +28,6 @@ export const LeftWrapper = styled.div`
     flex-direction: column;
     justify-content: space-between;
     align-items: flex-start;
-
 `
 
 export const DetailInput = styled.div`
@@ -49,8 +45,7 @@ export const Title = styled.div`
                  0 5px 0 #AAA, 0 6px 1px rgba(0, 0, 0, .1), 0 0 5px rgba(0, 0, 0, .1), 
                  0 1px 3px rgba(0, 0, 0, .3), 0 3px 5px rgba(0, 0, 0, .2), 0 5px 10px 
                  rgba(0, 0, 0, .25), 0 10px 10px rgba(0, 0, 0, .2), 0 20px 20px 
-                 rgba(0, 0, 0, .15);
-    
+                 rgba(0, 0, 0, .15); 
 `
 
 export const Input = styled.input`
@@ -63,6 +58,27 @@ export const Input = styled.input`
     color: pink;
   }
 `
+export const NameWrapper = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+`
+
+export const NameInput =styled.input`
+    width: 230px;
+    height: 45px;
+    padding: 10px;
+    ::placeholder,
+    ::-webkit-input-placeholder {
+    color: pink;
+  }
+`
+
+export const AdInput = styled.input`
+    width: 250px;
+    height: 45px;
+    margin-top: 25px;
+`
 
 export const Button = styled.button`
     height: 45px;
@@ -74,10 +90,24 @@ export const Button = styled.button`
     font-size: 16px;
 `
 
-export const TitleInput = styled.input`
-    width: 250px;
+export const HeadWrapper = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 500px;
     height: 45px;
     margin-top: 25px;
+`
+export const PasswordWrapper = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+`
+
+export const PasswordInput = styled.input`
+    width: 250px;
+    height: 45px;
+    margin-left: 20px;
     padding: 10px;
     ::placeholder,
     ::-webkit-input-placeholder {
@@ -90,8 +120,7 @@ export const Pictures = styled.div`
     flex-direction: row;
     justify-content: space-between;
     align-self: flex-start;
-
-    width: 50%;
+    width: 65%;
     margin-top: 20px;
 `
 
@@ -117,9 +146,25 @@ export const SignupButton = styled.button`
 
 export const RightWrapper = styled.div`
     width: 500px;
-    height: 735px;
+    height: 800px;
     margin-right: 90px;
     border: 1px solid #999999;
     box-shadow: 0px 0px 1px 3px;
     background-image: url("/images/darkbackground.png");
+`
+
+export const Error = styled.div`
+    font-size: 11px;
+    color: #ff0000;
+`
+
+export const PasswordError = styled.div`
+    margin-left: 20px;
+    font-size: 11px;
+    color: #ff0000;
+`
+
+export const NameError = styled.div`
+    font-size: 11px;
+    color: #ff0000;
 `

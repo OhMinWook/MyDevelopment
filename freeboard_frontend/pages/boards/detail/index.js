@@ -2,7 +2,7 @@ import { useRouter } from "next/router"
 import { useQuery, gql } from '@apollo/client'
 import { Wrapper, Header, Body, LeftIcon,HeadLeft, Name, HeadInfo, Data, Line, 
         RightIcon, Footer, FootIcons, Icon1, Icon2, FootImg, Title, LeftCount, 
-        WholeWrapper, Buttons, Button, HeadRight, Content, RightCount} from '../../../styles/DetailEmotion'
+        WholeWrapper, Buttons, Button, HeadRight, Content, RightCount} from '../../../styles/<div'
 
 const FETCH_BOARD = gql`
     query fetchBoard($boardId: ID!) {

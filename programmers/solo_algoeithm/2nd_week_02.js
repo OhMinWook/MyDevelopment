@@ -2,7 +2,7 @@
 // 음수도 포함한 반환값에 유의
 
 function solution(num) {
-    var answer = '';
+    let answer = '';
     
      
         if(num % 2 === 0 || num === 0) {
