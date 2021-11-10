@@ -25,39 +25,25 @@ const { data } = useQuery(FETCH_BOARD, {
         boardId: router.query.detailId
     }
 })
+console.log(data)
+
 
 async function onSignupButton() {
     
-    //     const result = await createBoard({
-    //         variables : {
-    //             createBoardInput: {
-    //                 writer: name,
-    //                 title,
-    //                 contents : content
-    //             }
-    //         }
-    //     })
-    
-    // router.push(`/Submit/list/${result.data.createBoard._id}`)
-
-   
-    // if( name ===  ""){
-    //     setNameError("이름을 입력해 주세요")
-    // }
-    // if( title=== "") {
-    //     setTitleError("제목을 입력해 주세요")
-    // }
-    // if(content === "") {
-    //     setContentError("내용을 입력해주세요")
-    // }
-
-    router.push(`/Submit/list`)
+     router.push(`/Submit/list`)
 
 }
+
+   async function DoEdit() {
+
+        router.push(`/Submit/detail/${router.query.detailId}/edit`)
+
+    }
+
 return (
 <Html>
     <Wrapper>
-        <Title>Bulletine Board</Title>
+        <Title>Detail Board</Title>
         <LeftWrapper>
             <HeadWrapper>
                 <NameWrapper>
@@ -90,7 +76,7 @@ return (
             </div>
             <FooterButton>
                 <SignupButton onClick={onSignupButton}>목록으로</SignupButton>
-                <SignupButton>수정하기</SignupButton>
+                <SignupButton onClick={DoEdit}>수정하기</SignupButton>
                 <SignupButton>삭제하기</SignupButton>
             </FooterButton>
         </LeftWrapper>

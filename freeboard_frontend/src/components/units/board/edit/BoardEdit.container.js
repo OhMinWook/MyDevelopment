@@ -1,14 +1,14 @@
-import BoardWriterUI from "./BoardWriter.persenter"
-import { useRouter } from "next/Router"
+import BoardEditUI from "./BoardEdit.presenter";
 import { useState } from "react"
-import { CREATE_BOARD } from './BoardWriter.queries'
 import { useMutation } from '@apollo/client'
+import { CREATE_BOARD, UPDATE_BOARD } from './BoardEdit.queries'
+import { useRouter } from 'next/router'
 
-
-export default function BoardWriterContainerPage(props) {
-
+export default function BoardEditContainPage(props) {
     const router = useRouter()
+
     const [ createBoard ] = useMutation(CREATE_BOARD)
+    const [ updateBoard ] = useMutation(UPDATE_BOARD)
     
     const [name, setName] = useState("")
     const [password, setPassword] = useState("")
@@ -50,48 +50,37 @@ export default function BoardWriterContainerPage(props) {
             setContentError("")
         }
     } 
+ 
 
-    async function addBoard() {
-        if( name ===  ""){
-            setNameError("이름을 입력해 주세요")
-        }
-        if( password === "") {
-            setTitleError("비밀번호를 입력해 주세요")
-        }
-        if(content === "") {
-            setContentError("내용을 입력해주세요")
-        }
-        if( title === "" ) {
-            setTitleError("제목을 입력해 주세요")
-        }
-        try {
-            const result = await createBoard({
-                variables : {
-                    createBoardInput: {
-                        writer: name,
-                        password,
-                        title,
-                        contents : content
-                    }
-                }
-            })
-            console.log(result)
-             router.push(`/Submit/detail/${result.data.createBoard._id}`)
+        async function onEditButton() {
+  
 
-            } catch(error) {
-                alert(error.message)
-            }
+        try{
+            const result = await updateBoard({variables:{
+                updateBoardInput:{
+                    title,
+                    contents:content
+                },
+                password,
+                boardId:router.query.detailId   
+           }})
+        }catch(error){
+            alert(error.message)
+            console.log(error.message)
+        }
+        router.push(`/Submit/detail/${router.query.detailId}`)
+
+    
     }
-
     return (
-        <BoardWriterUI
+        <BoardEditUI 
         InputName={InputName}
         InputPassword={InputPassword}
         InputTitle={InputTitle}
         InputContent={InputContent}
-        addBoard={addBoard}
         isEdit={props.isEdit}
+        onEditButton={onEditButton}
         />
+        
     )
-
 }

@@ -2,7 +2,6 @@ import styled from "@emotion/styled";
 
 export const Html = styled.div`
     padding: 100px 50px;
-
     display: flex;
     flex-direction: row;
     margin-left: 50px;
@@ -12,14 +11,11 @@ export const Wrapper = styled.div`
     margin: 0 auto;
     padding: 20px 50px 20px 65px;
     width: 1200px;
-
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: flex-start;
-
     border: 1px solid black;
-    
     box-shadow: 0px 0px 1px 3px;
 `
 
