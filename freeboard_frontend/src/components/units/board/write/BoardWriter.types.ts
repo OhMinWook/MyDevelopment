@@ -1,7 +1,7 @@
-import { ChangeEvent } from "react";
+import { ChangeEvent, MouseEvent } from "react";
 
 export interface IBoardWriteProps {
-    isEdit: boolean
+    isEdit?: boolean
     data?: any
 }
 
@@ -17,12 +17,12 @@ export interface IMyUpdateBoardInput {
 }
 
 export interface IBoardPresent {
-    isEdit: boolean
+    isEdit?: boolean
     data?:any
-    InputName: (event: ChangeEvent<HTMLInputElement>)=>void
-    InputPassword: (event: ChangeEvent<HTMLInputElement>)=>void
-    InputTitle:(event: ChangeEvent<HTMLInputElement>)=> void
-    InputContent: (event : ChangeEvent<HTMLInputElement>)=> void
+    InputName: ()=>void
+    InputPassword: ()=>void
+    InputTitle:()=> void
+    InputContent: ()=> void
     nameerror: string
     passworderror: string
     titleerror: string
@@ -35,9 +35,9 @@ export interface IBoardWriteUIProps {
     InputName:(event: ChangeEvent<HTMLInputElement>) => void
     InputPassword:(event : ChangeEvent<HTMLInputElement>) => void
     InputTitle:(event : ChangeEvent<HTMLInputElement>) => void
-    InputContent: (event : ChangeEvent<HTMLInputElement>) => void
-    addBoard: () => void
-    onClickUpdate: () => void
+    InputContent: (event : ChangeEvent<HTMLTextAreaElement>) => void
+    addBoard: (event : MouseEvent<HTMLButtonElement>) => void
+    onClickUpdate: (event : MouseEvent<HTMLButtonElement>) => void
 
 }
 
