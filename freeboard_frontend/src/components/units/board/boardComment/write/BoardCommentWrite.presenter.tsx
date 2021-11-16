@@ -19,13 +19,7 @@ export default function BoardCommentWriteUI(props) {
               placeholder="비밀번호"
               onChange={props.onChangeMyPassword}
             />
-            <C.Images>
-              <img src="/images/Star.png" />
-              <img src="/images/Star.png" />
-              <img src="/images/Star.png" />
-              <img src="/images/Star.png" />
-              <img src="/images/Star.png" />
-            </C.Images>
+            <C.Star onChange={props.onChangeStar} />
           </C.TopBody>
           <div>
             <C.Content
@@ -38,7 +32,13 @@ export default function BoardCommentWriteUI(props) {
             />
             <C.BotBody>
               <C.Count>0 / 100</C.Count>
-              <C.Singup onClick={props.onClickSubmit}>등록하기</C.Singup>
+              <C.Singup
+                onClick={
+                  props.isEidt ? props.onClickUpdate : props.onClickSubmit
+                }
+              >
+                {props.isEdit ? "수정하기" : "등록하기"}
+              </C.Singup>
             </C.BotBody>
           </div>
         </>

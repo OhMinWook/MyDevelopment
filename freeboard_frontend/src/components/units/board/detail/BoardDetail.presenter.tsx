@@ -24,7 +24,11 @@ export default function BoardDetailUI(props: IsEdit) {
             <D.DetailInput>
               <D.Input type="text" placeholder="상세 주소를 입력해 주세요" />
               <D.Input type="text" placeholder="상세 주소를 입력해 주세요" />
-              <D.Input type="text" placeholder="링크를 복사해 주세요" />
+              <D.Youtube
+                url={props.first?.fetchBoard.youtubeUrl}
+                width={500}
+                height={200}
+              />
             </D.DetailInput>
             <D.Pictures>
               <D.Picture></D.Picture>
@@ -36,6 +40,18 @@ export default function BoardDetailUI(props: IsEdit) {
               <input type="radio" name="mainset" /> 사진
             </D.Radios>
           </div>
+          <D.IconWrapper>
+            <>
+              <D.LikeIcon onClick={props.onClickLike} />
+              <D.LikeCount>{props.first?.fetchBoard.likeCount}</D.LikeCount>
+            </>
+            <>
+              <D.DisLikeIcon onClick={props.onClickDislike} />
+              <D.DisLikeCount>
+                {props.first?.fetchBoard.dislikeCount}
+              </D.DisLikeCount>
+            </>
+          </D.IconWrapper>
           <D.FooterButton>
             <D.SignupButton onClick={props.onSignupButton}>
               목록으로

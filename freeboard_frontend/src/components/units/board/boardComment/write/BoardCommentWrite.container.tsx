@@ -1,17 +1,22 @@
 import BoardCommentWriteUI from "./BoardCommentWrite.presenter";
 import { useState } from "react";
 import { useRouter } from "next/Router";
-import { CREATE_BOARD_COMMENT } from "./BoardCommentWrite.queries";
+import {
+  CREATE_BOARD_COMMENT,
+  UPDATE_BOARD_COMMENT,
+} from "./BoardCommentWrite.queries";
 import { useMutation } from "@apollo/client";
 import { FETCH_BOARD_COMMENTS } from "../list/BoardCommentList.queries";
 
-export default function BoardCommentWrite() {
+export default function BoardCommentWrite(props) {
+  const router = useRouter();
   const [myWriter, setMyWriter] = useState("");
   const [myPassword, setMyPassword] = useState("");
   const [myContent, setMyContent] = useState("");
+  const [star, setStar] = useState(0);
 
   const [createBoardComment] = useMutation(CREATE_BOARD_COMMENT);
-  const router = useRouter();
+  const [updateBoardComment] = useMutation(UPDATE_BOARD_COMMENT);
 
   function onChangeMyWriter(event) {
     setMyWriter(event.target.value);
@@ -22,6 +27,9 @@ export default function BoardCommentWrite() {
   function onChangeMyContent(event) {
     setMyContent(event.target.value);
   }
+  function onChangeStar(value) {
+    setStar(value);
+  }
 
   async function onClickSubmit() {
     try {
@@ -31,7 +39,7 @@ export default function BoardCommentWrite() {
             writer: myWriter,
             password: myPassword,
             contents: myContent,
-            rating: 0,
+            rating: star,
           },
           boardId: router.query.detailId,
         },
@@ -48,12 +56,42 @@ export default function BoardCommentWrite() {
     }
   }
 
+  async function onClickUpdate(event) {
+    try {
+      if (!props.el?._id) return;
+      await updateBoardComment({
+        variables: {
+          updateBoardCommentInput: {
+            contents: myContent,
+          },
+          password: myPassword,
+          boardCommentId: event.target.id,
+        },
+        refetchQueries: [
+          {
+            query: FETCH_BOARD_COMMENTS,
+            variables: { boardId: router.query.detailId },
+          },
+        ],
+      });
+      props.setIsEdit?.(false);
+    } catch (error) {
+      alert(error.message);
+    }
+  }
+
   return (
     <BoardCommentWriteUI
       onChangeMyWrite={onChangeMyWriter}
       onChangeMyPassword={onChangeMyPassword}
       onChangeMyContent={onChangeMyContent}
+      onChangeStar={onChangeStar}
       onClickSubmit={onClickSubmit}
+      onClickUpdate={onClickUpdate}
+      isEdit={props.isEdit}
+      el={props.el}
+      myContent={myContent}
+      star={star}
     />
   );
 }

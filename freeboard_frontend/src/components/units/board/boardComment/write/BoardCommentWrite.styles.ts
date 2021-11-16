@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { Rate } from "antd";
 
 export const Html = styled.div`
   padding: 0px 50px 50px;
@@ -48,14 +49,16 @@ export const TopBody = styled.div`
   margin-bottom: 20px;
 `;
 
-export const Images = styled.div`
-  padding-top: 3px;
-`;
-
 export const Input = styled.input`
   width: 150px;
   height: 30px;
   margin-right: 20px;
+`;
+
+export const Star = styled(Rate)`
+  /* display: flex;
+  flex-direction: row;
+  justify-content: space-between; */
 `;
 
 export const Content = styled.input`

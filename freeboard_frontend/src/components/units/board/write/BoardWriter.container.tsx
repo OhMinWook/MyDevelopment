@@ -10,21 +10,20 @@ export default function BoardWriterContainerPage(props: IBoardWriteProps) {
   const [createBoard] = useMutation(CREATE_BOARD);
   const [updateBoard] = useMutation(UPDATE_BOARD);
 
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [myaddress, setMyAddress] = useState("");
+
+  const [myzonecode, setMyZonecode] = useState("");
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-  // const [number, setNumber] = useState("")
-  // const [detail, setDetail] = useState("")
-  // const [link, setLink] = useState("")
+  const [youtubeurl, setYoutubeUrl] = useState("");
 
   const [nameerror, setNameError] = useState("");
   const [passworderror, setPasswordError] = useState("");
   const [titleerror, setTitleError] = useState("");
   const [contenterror, setContentError] = useState("");
-  // const [numbererror, setNumberError] = useState("")
-  // const [detailerror, setDetailError] = useState("")
-  // const [linkerror, setLinkError] = useState("")
 
   function InputName(event: ChangeEvent<HTMLInputElement>) {
     setName(event.target.value);
@@ -50,6 +49,19 @@ export default function BoardWriterContainerPage(props: IBoardWriteProps) {
       setContentError("");
     }
   }
+  function InputYoutubeUrl(event: ChangeEvent<HTMLInputElement>) {
+    setYoutubeUrl(event.target.value);
+  }
+
+  const onToggleModal = () => {
+    setIsModalVisible((prev) => !prev);
+  };
+
+  const handleComplete = (data: any) => {
+    setMyAddress(data.address);
+    setMyZonecode(data.zonecode);
+    setIsModalVisible((prev) => !prev);
+  };
   async function addBoard() {
     if (name === "") setNameError("이름을 입력해 주세요");
     if (password === "") setTitleError("비밀번호를 입력해 주세요");
@@ -63,6 +75,7 @@ export default function BoardWriterContainerPage(props: IBoardWriteProps) {
             password,
             title,
             contents: content,
+            youtubeUrl: youtubeurl,
           },
         },
       });
@@ -78,6 +91,7 @@ export default function BoardWriterContainerPage(props: IBoardWriteProps) {
 
     if (title) myUpdateBoardInput.title = title;
     if (content) myUpdateBoardInput.contents = content;
+    if (youtubeurl) myUpdateBoardInput.youtubeUrl = youtubeurl;
 
     // if(!name) setNameError("이름을 입력해 주세요")
     // if(!password) setTitleError("비밀번호를 입력해 주세요")
@@ -106,8 +120,14 @@ export default function BoardWriterContainerPage(props: IBoardWriteProps) {
       InputName={InputName}
       InputPassword={InputPassword}
       InputContent={InputContent}
+      InputYoutubeUrl={InputYoutubeUrl}
       addBoard={addBoard}
       onClickUpdate={onClickUpdate}
+      onToggleModal={onToggleModal}
+      handleComplete={handleComplete}
+      isModalVisible={isModalVisible}
+      myaddress={myaddress}
+      myzonecode={myzonecode}
       isEdit={props.isEdit}
       data={props.data}
     />

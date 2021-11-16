@@ -1,5 +1,7 @@
 import * as W from "./BoardWriter.styles";
 import { IBoardPresent } from "./BoardWriter.types";
+import { Modal } from "antd";
+import DaumPostcode from "react-daum-postcode";
 
 export default function BoardWriterUI(props: IBoardPresent) {
   return (
@@ -41,13 +43,29 @@ export default function BoardWriterUI(props: IBoardPresent) {
           />
           <W.Error>{props.contenterror}</W.Error>
           <div>
-            <W.AdInput type="text" />
-            <W.Button>우편 번호 검색</W.Button>
+            <W.Addresses>
+              <W.Zipcode>{props.myzonecode}</W.Zipcode>
+              <W.Button onClick={props.onToggleModal}>
+                우편 번호 검색
+                {props.isModalVisible && (
+                  <Modal
+                    visible={true}
+                    onOk={props.onToggleModal}
+                    onCancel={props.onToggleModal}
+                  >
+                    <DaumPostcode onComplete={props.handleComplete} />
+                  </Modal>
+                )}
+              </W.Button>
+            </W.Addresses>
             <div />
             <W.DetailInput>
+              <W.Address>{props.myaddress}</W.Address>
               <W.Input type="text" placeholder="상세 주소를 입력해 주세요" />
-              <W.Input type="text" placeholder="상세 주소를 입력해 주세요" />
-              <W.Input type="text" placeholder="링크를 복사해 주세요" />
+              <W.Input
+                placeholder="링크를 복사해 주세요"
+                onChange={props.InputYoutubeUrl}
+              />
             </W.DetailInput>
             <W.Pictures>
               <W.Picture></W.Picture>

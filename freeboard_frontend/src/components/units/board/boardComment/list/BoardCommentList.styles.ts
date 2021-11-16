@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { Rate } from "antd";
 
 export const Html = styled.div`
   padding: 0px 50px;
@@ -52,6 +53,7 @@ export const Name = styled.div`
   margin-right: 10px;
 `;
 
+export const Star = styled(Rate)``;
 export const PencilButton = styled.button`
   /* width: 18px;
   height: 18px; */

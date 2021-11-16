@@ -1,4 +1,6 @@
 import styled from "@emotion/styled";
+import ReactPlayer from "react-player/youtube";
+import { LikeOutlined, DislikeOutlined } from "@ant-design/icons";
 
 export const Html = styled.div`
   padding: 100px 50px;
@@ -53,6 +55,9 @@ export const Input = styled.input`
   ::-webkit-input-placeholder {
     color: pink;
   }
+`;
+export const Youtube = styled(ReactPlayer)`
+  border: 10px solid yellow;
 `;
 export const NameWrapper = styled.div`
   display: flex;
@@ -293,4 +298,30 @@ export const DeleteButton = styled.button`
 
 export const CommentContent = styled.div`
   margin-bottom: 10px;
+`;
+export const IconWrapper = styled.div`
+  width: 20%;
+  display: flex;
+  justify-content: space-between;
+  margin-left: 120px;
+`;
+
+export const LikeIcon = styled(LikeOutlined)`
+  font-size: 24px;
+  color: #ffd600;
+  cursor: pointer;
+`;
+
+export const DisLikeIcon = styled(DislikeOutlined)`
+  font-size: 24px;
+  color: #828282;
+  cursor: pointer;
+`;
+
+export const LikeCount = styled.div`
+  color: #ffd600;
+`;
+
+export const DisLikeCount = styled.div`
+  color: #828282;
 `;
