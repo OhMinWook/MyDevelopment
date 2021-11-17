@@ -12,24 +12,29 @@ import { useState } from "react";
 export default function BoardCommentListUIItem(props) {
   const router = useRouter();
   const [isEdit, setIsEdit] = useState(false);
-  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [isOpenDelelteModal, setIsOpenDeleteModal] = useState(false);
+  const [myPassword, setMyPassword] = useState("");
+
   const [deleteBoardComment] = useMutation(DELETE_BOARD_COMMENT);
 
   function onClickUpdate() {
     setIsEdit(true);
   }
 
-  const onToggleModal = () => {
-    setIsModalVisible((prev) => !prev);
-  };
+  function onClickOpenDelelteModal() {
+    setIsOpenDeleteModal(true);
+  }
 
-  async function onClickDelete(event) {
-    const myPassword = setIsModalVisible(true);
+  function onChangeDeletePassword(event) {
+    setMyPassword(event.target.value);
+  }
+
+  async function onClickDelete() {
     try {
       await deleteBoardComment({
         variables: {
           password: myPassword,
-          boardCommentId: event.target.id,
+          boardCommentId: props.el?._id,
         },
         refetchQueries: [
           {
@@ -45,6 +50,12 @@ export default function BoardCommentListUIItem(props) {
 
   return (
     <>
+      {isOpenDelelteModal && (
+        <Modal visible={true} onOk={onClickDelete}>
+          비밀번호 입력:{" "}
+          <input type="password" onChange={onChangeDeletePassword} />
+        </Modal>
+      )}
       {!isEdit && (
         <D.Html>
           <D.CommentWrapper>
@@ -64,17 +75,8 @@ export default function BoardCommentListUIItem(props) {
                   ></D.PencilButton>
                   <D.DeleteButton
                     id={props.el._id}
-                    onClick={onClickDelete}
+                    onClick={onClickOpenDelelteModal}
                   ></D.DeleteButton>
-                  {isModalVisible && (
-                    <Modal
-                      visible={true}
-                      onOk={onToggleModal}
-                      onCancel={onToggleModal}
-                    >
-                      비밀번호 입력: <input type="password" />
-                    </Modal>
-                  )}
                 </div>
               </D.TopBody>
               <D.Content>{props.el?.contents}</D.Content>

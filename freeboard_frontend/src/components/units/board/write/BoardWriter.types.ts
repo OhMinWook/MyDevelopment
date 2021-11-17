@@ -25,6 +25,7 @@ export interface IBoardPresent {
   InputTitle: () => void;
   InputContent: () => void;
   InputYoutubeUrl: () => void;
+  InputAddressDetail: () => void;
   onToggleModal: () => void;
   handleComplete: () => void;
   nameerror: string;

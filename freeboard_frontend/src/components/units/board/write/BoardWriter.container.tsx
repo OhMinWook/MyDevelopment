@@ -12,8 +12,9 @@ export default function BoardWriterContainerPage(props: IBoardWriteProps) {
 
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [myaddress, setMyAddress] = useState("");
-
+  const [myaddressdetail, setMyAddressDetail] = useState("");
   const [myzonecode, setMyZonecode] = useState("");
+
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [title, setTitle] = useState("");
@@ -53,15 +54,20 @@ export default function BoardWriterContainerPage(props: IBoardWriteProps) {
     setYoutubeUrl(event.target.value);
   }
 
+  function InputAddressDetail(event) {
+    setMyAddressDetail(event.target.value);
+  }
+
   const onToggleModal = () => {
-    setIsModalVisible((prev) => !prev);
+    setIsModalVisible(true);
   };
 
   const handleComplete = (data: any) => {
     setMyAddress(data.address);
     setMyZonecode(data.zonecode);
-    setIsModalVisible((prev) => !prev);
+    setIsModalVisible(false);
   };
+
   async function addBoard() {
     if (name === "") setNameError("이름을 입력해 주세요");
     if (password === "") setTitleError("비밀번호를 입력해 주세요");
@@ -76,6 +82,11 @@ export default function BoardWriterContainerPage(props: IBoardWriteProps) {
             title,
             contents: content,
             youtubeUrl: youtubeurl,
+            boardAddress: {
+              zipcode: myzonecode,
+              address: myaddress,
+              addressDetail: myaddressdetail,
+            },
           },
         },
       });
@@ -88,10 +99,17 @@ export default function BoardWriterContainerPage(props: IBoardWriteProps) {
 
   async function onClickUpdate() {
     const myUpdateBoardInput = {};
-
     if (title) myUpdateBoardInput.title = title;
     if (content) myUpdateBoardInput.contents = content;
     if (youtubeurl) myUpdateBoardInput.youtubeUrl = youtubeurl;
+
+    if (myzonecode || myaddress || myaddressdetail) {
+      myUpdateBoardInput.boardAddress = {};
+      if (myzonecode) myUpdateBoardInput.boardAddress.zipcode = myzonecode;
+      if (myaddress) myUpdateBoardInput.boardAddress.address = myaddress;
+      if (myaddressdetail)
+        myUpdateBoardInput.boardAddress.addressDetail = myaddressdetail;
+    }
 
     // if(!name) setNameError("이름을 입력해 주세요")
     // if(!password) setTitleError("비밀번호를 입력해 주세요")
@@ -121,12 +139,14 @@ export default function BoardWriterContainerPage(props: IBoardWriteProps) {
       InputPassword={InputPassword}
       InputContent={InputContent}
       InputYoutubeUrl={InputYoutubeUrl}
+      InputAddressDetail={InputAddressDetail}
       addBoard={addBoard}
       onClickUpdate={onClickUpdate}
       onToggleModal={onToggleModal}
       handleComplete={handleComplete}
       isModalVisible={isModalVisible}
       myaddress={myaddress}
+      myaddressdetail={myaddressdetail}
       myzonecode={myzonecode}
       isEdit={props.isEdit}
       data={props.data}

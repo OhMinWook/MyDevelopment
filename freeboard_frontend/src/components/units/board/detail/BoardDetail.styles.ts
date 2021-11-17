@@ -3,7 +3,7 @@ import ReactPlayer from "react-player/youtube";
 import { LikeOutlined, DislikeOutlined } from "@ant-design/icons";
 
 export const Html = styled.div`
-  padding: 100px 50px;
+  padding: 100px 0px;
   display: flex;
   flex-direction: row;
   margin-left: 50px;
@@ -46,15 +46,17 @@ export const Title = styled.div`
     0 20px 20px rgba(0, 0, 0, 0.15);
 `;
 
-export const Input = styled.input`
+export const Address = styled.div`
   margin-top: 25px;
   width: 500px;
   height: 45px;
   padding: 10px;
-  ::placeholder,
-  ::-webkit-input-placeholder {
-    color: pink;
-  }
+`;
+export const AddressDetail = styled.div`
+  margin-top: 25px;
+  width: 500px;
+  height: 45px;
+  padding: 10px;
 `;
 export const Youtube = styled(ReactPlayer)`
   border: 10px solid yellow;
@@ -63,12 +65,6 @@ export const NameWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-`;
-
-export const AdInput = styled.input`
-  width: 250px;
-  height: 45px;
-  margin-top: 25px;
 `;
 
 export const Button = styled.button`

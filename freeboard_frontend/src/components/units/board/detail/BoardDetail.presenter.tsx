@@ -18,12 +18,13 @@ export default function BoardDetailUI(props: IsEdit) {
           <div>{props.first?.fetchBoard.title}</div>
           <div>{props.first?.fetchBoard.contents}</div>
           <div>
-            <D.AdInput type="text" />
-            <D.Button>우편 번호 검색</D.Button>
-            <div />
             <D.DetailInput>
-              <D.Input type="text" placeholder="상세 주소를 입력해 주세요" />
-              <D.Input type="text" placeholder="상세 주소를 입력해 주세요" />
+              <D.Address>
+                {props.first?.fetchBoard.boardAddress?.address}
+              </D.Address>
+              <D.AddressDetail>
+                {props.first?.fetchBoard.boardAddress?.addressDetail}
+              </D.AddressDetail>
               <D.Youtube
                 url={props.first?.fetchBoard.youtubeUrl}
                 width={500}
