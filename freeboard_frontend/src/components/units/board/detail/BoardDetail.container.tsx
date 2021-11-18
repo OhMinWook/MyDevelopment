@@ -14,7 +14,7 @@ export default function BoardDetailContainer() {
   const [likeBoard] = useMutation(LIKE_BOARD);
   const [dislikeBoard] = useMutation(DISLIKE_BOARD);
 
-  const { data: first } = useQuery(FETCH_BOARD, {
+  const { data } = useQuery(FETCH_BOARD, {
     variables: {
       boardId: router.query.detailId,
     },
@@ -33,7 +33,7 @@ export default function BoardDetailContainer() {
         variables: { boardId: router.query.detailId },
       });
       alert("게시물이 삭제되었습니다.");
-      router.push(`/detail`);
+      router.push("/detail");
     } catch (error: any) {
       alert(error.message);
     }
@@ -70,7 +70,7 @@ export default function BoardDetailContainer() {
   return (
     <>
       <BoardDetailUI
-        first={first}
+        data={data}
         onSignupButton={onSignupButton}
         DoEdit={DoEdit}
         onClickDelete={onClickDelete}

@@ -1,4 +1,4 @@
-import styled from '@emotion/styled'
+import styled from "@emotion/styled";
 
 export const Wrapper = styled.div`
   width: 1200px;
@@ -78,4 +78,17 @@ export const Button = styled.button`
   :hover {
     background-color: #f5f2fc;
   }
-`
+`;
+
+export const Page = styled.span`
+  margin: 10px;
+  cursor: pointer;
+`;
+
+export const PrevPage = styled.span`
+  font-size: 20px;
+`;
+
+export const NextPage = styled.span`
+  font-size: 20px;
+`;

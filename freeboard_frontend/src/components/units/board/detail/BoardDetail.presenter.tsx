@@ -9,24 +9,24 @@ export default function BoardDetailUI(props: IsEdit) {
         <D.LeftWrapper>
           <D.HeadWrapper>
             <D.NameWrapper>
-              <div>{props.first?.fetchBoard.writer}</div>
+              <div>{props.data?.fetchBoard.writer}</div>
             </D.NameWrapper>
             <D.TitleWrapper>
               <div></div>
             </D.TitleWrapper>
           </D.HeadWrapper>
-          <div>{props.first?.fetchBoard.title}</div>
-          <div>{props.first?.fetchBoard.contents}</div>
+          <div>{props.data?.fetchBoard.title}</div>
+          <div>{props.data?.fetchBoard.contents}</div>
           <div>
             <D.DetailInput>
               <D.Address>
-                {props.first?.fetchBoard.boardAddress?.address}
+                {props.data?.fetchBoard.boardAddress?.address}
               </D.Address>
               <D.AddressDetail>
-                {props.first?.fetchBoard.boardAddress?.addressDetail}
+                {props.data?.fetchBoard.boardAddress?.addressDetail}
               </D.AddressDetail>
               <D.Youtube
-                url={props.first?.fetchBoard.youtubeUrl}
+                url={props.data?.fetchBoard.youtubeUrl}
                 width={500}
                 height={200}
               />
@@ -44,12 +44,12 @@ export default function BoardDetailUI(props: IsEdit) {
           <D.IconWrapper>
             <>
               <D.LikeIcon onClick={props.onClickLike} />
-              <D.LikeCount>{props.first?.fetchBoard.likeCount}</D.LikeCount>
+              <D.LikeCount>{props.data?.fetchBoard.likeCount}</D.LikeCount>
             </>
             <>
               <D.DisLikeIcon onClick={props.onClickDislike} />
               <D.DisLikeCount>
-                {props.first?.fetchBoard.dislikeCount}
+                {props.data?.fetchBoard.dislikeCount}
               </D.DisLikeCount>
             </>
           </D.IconWrapper>

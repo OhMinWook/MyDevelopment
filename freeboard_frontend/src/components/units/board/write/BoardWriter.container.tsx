@@ -54,7 +54,7 @@ export default function BoardWriterContainerPage(props: IBoardWriteProps) {
     setYoutubeUrl(event.target.value);
   }
 
-  function InputAddressDetail(event) {
+  function InputAddressDetail(event: ChangeEvent<HTMLInputElement>) {
     setMyAddressDetail(event.target.value);
   }
 

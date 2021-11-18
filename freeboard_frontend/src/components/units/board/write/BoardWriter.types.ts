@@ -1,4 +1,4 @@
-import { ChangeEvent, MouseEvent } from "react";
+import { ChangeEvent, ChangeEventHandler, MouseEvent } from "react";
 
 export interface IBoardWriteProps {
   isEdit?: boolean;
@@ -20,18 +20,21 @@ export interface IBoardPresent {
   isModalVisible?: boolean;
   isEdit?: boolean;
   data?: any;
-  InputName: () => void;
-  InputPassword: () => void;
-  InputTitle: () => void;
-  InputContent: () => void;
-  InputYoutubeUrl: () => void;
-  InputAddressDetail: () => void;
+  InputName: (event: ChangeEvent<HTMLInputElement>) => void;
+  InputPassword: (event: ChangeEvent<HTMLInputElement>) => void;
+  InputTitle: (event: ChangeEvent<HTMLInputElement>) => void;
+  InputContent: (event: ChangeEvent<HTMLTextAreaElement>) => void;
+  InputYoutubeUrl: (event: ChangeEvent<HTMLInputElement>) => void;
+  InputAddressDetail: (event: ChangeEvent<HTMLInputElement>) => void;
   onToggleModal: () => void;
-  handleComplete: () => void;
+  handleComplete: (data: any) => void;
   nameerror: string;
   passworderror: string;
   titleerror: string;
   contenterror: string;
+  myaddress: string;
+  myaddressdetail: string;
+  myzonecode: string;
   onClickUpdate: () => void;
   addBoard: () => void;
 }
