@@ -149,7 +149,7 @@ export default function BoardWriterContainerPage(props: IBoardWriteProps) {
       myaddressdetail={myaddressdetail}
       myzonecode={myzonecode}
       isEdit={props.isEdit}
-      data={props.data}
+      // data={props.data}
     />
   );
 }

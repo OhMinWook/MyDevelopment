@@ -37,10 +37,10 @@ export default function Layout(props: ILayoutProps) {
       <Banner />
       <Navigation />
       <BodyWrapper>
-        <Sidebar>사이드바영역입니다.</Sidebar>
+        {/* <Sidebar>사이드바영역입니다.</Sidebar> */}
         <Body>{props.children}</Body>
       </BodyWrapper>
-      {isHiddenFooter && <Footer />}
+      <Footer />
     </Wrapper>
   );
 }
