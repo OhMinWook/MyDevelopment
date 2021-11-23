@@ -10,21 +10,21 @@ export const Icons = styled.div`
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  padding: 30px 720px 0px;
+  padding: 30px 820px 0px;
 `;
 
 export const Menu = styled.div`
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  padding: 30px 720px 0px;
+  padding: 10px 840px 0px;
 `;
 
 export const Terms = styled.div`
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  padding: 10px 720px 0px;
+  padding: 10px 840px 0px;
 `;
 
 export const End = styled.div`

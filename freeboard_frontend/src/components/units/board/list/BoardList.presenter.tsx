@@ -7,12 +7,10 @@ import {
   ColumnBasic,
   ColumnTitle,
   TableBottom,
-  PrevPage,
-  Page,
-  NextPage,
   Footer,
   Button,
 } from "./BoardList.styles";
+import Paginations01 from "../../../commons/pagination/pagination.container";
 import { IBoardListProps } from "./BoardList.types";
 
 export default function BoardListUI(props: IBoardListProps) {
@@ -35,19 +33,14 @@ export default function BoardListUI(props: IBoardListProps) {
           {/* <ColumnBasic>{el.createdAt}</ColumnBasic> */}
         </Row>
       ))}
-      <TableBottom />S
+      <TableBottom />
       <Footer>
-        <PrevPage onClick={props.onClickPrevPage}>이전 페이지</PrevPage>
-        {new Array(10).fill(1).map((_, index) => (
-          <Page
-            key={props.startpage + index}
-            onClick={props.onClickPage}
-            id={String(props.startpage + index)}
-          >
-            {props.startpage + index}
-          </Page>
-        ))}
-        <NextPage onClick={props.onClickNextPage}>다음 페이지</NextPage>
+        <Paginations01
+          refetch={props.refetch}
+          count={props.count?.fetchBoardsCount}
+          startpage={props.startpage}
+          setStartPage={props.setStartPage}
+        />
         <Button onClick={props.onClickBoarderNew}>
           <img />
           게시물 등록하기
