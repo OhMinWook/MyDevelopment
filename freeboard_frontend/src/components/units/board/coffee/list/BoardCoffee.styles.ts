@@ -1,18 +1,23 @@
 import styled from "@emotion/styled";
 
-export const Wrapper = styled.div`
-  padding: 30px 20px;
-  width: 100%;
+export const WholeWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
 `;
+
+export const Wrapper = styled.div``;
 
 export const RowWrapper = styled.div`
   display: flex;
+  justify-content: space-between;
+  align-items: center;
   margin-top: 50px;
+  margin-left: 70px;
 `;
 
 export const Tag = styled.div`
-  width: 250px;
-  height: 250px;
+  width: 340px;
+  height: 370px;
   border: 2px solid #000000;
   border-radius: 20px;
   overflow: hidden;
@@ -32,6 +37,8 @@ export const Img2 = styled.div`
   /* background-color: pink; */
   border-top: 1px solid black;
   padding-left: 5px;
+  padding-top: 25px;
+  text-align: center;
 `;
 
 export const Img3 = styled.div`
