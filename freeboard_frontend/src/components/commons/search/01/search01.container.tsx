@@ -24,7 +24,7 @@ export default function SearchPage() {
   const getDebounce = _.debounce((data) => {
     refetch({ search: data, page: 1 });
     setKeyword(data);
-  }, 1000);
+  }, 500);
 
   // 검색 페이지 넘기기
   function onClickPage(event) {
@@ -32,5 +32,12 @@ export default function SearchPage() {
       refetch({ search: keyword, page: Number(event.target.id) });
   }
 
-  return <SearchPageUI data={data} onChangeSearch={onChangeSearch} />;
+  return (
+    <SearchPageUI
+      data={data}
+      keyword={keyword}
+      onChangeSearch={onChangeSearch}
+      onClickPage={onClickPage}
+    />
+  );
 }
