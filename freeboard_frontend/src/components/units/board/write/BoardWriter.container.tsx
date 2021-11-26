@@ -9,22 +9,20 @@ export default function BoardWriterContainerPage(props: IBoardWriteProps) {
   const router = useRouter();
   const [createBoard] = useMutation(CREATE_BOARD);
   const [updateBoard] = useMutation(UPDATE_BOARD);
-
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [myaddress, setMyAddress] = useState("");
   const [myaddressdetail, setMyAddressDetail] = useState("");
   const [myzonecode, setMyZonecode] = useState("");
-
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [youtubeurl, setYoutubeUrl] = useState("");
-
   const [nameerror, setNameError] = useState("");
   const [passworderror, setPasswordError] = useState("");
   const [titleerror, setTitleError] = useState("");
   const [contenterror, setContentError] = useState("");
+  const [fileUrl, setFileUrl] = useState(["", "", ""]);
 
   function InputName(event: ChangeEvent<HTMLInputElement>) {
     setName(event.target.value);
@@ -53,9 +51,14 @@ export default function BoardWriterContainerPage(props: IBoardWriteProps) {
   function InputYoutubeUrl(event: ChangeEvent<HTMLInputElement>) {
     setYoutubeUrl(event.target.value);
   }
-
   function InputAddressDetail(event: ChangeEvent<HTMLInputElement>) {
     setMyAddressDetail(event.target.value);
+  }
+
+  function onChangeFilrUrls(fileUrl, index) {
+    const newFileUrl = [...fileUrl];
+    newFileUrl[index] = fileUrl;
+    setFileUrl(newFileUrl);
   }
 
   const onToggleModal = () => {
@@ -149,6 +152,8 @@ export default function BoardWriterContainerPage(props: IBoardWriteProps) {
       myaddressdetail={myaddressdetail}
       myzonecode={myzonecode}
       isEdit={props.isEdit}
+      onChangeFilrUrls={onChangeFilrUrls}
+      fileUrl={fileUrl}
       // data={props.data}
     />
   );

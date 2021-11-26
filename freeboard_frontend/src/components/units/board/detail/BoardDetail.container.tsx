@@ -10,6 +10,7 @@ import {
 
 export default function BoardDetailContainer() {
   const router = useRouter();
+
   const [deleteBoard] = useMutation(DELETE_BOARD);
   const [likeBoard] = useMutation(LIKE_BOARD);
   const [dislikeBoard] = useMutation(DISLIKE_BOARD);

@@ -2,6 +2,7 @@ import * as W from "./BoardWriter.styles";
 import { IBoardPresent } from "./BoardWriter.types";
 import { Modal } from "antd";
 import DaumPostcode from "react-daum-postcode";
+import UploadPage from "../../../commons/uploads/01/Uploads01.container";
 
 export default function BoardWriterUI(props: IBoardPresent) {
   return (
@@ -73,11 +74,14 @@ export default function BoardWriterUI(props: IBoardPresent) {
                 onChange={props.InputYoutubeUrl}
               />
             </W.DetailInput>
-            <W.Pictures>
-              <W.Picture></W.Picture>
-              <W.Picture></W.Picture>
-              <W.Picture></W.Picture>
-            </W.Pictures>
+            {props.fileUrl.map((el, index) => (
+              <UploadPage
+                key={index}
+                index={index}
+                fileUrl={el}
+                onChangeFilrUrls={props.onChangeFilrUrls}
+              />
+            ))}
             <W.Radios>
               <input type="radio" name="mainset" /> 유튜브
               <input type="radio" name="mainset" /> 사진

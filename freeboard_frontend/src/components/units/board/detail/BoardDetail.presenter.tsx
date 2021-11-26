@@ -1,3 +1,4 @@
+import UploadPage from "../../../commons/uploads/01/Uploads01.container";
 import * as D from "./BoardDetail.styles";
 import { IsEdit } from "./Boarddetail.types";
 
@@ -31,11 +32,14 @@ export default function BoardDetailUI(props: IsEdit) {
                 height={200}
               />
             </D.DetailInput>
-            <D.Pictures>
-              <D.Picture></D.Picture>
-              <D.Picture></D.Picture>
-              <D.Picture></D.Picture>
-            </D.Pictures>
+            {props.fileUrl.map((el, index) => (
+              <UploadPage
+                key={index}
+                index={index}
+                fileUrl={el}
+                onChangeFilrUrls={onChangeFilrUrls}
+              />
+            ))}
             <D.Radios>
               <input type="radio" name="mainset" /> 유튜브
               <input type="radio" name="mainset" /> 사진
