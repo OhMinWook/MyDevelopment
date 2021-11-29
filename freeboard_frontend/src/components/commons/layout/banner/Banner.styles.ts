@@ -2,17 +2,17 @@ import styled from "@emotion/styled";
 
 export const Banner = styled.div`
   width: 100%;
-  height: 800px;
+  height: 330px;
   background-color: black;
 `;
 
 export const ImgWrapper = styled.div`
   width: 100%;
-  height: 800px;
+  height: 330px;
 `;
 
 export const Img = styled.img`
-  width: 65%;
+  width: 100%;
   height: 100%;
   object-fit: fill;
   border: 1px solid black;

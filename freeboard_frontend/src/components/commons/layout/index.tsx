@@ -6,7 +6,10 @@ import Banner from "./banner/Banner.container";
 import Navigation from "./navigation/Navigation.container";
 import Footer from "./footer/Footer.container";
 
-const Wrapper = styled.div``;
+const Wrapper = styled.div`
+  width: 100%;
+  overflow: hidden;
+`;
 
 const Sidebar = styled.div`
   width: 300px;
@@ -34,12 +37,12 @@ export default function Layout(props: ILayoutProps) {
   return (
     <Wrapper>
       <Header />
-      <Banner />
       <Navigation />
-      <BodyWrapper>
-        {/* <Sidebar>사이드바영역입니다.</Sidebar> */}
-        <Body>{props.children}</Body>
-      </BodyWrapper>
+      <Banner />
+      {/* <BodyWrapper> */}
+      {/* <Sidebar>사이드바영역입니다.</Sidebar> */}
+      <Body>{props.children}</Body>
+      {/* </BodyWrapper> */}
       <Footer />
     </Wrapper>
   );

@@ -19,16 +19,16 @@ export default function BannerUI() {
     <Banner>
       <Slider {...settings}>
         <ImgWrapper>
-          <Img src="/images/coffee01.jpg" />
+          <Img />
         </ImgWrapper>
         <ImgWrapper>
-          <Img src="/images/coffee02.jpg" />
+          <Img />
         </ImgWrapper>
         <ImgWrapper>
-          <Img src="/images/coffee03.jpg" />
+          <Img />
         </ImgWrapper>
         <ImgWrapper>
-          <Img src="/images/coffee04.jpg" />
+          <Img />
         </ImgWrapper>
       </Slider>
     </Banner>

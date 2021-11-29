@@ -1,5 +1,5 @@
-import styled from "@emotion/styled";
+// import styled from "@emotion/styled";
 
-export const Word = styled.span`
-  color: ${(props) => (props.isMatched ? "red" : "black")};
-`;
+// export const Word = styled.span`
+//   color: ${(props) => (props.isMatched ? "red" : "black")};
+// `;
