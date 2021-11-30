@@ -49,7 +49,8 @@ export const Inputs = styled.div`
 export const Idinput = styled.input`
   width: 332px;
   height: 44px;
-  margin-right: 10px;
+  margin-right: 14px;
+  padding-left: 10px;
   /* border-radius: 4px; */
 `;
 
@@ -61,6 +62,7 @@ export const IdBtn = styled.button`
   border: 1px solid purple;
   font-weight: bold;
   border-radius: 4px;
+  cursor: pointer;
 `;
 
 export const IdCheck = styled.div`
@@ -98,4 +100,5 @@ export const SingupButton = styled.button`
   color: #ffffff;
   font-weight: bold;
   font-size: 16px;
+  cursor: pointer;
 `;
