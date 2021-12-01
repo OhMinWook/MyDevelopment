@@ -36,7 +36,6 @@ export default function SignupUI(props) {
               onChange={props.onChagneInputs}
               type="password"
               name="password"
-              error={props.hasError("input.password")}
             />
           </Inputs>
           <div>
@@ -55,13 +54,7 @@ export default function SignupUI(props) {
             placeholder="비밀번호를 한번 더 입력하세요"
             onChange={props.onConfirmInputs}
             type="password"
-            name="confirmpassword"
-            error={props.hasNotSameError("confirmpassword")}
-            helperText={
-              props.hasNotSameError("confirmpassword")
-                ? "입력한 비밀번호와 일치하지 않습니다."
-                : null
-            }
+            name="password"
           />
         </PasswordInput>
       </Id>

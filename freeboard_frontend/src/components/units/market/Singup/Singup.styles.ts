@@ -22,7 +22,7 @@ export const Wrapper = styled.div`
 // `;
 
 export const Title = styled.h3`
-  width: 40%;
+  width: 50%;
   text-align: center;
   font-size: 40px;
   border-bottom: 1px solid black;
@@ -30,7 +30,7 @@ export const Title = styled.h3`
 `;
 
 export const Id = styled.div`
-  width: 40%;
+  width: 50%;
   display: flex;
   justify-content: space-between;
   padding: 15px 25px;
