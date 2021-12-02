@@ -5,7 +5,7 @@ import SearchIcon from "@mui/icons-material/Search";
 export default function NavigationUI(props) {
   return (
     <Navigation>
-      <Button>신상품</Button>
+      <Button>ProductSubmit</Button>
       <Button>베스트</Button>
       <Button>알뜰쇼핑</Button>
       <Button onClick={props.onClickReview}>상품 후기</Button>

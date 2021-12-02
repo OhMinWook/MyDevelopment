@@ -45,16 +45,16 @@ export default function Signup() {
       alert(error.message);
     }
 
-    // try {
-    //   const user = await createUserWithEmailAndPassword(
-    //     auth,
-    //     input.email,
-    //     input.password
-    //   );
-    //   console.log(user);
-    // } catch (error) {
-    //   console.log(error.message);
-    // }
+    try {
+      const user = await createUserWithEmailandPassword(
+        auth,
+        input.email,
+        input.password
+      );
+      console.log(user);
+    } catch (error) {
+      console.log(error.message);
+    }
 
     router.push("/login");
   };
