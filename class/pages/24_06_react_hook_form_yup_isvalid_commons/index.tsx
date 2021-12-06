@@ -1,6 +1,16 @@
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup/dist/yup";
+import styled from "@emotion/styled";
+
+interface IMyButtonProps {
+  isValid: boolean;
+}
+
+const MyButton = styled.button`
+  background-color: ${(props: IMyButtonProps) =>
+    props.isValid ? "purple" : ""};
+`;
 
 const schema = yup.object().shape({
   // 문자인지 숫자인지 비교, 이메일 형식인지 비교, 필수인지 아닌지 비교
@@ -33,12 +43,11 @@ export default function ReactHookFormPage() {
 
   return (
     <form onSubmit={handleSubmit(onClickLogin)}>
-      <div>asdasd</div>
       이메일: <input type="text" {...register("myEmail")} />
       <div>{formState.errors.myEmail?.message}</div>
       비밀번호: <input type="password" {...register("myPassword")} />
       <div>{formState.errors.myPassword?.message}</div>
-      <button>로그인하기</button>
+      <MyButton isValid={formState.isValid}>로그인하기</MyButton>
     </form>
   );
 }

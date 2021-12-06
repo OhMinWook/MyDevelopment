@@ -13,7 +13,7 @@ import { createUploadLink } from "apollo-upload-client";
 
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { createContext, useEffect, useState } from "react";
+import { createContext, Dispatch, useEffect, useState } from "react";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -30,17 +30,28 @@ const firebaseConfig = {
 // Initialize Firebase
 export const firebaseapp = initializeApp(firebaseConfig);
 
+interface IGlobalContext {
+  accessToken?: string;
+  setAccessToken?: Dispatch<SetStateAction<string>>;
+  userInfo?: {
+    name?: string;
+    email?: string;
+    picture?: string;
+  };
+  setUserInfo?: Dispatch<SetStateAction<{}>>;
+}
+
 export const GlobalContext = createContext(null);
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [accessToken, setAccessToken] = useState("");
-  // const [userInfo, setUserInfo] = useState({});
+  const [userInfo, setUserInfo] = useState({});
 
   const myValue = {
     accessToken: accessToken,
     setAccessToken: setAccessToken,
-    // userInfo: userInfo,
-    // setUserInfo: setUserInfo,
+    userInfo: userInfo,
+    setUserInfo: setUserInfo,
   };
 
   // 서버에서 다 그리고 나서 브라우저에 띄우기 위해 useEffect를 사용한다.

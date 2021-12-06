@@ -52,7 +52,7 @@ export default function SignupUI(props) {
         <PasswordInput>
           <Idinput
             placeholder="비밀번호를 한번 더 입력하세요"
-            onChange={props.onConfirmInputs}
+            onChange={props.onChangeConfirm}
             type="password"
             name="password"
           />

@@ -12,7 +12,7 @@ export const Wrapper = styled.div`
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  width: 100%;
+  width: 80%;
   padding: 100px;
   margin: 0 auto;
 `;

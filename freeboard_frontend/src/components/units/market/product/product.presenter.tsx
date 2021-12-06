@@ -5,10 +5,19 @@ import {
   InnerWrapper,
   ButtonWrapper,
   Content,
+  InputWrapper,
+  Image,
+  ImageClick,
+  ImageWrapper,
+  ContentWrapper,
+  Submit,
+  Subject,
 } from "./product.styles";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup/dist/yup";
+import { useContext } from "react";
+import { Context } from "../../../../../pages/pddetail/[useditemId]/edit";
 
 const schema = yup.object().shape({
   name: yup.string().required("입력하세요"),
@@ -16,9 +25,11 @@ const schema = yup.object().shape({
   contents: yup.string().required("입력하세요"),
   price: yup.number().positive().integer().required("입력하세요"),
   tags: yup.string().required("입력하세요"),
+  // images: yup.string().required("입력하세요"),
 });
 
 export default function ProductUI(props) {
+  const { isEdit } = useContext(Context);
   const { handleSubmit, register, formState } = useForm({
     mode: "onChange",
     resolver: yupResolver(schema),
@@ -28,40 +39,83 @@ export default function ProductUI(props) {
     <form onSubmit={handleSubmit(props.onClick)}>
       <Wrapper>
         <div>
-          <Title>상품 등록</Title>
+          <Title>{isEdit ? "상품 수정" : "상품 등록"}</Title>
           <InnerWrapper>
-            <div>상품명</div>
-            <Input type="text" {...register("name")} />
-            <div>{formState.errors.name?.message}</div>
+            <Subject>상품명</Subject>
+            <InputWrapper>
+              <Input
+                type="text"
+                {...register("name")}
+                defaultValue={props.data?.fetchUseditem.name}
+              />
+              <div>{formState.errors.name?.message}</div>
+            </InputWrapper>
           </InnerWrapper>
           <InnerWrapper>
-            <div>한줄 요약</div>
-            <Input type="text" {...register("remarks")} />
-            <div>{formState.errors.remarks?.message}</div>
+            <Subject>한줄 요약</Subject>
+            <InputWrapper>
+              <Input
+                type="text"
+                {...register("remarks")}
+                defaultValue={props.data?.fetchUseditem.remarks}
+              />
+              <div>{formState.errors.remarks?.message}</div>
+            </InputWrapper>
           </InnerWrapper>
           <InnerWrapper>
-            <div>상품 내용</div>
-            <Content type="text" {...register("contents")} />
-            <div>{formState.errors.contents?.message}</div>
+            <Subject>상품 내용</Subject>
+            <ContentWrapper>
+              <Content
+                type="text"
+                {...register("contents")}
+                defaultValue={props.data?.fetchUseditem.contents}
+              />
+              <div>{formState.errors.contents?.message}</div>
+            </ContentWrapper>
           </InnerWrapper>
           <InnerWrapper>
-            <div>가격</div>
-            <Input type="text" {...register("price")} />
-            <div>{formState.errors.price?.message}</div>
+            <Subject>가격</Subject>
+            <InputWrapper>
+              <Input
+                type="text"
+                {...register("price")}
+                defaultValue={props.data?.fetchUseditem.price}
+              />
+              <div>{formState.errors.price?.message}</div>
+            </InputWrapper>
           </InnerWrapper>
           <InnerWrapper>
-            <div>태그</div>
-            <Input type="text" {...register("tags")} />
-            <div>{formState.errors.tag?.message}</div>
+            <Subject>태그</Subject>
+            <InputWrapper>
+              <Input
+                type="text"
+                {...register("tags")}
+                defaultValue={props.data?.fetchUseditem.tags}
+              />
+              <div>{formState.errors.tag?.message}</div>
+            </InputWrapper>
           </InnerWrapper>
-          <div>사진 첨부</div>
-          <ButtonWrapper>
-            <input type="file" {...register("images")} />
-            <input type="file" />
-            <input type="file" />
-          </ButtonWrapper>
+          <ImageWrapper>
+            <Subject>사진 첨부</Subject>
+            <ButtonWrapper>
+              {props.images[0] ? (
+                <img
+                  src={`https://storage.googleapis.com/${props.images[0]}`}
+                />
+              ) : (
+                <ImageClick onClick={props.onClickImages}>Image</ImageClick>
+              )}
+              <Image
+                style={{ display: "none" }}
+                type="file"
+                onChange={props.onChangeFile}
+                ref={props.fileRef}
+              />
+              {/* <div>{formState.errors.images?.message}</div> */}
+            </ButtonWrapper>
+          </ImageWrapper>
         </div>
-        <button>등록하기</button>
+        <Submit>{isEdit ? "수정하기" : "등록하기"}</Submit>
       </Wrapper>
     </form>
   );

@@ -24,6 +24,7 @@ export default function BoardDetailContainer() {
   async function onSignupButton() {
     router.push(`/list`);
   }
+
   async function DoEdit() {
     router.push(`/detail/${router.query.detailId}/edit`);
   }
