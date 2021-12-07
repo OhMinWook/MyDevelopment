@@ -49,10 +49,10 @@ export default function Home() {
       alert("이미 장바구니에 담으셨습니다.");
       return;
     }
-    baskets.push(el);
+    // baskets.push(el);
 
     //rest 파라미터(객체 내에서 원하는 항목만을 추려서 원본을 건들지 않고 삭제한다.)
-    const { __typename, _id, ...newEl } = el;
+    const { __typename, ...newEl } = el;
     baskets.push(newEl);
     console.log(newEl);
 

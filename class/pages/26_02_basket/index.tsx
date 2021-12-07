@@ -57,6 +57,8 @@ export default function BasketPage() {
         "장바구니에 담으신 상품이 있습니다. 장바구니 페이지로 이동할까요?"
       );
       if (result) router.push("/26_03_basket_logged_in");
+    } else {
+      router.push("/home");
     }
   }
 

@@ -19,7 +19,15 @@ export default function ProductDetailUI(props) {
           <Name>{props.data?.fetchUseditem.name}</Name>
           <Remarks>{props.data?.fetchUseditem.remarks}</Remarks>
           <Price>{props.data?.fetchUseditem.price}</Price>
-          <Contents>{props.data?.fetchUseditem.contents}</Contents>
+          {process.browser ? (
+            <Contents
+              dangerouslySetInnerHTML={{
+                __html: String(props.data?.fetchUseditem.contents),
+              }}
+            />
+          ) : (
+            <div />
+          )}
           <Edit onClick={props.onClickEdit}>수정하기</Edit>
         </div>
       </Wrapper>

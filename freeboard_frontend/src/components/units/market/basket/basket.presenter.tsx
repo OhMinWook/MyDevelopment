@@ -11,6 +11,9 @@ export default function BasketUI(props) {
           <span>{el.name}</span>
           <span>{el.remarks}</span>
           <span>{el.price}</span>
+          <button id={el._id} onClick={props.onClickDelete}>
+            삭제하기
+          </button>
         </div>
       ))}
     </Wrapper>

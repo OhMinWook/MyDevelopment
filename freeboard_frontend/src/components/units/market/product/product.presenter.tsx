@@ -4,7 +4,6 @@ import {
   Input,
   InnerWrapper,
   ButtonWrapper,
-  Content,
   InputWrapper,
   Image,
   ImageClick,
@@ -18,7 +17,10 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup/dist/yup";
 import { useContext } from "react";
 import { Context } from "../../../../../pages/pddetail/[useditemId]/edit";
+import "react-quill/dist/quill.snow.css";
+import dynamic from "next/dynamic";
 
+const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 const schema = yup.object().shape({
   name: yup.string().required("입력하세요"),
   remarks: yup.string().required("입력하세요"),
@@ -30,10 +32,15 @@ const schema = yup.object().shape({
 
 export default function ProductUI(props) {
   const { isEdit } = useContext(Context);
-  const { handleSubmit, register, formState } = useForm({
+  const { handleSubmit, register, formState, setValue, trigger } = useForm({
     mode: "onChange",
     resolver: yupResolver(schema),
   });
+  function handleChange(value: String) {
+    console.log(value);
+    setValue("contents", value === "<p><br></p>" ? "" : value);
+    trigger("contents");
+  }
 
   return (
     <form onSubmit={handleSubmit(props.onClick)}>
@@ -65,10 +72,10 @@ export default function ProductUI(props) {
           <InnerWrapper>
             <Subject>상품 내용</Subject>
             <ContentWrapper>
-              <Content
-                type="text"
-                {...register("contents")}
+              <ReactQuill
+                onChange={handleChange}
                 defaultValue={props.data?.fetchUseditem.contents}
+                style={{ width: "720px" }}
               />
               <div>{formState.errors.contents?.message}</div>
             </ContentWrapper>
@@ -111,7 +118,7 @@ export default function ProductUI(props) {
                 onChange={props.onChangeFile}
                 ref={props.fileRef}
               />
-              {/* <div>{formState.errors.images?.message}</div> */}
+              <div>{formState.errors.images?.message}</div>
             </ButtonWrapper>
           </ImageWrapper>
         </div>

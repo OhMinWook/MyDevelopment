@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import ReactQuill from "react-quill";
 
 export const Wrapper = styled.div`
   display: flex;
@@ -105,3 +106,7 @@ export const Submit = styled.button`
   color: white;
   cursor: pointer;
 `;
+
+// export const Quill = styled(ReactQuill)`
+//   width: 720px;
+// `;
