@@ -1,20 +1,26 @@
-import { Title, Wrapper } from "./basket.styles";
+import {
+  Title,
+  Wrapper,
+  InnerWrapper,
+  Index,
+  Image,
+  Name,
+  Price,
+  Button,
+} from "./basket.styles";
 
 export default function BasketUI(props) {
   return (
     <Wrapper>
       <Title>장바구니</Title>
       {props.basketItems.map((el, index) => (
-        <div key={el._id}>
-          <span>{index + 1}</span>
-          <img src={`https://storage.googleapis.com/${el.images[0]}`} />
-          <span>{el.name}</span>
-          <span>{el.remarks}</span>
-          <span>{el.price}</span>
-          <button id={el._id} onClick={props.onClickDelete}>
-            삭제하기
-          </button>
-        </div>
+        <InnerWrapper key={el._id}>
+          <Index>{index + 1}</Index>
+          <Image src={`https://storage.googleapis.com/${el.images[0]}`} />
+          <Name>{el.name}</Name>
+          <Price>{el.price}</Price>
+          <Button onClick={props.onClickDelete(el._id)}>X</Button>
+        </InnerWrapper>
       ))}
     </Wrapper>
   );

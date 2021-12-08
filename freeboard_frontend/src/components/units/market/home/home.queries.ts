@@ -7,10 +7,20 @@ export const FETCH_USED_ITEMS = gql`
       name
       price
       images
+      contents
+
       pickedCount
       seller {
         name
       }
+    }
+  }
+`;
+
+export const CREATE_POINT_BUYING_AND_SELLING = gql`
+  mutation createPointTransactionOfBuyingAndSelling($useritemId: ID!) {
+    createPointTransactionOfBuyingAndSelling(useritemId: $useritemId) {
+      _id
     }
   }
 `;

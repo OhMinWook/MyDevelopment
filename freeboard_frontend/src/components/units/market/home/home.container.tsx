@@ -1,15 +1,22 @@
-import { useQuery } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 import {
   IBoard,
   IQuery,
   IQueryFetchUseditemsArgs,
 } from "../../../../commons/types/generated/types";
 import HomeUI from "./home.presenter";
-import { FETCH_USED_ITEMS } from "./home.queries";
+import {
+  CREATE_POINT_BUYING_AND_SELLING,
+  FETCH_USED_ITEMS,
+} from "./home.queries";
 import { useRouter } from "next/Router";
+import { useState } from "react";
 
 export default function Home() {
   const router = useRouter();
+  const [createPointBuyingandSelling] = useMutation(
+    CREATE_POINT_BUYING_AND_SELLING
+  );
   const { data, fetchMore } = useQuery<
     Pick<IQuery, "fetchUseditems">,
     IQueryFetchUseditemsArgs
@@ -17,7 +24,6 @@ export default function Home() {
 
   function onLoadMore() {
     if (!data) return;
-
     fetchMore({
       variables: { page: Math.ceil(data?.fetchUseditems.length / 10) + 1 },
       updateQuery: (prev, { fetchMoreResult }) => {
@@ -33,13 +39,21 @@ export default function Home() {
     });
   }
 
+  const onClickBuying = (id) => async () => {
+    const result = await createPointBuyingandSelling({
+      variables: {
+        useritemId: id,
+      },
+    });
+    console.log(result);
+    alert("구매를 완료했습니다.");
+  };
+
   // console.log(data);
   // 장바구니에 담기 위한 온클릭 함수
   const onClickBasket = (el: IBoard) => () => {
     console.log(el);
-
     const baskets = JSON.parse(localStorage.getItem("basket") || "[]");
-
     // 불린 변수
     let isExit = false;
     baskets.forEach((basketEl: IBoard) => {
@@ -49,7 +63,6 @@ export default function Home() {
       alert("이미 장바구니에 담으셨습니다.");
       return;
     }
-    // baskets.push(el);
 
     //rest 파라미터(객체 내에서 원하는 항목만을 추려서 원본을 건들지 않고 삭제한다.)
     const { __typename, ...newEl } = el;
@@ -61,7 +74,12 @@ export default function Home() {
   };
 
   return (
-    <HomeUI data={data} loadMore={onLoadMore} onClickBasket={onClickBasket} />
+    <HomeUI
+      data={data}
+      loadMore={onLoadMore}
+      onClickBasket={onClickBasket}
+      onClickBuying={onClickBuying}
+    />
   );
 }
 ``;
