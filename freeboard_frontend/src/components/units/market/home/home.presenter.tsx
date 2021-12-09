@@ -25,7 +25,10 @@ export default function HomeUI(props) {
         <Wrapper>
           {props.data?.fetchUseditems.map((el) => (
             <Card key={el._id}>
-              <Image src={`https://storage.googleapis.com/${el.images[0]}`} />
+              <Image
+                onClick={props.onClickpdDetail(el._id)}
+                src={`https://storage.googleapis.com/${el.images[0]}`}
+              />
               <Name>{el.name}</Name>
               <Price>{el.price}</Price>
               <Seller>{el.seller.name}</Seller>

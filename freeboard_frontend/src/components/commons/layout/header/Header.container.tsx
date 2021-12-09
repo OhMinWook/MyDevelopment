@@ -11,5 +11,15 @@ export default function Header() {
   function onClickLogin() {
     router.push("/login");
   }
-  return <HeaderUI onClickSignup={onClickSignup} onClickLogin={onClickLogin} />;
+
+  function onClickHome() {
+    router.push("/home");
+  }
+  return (
+    <HeaderUI
+      onClickSignup={onClickSignup}
+      onClickLogin={onClickLogin}
+      onClickHome={onClickHome}
+    />
+  );
 }

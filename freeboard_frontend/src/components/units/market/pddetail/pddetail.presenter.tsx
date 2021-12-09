@@ -1,3 +1,4 @@
+import KakaoMap from "../../../commons/map/map.container";
 import {
   Remarks,
   Wrapper,
@@ -28,6 +29,7 @@ export default function ProductDetailUI(props) {
           ) : (
             <div />
           )}
+          <KakaoMap />
           <Edit onClick={props.onClickEdit}>수정하기</Edit>
         </div>
       </Wrapper>

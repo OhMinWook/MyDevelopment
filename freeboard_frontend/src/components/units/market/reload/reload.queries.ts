@@ -11,7 +11,7 @@ export const CREATE_POINT_LOADING = gql`
   }
 `;
 
-export const FETCH_USER_LOGED_IN = gql`
+export const FETCH_USER_LOGGED_IN = gql`
   query fetchUserLoggedIn {
     fetchUserLoggedIn {
       userPoint {

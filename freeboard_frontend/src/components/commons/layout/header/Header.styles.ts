@@ -39,4 +39,6 @@ export const Button2 = styled.button`
   color: black;
 `;
 
-export const Logo = styled.img``;
+export const Logo = styled.img`
+  cursor: pointer;
+`;

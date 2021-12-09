@@ -1,6 +1,8 @@
 import { useMutation, useQuery } from "@apollo/client";
 import {
   IBoard,
+  IMutation,
+  IMutationCreatePointTransactionOfLoadingArgs,
   IQuery,
   IQueryFetchUseditemsArgs,
 } from "../../../../commons/types/generated/types";
@@ -14,10 +16,11 @@ import { useState } from "react";
 
 export default function Home() {
   const router = useRouter();
-  const [createPointBuyingandSelling] = useMutation(
-    CREATE_POINT_BUYING_AND_SELLING
-  );
-  const { data, fetchMore } = useQuery<
+  const [createPointBuyingandSelling] = useMutation<
+    Pick<IMutation, "createPointTransactionOfLoading">,
+    IMutationCreatePointTransactionOfLoadingArgs
+  >(CREATE_POINT_BUYING_AND_SELLING);
+  const { data, fetchMore, refetch } = useQuery<
     Pick<IQuery, "fetchUseditems">,
     IQueryFetchUseditemsArgs
   >(FETCH_USED_ITEMS);
@@ -44,11 +47,11 @@ export default function Home() {
       variables: {
         useritemId: id,
       },
+      refetchQueries: [{ query: FETCH_USED_ITEMS }],
     });
     console.log(result);
     alert("구매를 완료했습니다.");
   };
-
   // console.log(data);
   // 장바구니에 담기 위한 온클릭 함수
   const onClickBasket = (el: IBoard) => () => {
@@ -73,13 +76,17 @@ export default function Home() {
     localStorage.setItem("basket", JSON.stringify(baskets));
   };
 
+  const onClickpdDetail = (id) => () => {
+    router.push(`/pddetail/${id}`);
+  };
+
   return (
     <HomeUI
       data={data}
+      onClickpdDetail={onClickpdDetail}
       loadMore={onLoadMore}
       onClickBasket={onClickBasket}
       onClickBuying={onClickBuying}
     />
   );
 }
-``;

@@ -7,5 +7,19 @@ export default function Navigation() {
     router.push("/review");
   }
 
-  return <NavigationUI onClickReview={onClickReview} />;
+  function onClickProductSubmit() {
+    router.push("/productSubmit");
+  }
+
+  function onClickMypage() {
+    router.push("/mypage");
+  }
+
+  return (
+    <NavigationUI
+      onClickReview={onClickReview}
+      onClickProductSubmit={onClickProductSubmit}
+      onClickMypage={onClickMypage}
+    />
+  );
 }

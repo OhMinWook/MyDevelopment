@@ -8,7 +8,7 @@ export default function HeaderUI(props) {
         <Button2 onClick={props.onClickLogin}>로그인</Button2>
       </TopHeader>
       <Header>
-        <Logo src={"/images/headerlogo.jpg"} />
+        <Logo onClick={props.onClickHome} src={"/images/headerlogo.jpg"} />
       </Header>
     </>
   );
