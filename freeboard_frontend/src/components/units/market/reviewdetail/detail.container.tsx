@@ -11,5 +11,5 @@ export default function ReviewDetail() {
     },
   });
 
-  return <ReviewDetailUI />;
+  return <ReviewDetailUI data={data} />;
 }

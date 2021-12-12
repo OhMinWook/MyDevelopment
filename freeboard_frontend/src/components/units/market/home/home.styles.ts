@@ -12,7 +12,7 @@ export const Wrapper = styled.div`
 `;
 
 export const Card = styled.div`
-  width: 400px;
+  width: 250px;
   border: 1px solid #000000;
   display: flex;
   flex-direction: column;

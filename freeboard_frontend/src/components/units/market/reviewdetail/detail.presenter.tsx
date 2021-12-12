@@ -1,7 +1,11 @@
-import {} from '../reviewdetail/detail.styles'
+import {} from "../reviewdetail/detail.styles";
 
 export default function ReviewDetailUI() {
-    return(
-
-    )
+  return (
+    <>
+      <div>
+        <div></div>
+      </div>
+    </>
+  );
 }

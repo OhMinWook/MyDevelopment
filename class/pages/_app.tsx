@@ -4,6 +4,7 @@ import {
   InMemoryCache,
   ApolloLink,
 } from "@apollo/client";
+import { onError } from "@apollo/client/link/error";
 import { Global } from "@emotion/react";
 import "antd/dist/antd.css";
 import { AppProps } from "next/dist/shared/lib/router/router";
@@ -14,7 +15,14 @@ import { createUploadLink } from "apollo-upload-client";
 
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { createContext, Dispatch, useEffect, useState } from "react";
+import {
+  createContext,
+  Dispatch,
+  useEffect,
+  useState,
+  SetStateAction,
+} from "react";
+import { getAccessToken } from "../src/commons/libraries/getAccessToken";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -56,20 +64,44 @@ function MyApp({ Component, pageProps }: AppProps) {
   };
 
   // 서버에서 다 그리고 나서 브라우저에 띄우기 위해 useEffect를 사용한다.
+  // 새로고침을 하더라도 조건문을 통해 리프레쉬 토큰이 남아있으면 다시 브라우저에 그리도록 해준다.
   useEffect(() => {
-    const MyaccessToken = localStorage.getItem("accessToken") || "";
-    if (MyaccessToken) setAccessToken(MyaccessToken);
+    // const MyaccessToken = localStorage.getItem("accessToken") || "";
+    // if (MyaccessToken) setAccessToken(MyaccessToken);
+    if (localStorage.getItem("refreshToken")) getAccessToken(setAccessToken);
   }, []);
 
+  const errorLink = onError(({ graphQLErrors, operation, forward }) => {
+    if (graphQLErrors) {
+      for (const err of graphQLErrors) {
+        // 1. 토큰 만료 에러를 캐치
+        if (err.extensions?.code === "UNAUTHENTICATED") {
+          // 3. 기존에 실패한 요청하기
+          // 재요청하기 forward
+          operation.setContext({
+            headers: {
+              ...operation.getContext().headers,
+              authorization: `Bearer ${getAccessToken(setAccessToken)}`, // 2. 리프레쉬 토큰으로 액세스 토큰 재발급 받기 => restoreAccessToken
+            },
+          });
+
+          return forward(operation);
+        }
+      }
+    }
+  });
+
   const uploadLink = createUploadLink({
-    uri: "http://backend04.codebootcamp.co.kr/graphql",
+    uri: "https://backend04.codebootcamp.co.kr/graphql",
     headers: {
       authorization: `Bearer ${accessToken}`,
     },
+    // 리프레시 토큰 불러와 주는 코드
+    credentials: "include",
   });
 
   const client = new ApolloClient({
-    link: ApolloLink.from([uploadLink as unknown as ApolloLink]),
+    link: ApolloLink.from([errorLink, uploadLink as unknown as ApolloLink]),
     cache: new InMemoryCache(),
   });
 

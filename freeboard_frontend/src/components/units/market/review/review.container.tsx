@@ -1,10 +1,10 @@
 import { useMutation } from "@apollo/client";
 import { useRouter } from "next/Router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ReviewUI from "./review.presenter";
 import { CREATE_BOARD } from "./review.queries";
 
-export default function Review() {
+export default function Review(props) {
   const router = useRouter();
   const [createBoard] = useMutation(CREATE_BOARD);
 
@@ -31,7 +31,17 @@ export default function Review() {
     });
   }
 
-  function onChangeFIleUrl() {}
+  function onChangeFIleUrl(fileUrl, index) {
+    const newFileUrls = [...fileUrl];
+    newFileUrls[index] = fileUrl;
+    setFileUrl(newFileUrls);
+  }
+
+  useEffect(() => {
+    if (props.data?.fetchBoard.images?.length) {
+      setFileUrl([...props.data?.fetchBoard.images]);
+    }
+  }, [props.data]);
 
   function onChangeError(event) {
     setError({
@@ -50,19 +60,25 @@ export default function Review() {
         variables: {
           createBoardInput: {
             ...inputs,
-            fileUrl,
+            images: fileUrl,
           },
         },
       });
       console.log(result);
       alert("후기가 등록이 되었습니다.");
-      router.push(`/reviewdetail/${result.data.createBoard._id}`);
+      // router.push(`/reviewlist/${result.data?.createBoard._id}`);
     } catch (error) {
       alert(error.message);
     }
   };
 
   return (
-    <ReviewUI onChangeInputs={onChangeInputs} onClickSubmit={onClickSubmit} />
+    <ReviewUI
+      onChangeInputs={onChangeInputs}
+      onClickSubmit={onClickSubmit}
+      onChangeError={onChangeError}
+      onChangeFIleUrl={onChangeFIleUrl}
+      fileUrl={fileUrl}
+    />
   );
 }

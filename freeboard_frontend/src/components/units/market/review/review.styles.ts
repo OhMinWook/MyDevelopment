@@ -96,3 +96,13 @@ export const Button = styled.button`
   height: 66px;
   margin-left: 15px;
 `;
+
+export const Signup = styled.button`
+  width: 128px;
+  height: 54px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  background-color: #5f0080;
+  border: 1px solid #5f0081;
+  color: #ffffff;
+`;

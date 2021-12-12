@@ -20,7 +20,7 @@ export default function Home() {
     Pick<IMutation, "createPointTransactionOfLoading">,
     IMutationCreatePointTransactionOfLoadingArgs
   >(CREATE_POINT_BUYING_AND_SELLING);
-  const { data, fetchMore, refetch } = useQuery<
+  const { data, fetchMore } = useQuery<
     Pick<IQuery, "fetchUseditems">,
     IQueryFetchUseditemsArgs
   >(FETCH_USED_ITEMS);
