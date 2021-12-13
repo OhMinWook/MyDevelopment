@@ -36,15 +36,19 @@ export default function MyPageContainer() {
         buyer_postcode: "01181",
         m_redirect_url: "",
       },
-      (rsp) => {
+      async (rsp) => {
         if (rsp.success) {
           console.log(rsp);
-          const result = createPointLoading({
-            variables: {
-              impUid: rsp.imp_uid,
-            },
-          });
-          console.log(result);
+          try {
+            const result = await createPointLoading({
+              variables: {
+                impUid: rsp.imp_uid,
+              },
+            });
+            console.log(result);
+          } catch (error) {
+            alert(error.message);
+          }
         } else {
           // 결제 실패시
         }

@@ -17,6 +17,7 @@ import {
   Signup,
 } from "../review/review.styles";
 import Uploads01 from "../../../commons/uploads/01/Uploads01.container";
+import { v4 as uuidv4 } from "uuid";
 
 function ReviewUI(props) {
   return (
@@ -52,12 +53,13 @@ function ReviewUI(props) {
         </ContentWrpper>
         <Pictures>
           첨부파일
-          {props.fileUrl.map((el, index) => (
+          {props.fileUrls.map((el: any, index: any) => (
             <Uploads01
-              key={index}
+              key={uuidv4()}
               index={index}
               fileUrl={el}
               defaultFileUrl={props.data?.fetchBoard.images?.[index]}
+              onChangeFIleUrl={props.onChangeFIleUrl}
             />
           ))}
         </Pictures>

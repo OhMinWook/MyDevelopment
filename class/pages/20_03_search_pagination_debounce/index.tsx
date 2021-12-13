@@ -26,7 +26,7 @@ export default function SearchPaginationDebouncePage() {
   >(FETCH_BOARDS);
 
   const getDebounce = _.debounce((data) => {
-    refetch({ search: "data", page: 1 });
+    refetch({ search: data, page: 1 });
     setKeyword(data);
   }, 1000);
 

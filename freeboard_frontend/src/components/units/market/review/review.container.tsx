@@ -22,7 +22,7 @@ export default function Review(props) {
     contenterror: "",
   });
 
-  const [fileUrl, setFileUrl] = useState(["", "", ""]);
+  const [fileUrls, setFileUrl] = useState(["", "", ""]);
 
   function onChangeInputs(event) {
     setInputs({
@@ -31,8 +31,8 @@ export default function Review(props) {
     });
   }
 
-  function onChangeFIleUrl(fileUrl, index) {
-    const newFileUrls = [...fileUrl];
+  function onChangeFIleUrl(fileUrl: string, index: number) {
+    const newFileUrls = [...fileUrls];
     newFileUrls[index] = fileUrl;
     setFileUrl(newFileUrls);
   }
@@ -60,13 +60,13 @@ export default function Review(props) {
         variables: {
           createBoardInput: {
             ...inputs,
-            images: fileUrl,
+            images: fileUrls,
           },
         },
       });
       console.log(result);
       alert("후기가 등록이 되었습니다.");
-      // router.push(`/reviewlist/${result.data?.createBoard._id}`);
+      router.push(`/reviewdetail/${result.data?.createBoard._id}`);
     } catch (error) {
       alert(error.message);
     }
@@ -78,7 +78,7 @@ export default function Review(props) {
       onClickSubmit={onClickSubmit}
       onChangeError={onChangeError}
       onChangeFIleUrl={onChangeFIleUrl}
-      fileUrl={fileUrl}
+      fileUrls={fileUrls}
     />
   );
 }

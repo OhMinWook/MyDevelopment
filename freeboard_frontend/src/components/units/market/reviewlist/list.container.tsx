@@ -10,8 +10,10 @@ import { FETCH_BOARDS, FETCH_BOARDS_COUNT } from "./list.queries";
 
 export default function ReviewList() {
   const router = useRouter();
+  const [keyword, setKeyword] = useState("");
   const [startpage, setStartPage] = useState(1);
-  const { data: dataBoardsCount } = useQuery(FETCH_BOARDS_COUNT);
+  const { data: dataBoardsCount, refetch: refetchBoardCount } =
+    useQuery(FETCH_BOARDS_COUNT);
   const { data, refetch } = useQuery<
     Pick<IQuery, "fetchBoards">,
     IQueryFetchBoardsArgs
@@ -22,24 +24,36 @@ export default function ReviewList() {
   });
   console.log(data);
 
-  function onClickProduct() {
-    router.push("/product");
+  function onChangeKeyword(value: string) {
+    setKeyword(value);
   }
 
-  function onclickProductDetail(event: any) {
+  function onClickReview() {
+    router.push("/review");
+  }
+
+  function onClickMoveToReview() {
+    router.push("/review");
+  }
+
+  function onClickMoveToReviewDetail(event: any) {
     if (event.target instanceof Element)
-      router.push(`/pddetail/${event.target.id}`);
+      router.push(`/reviewdetail/${event.target.id}`);
   }
 
   return (
     <ReviewListUI
       data={data}
-      onClickProduct={onClickProduct}
-      onclickProductDetail={onclickProductDetail}
-      count={dataBoardsCount}
+      keyword={keyword}
+      onClickReview={onClickReview}
+      onClickMoveToReviewDetail={onClickMoveToReviewDetail}
+      onChangeKeyword={onChangeKeyword}
+      count={dataBoardsCount?.fetchBoardsCount}
       refetch={refetch}
+      refetchBoardCount={refetchBoardCount}
       startpage={startpage}
       setStartPage={setStartPage}
+      onClickMoveToReview={onClickMoveToReview}
     />
   );
 }

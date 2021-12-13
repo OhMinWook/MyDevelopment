@@ -1,43 +1,16 @@
-// import { useQuery } from "@apollo/client";
-// import { useState } from "react";
-// import SearchPageUI from "./search01.presenter";
-// import { FETCH_BOARDS } from "./search01.queries";
+import _ from "lodash";
+import SearchPageUI from "./search01.presenter";
 
-// export default function SearchPage() {
-//   //   const [search, setSearch] = useState("");
-//   const [keyword, setKeyword] = useState("");
+export default function SearchPage(props) {
+  const getDebounce = _.debounce((data) => {
+    props.refetch({ search: data });
+    props.refetchBoardCount({ search: data });
+    props.onChangeKeyword(data);
+  }, 200);
 
-//   const { data, refetch } = useQuery(FETCH_BOARDS);
+  function onChangeSearchbar(event) {
+    getDebounce(event.target.value);
+  }
 
-//   // 검색 입력 함수
-//   function onChangeSearch(event) {
-//     getDebounce(event.target.value);
-//   }
-
-//   // 입력한 search 키워드를 fetchBoard에 요청하기!!
-//   //   function onClickSearch() {
-//   //     refetch: ({ search: search, page: 1 });
-//   //     setKeyword(search);
-//   //   }
-
-//   // 디바운싱(자동 검색)
-//   const getDebounce = _.debounce((data) => {
-//     refetch({ search: data, page: 1 });
-//     setKeyword(data);
-//   }, 500);
-
-//   // 검색 페이지 넘기기
-//   function onClickPage(event) {
-//     if (event.target)
-//       refetch({ search: keyword, page: Number(event.target.id) });
-//   }
-
-//   return (
-//     <SearchPageUI
-//       data={data}
-//       keyword={keyword}
-//       onChangeSearch={onChangeSearch}
-//       onClickPage={onClickPage}
-//     />
-//   );
-// }
+  return <SearchPageUI onChangeSearchbar={onChangeSearchbar} />;
+}

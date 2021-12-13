@@ -61,12 +61,6 @@ export default function Product() {
     fileRef.current?.click();
   };
 
-  // function onChangeFileUrls(fileUrl, index) {
-  //   const newFileUrl = [...fileUrl];
-  //   newFileUrl[index] = fileUrl;
-  //   setImages(newFileUrl);
-  // }
-
   async function onClick(data: FormValues) {
     const result = await createUseditem({
       variables: {
@@ -84,7 +78,6 @@ export default function Product() {
     router.push(`/pddetail/${result.data.createUseditem._id}`);
   }
 
-  // 수정하기
   async function onClickEdit(data: FormValues) {
     const edit = await updateUseditem({
       variables: {
