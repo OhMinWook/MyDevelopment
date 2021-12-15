@@ -10,20 +10,27 @@ import HomeUI from "./home.presenter";
 import {
   CREATE_POINT_BUYING_AND_SELLING,
   FETCH_USED_ITEMS,
+  TOGGLE_USEDITEM_PICK,
 } from "./home.queries";
 import { useRouter } from "next/Router";
 import { useState } from "react";
 
 export default function Home() {
   const router = useRouter();
+  const [keyword, setKeyword] = useState("");
   const [createPointBuyingandSelling] = useMutation<
     Pick<IMutation, "createPointTransactionOfLoading">,
     IMutationCreatePointTransactionOfLoadingArgs
   >(CREATE_POINT_BUYING_AND_SELLING);
-  const { data, fetchMore } = useQuery<
+  const [toggleUseditemPick] = useMutation(TOGGLE_USEDITEM_PICK);
+  const { data, fetchMore, refetch } = useQuery<
     Pick<IQuery, "fetchUseditems">,
     IQueryFetchUseditemsArgs
-  >(FETCH_USED_ITEMS);
+  >(FETCH_USED_ITEMS, {
+    variables: {
+      search: keyword,
+    },
+  });
 
   function onLoadMore() {
     if (!data) return;
@@ -40,6 +47,11 @@ export default function Home() {
         };
       },
     });
+  }
+
+  function onChangeSearch(value) {
+    setKeyword(value);
+    console.log(value);
   }
 
   const onClickBuying = (id) => async () => {
@@ -80,13 +92,26 @@ export default function Home() {
     router.push(`/pddetail/${id}`);
   };
 
+  const onClickLike = (id) => async () => {
+    await toggleUseditemPick({
+      variables: {
+        useditemId: id,
+      },
+      refetchQueries: [{ query: FETCH_USED_ITEMS }],
+    });
+  };
+
   return (
     <HomeUI
       data={data}
+      keyword={keyword}
+      refetch={refetch}
+      onChangeSearch={onChangeSearch}
       onClickpdDetail={onClickpdDetail}
       loadMore={onLoadMore}
       onClickBasket={onClickBasket}
       onClickBuying={onClickBuying}
+      onClickLike={onClickLike}
     />
   );
 }

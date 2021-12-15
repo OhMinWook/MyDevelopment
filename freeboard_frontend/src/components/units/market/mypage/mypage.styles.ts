@@ -4,7 +4,7 @@ export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: 70%;
+  width: 1050px;
   margin: 0 auto;
   margin-top: 50px;
   margin-bottom: 50px;
@@ -13,7 +13,7 @@ export const Wrapper = styled.div`
 export const Title = styled.div`
   font-size: 40px;
   border-bottom: 5px solid purple;
-  width: 1100px;
+  width: 1050px;
   text-align: center;
   padding-bottom: 40px;
   margin-bottom: 20px;
@@ -26,6 +26,7 @@ export const BoxWrapper = styled.div`
   align-items: center;
   margin: 0 auto;
   width: 80%;
+  border-bottom: 5px solid purple;
 `;
 
 export const Box = styled.div`

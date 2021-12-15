@@ -7,6 +7,7 @@ import { LOGIN_USER } from "./login.queries";
 
 export default function Login() {
   const { setAccessToken } = useContext(GlobalContext);
+  const [logout, setLogout] = useState(false);
 
   const router = useRouter();
   const [input, setInput] = useState({
@@ -43,11 +44,16 @@ export default function Login() {
     router.push("./signup");
   }
 
+  const onClickLogout = () => {
+    setLogout(true);
+  };
+
   return (
     <LoginUI
       onChangeInput={onChangeInput}
       onClickSubmit={onClickSubmit}
       onClickSignup={onClickSignup}
+      onClickLogout={onClickLogout}
     />
   );
 }

@@ -3,17 +3,28 @@ import { useState } from "react";
 import {
   IMutation,
   IMutationCreatePointTransactionOfLoadingArgs,
+  IQuery,
+  IQueryFetchUseditemsIPickedArgs,
 } from "../../../../commons/types/generated/types";
 import MyPageUI from "./mypage.presenter";
-import { FETCH_USER_LOGGED_IN, CREATE_POINT_LOADING } from "./mypage.quries";
+import {
+  FETCH_USER_LOGGED_IN,
+  CREATE_POINT_LOADING,
+  FETCH_USEDITEMS_IPICK,
+} from "./mypage.quries";
 
 export default function MyPageContainer() {
   const { data } = useQuery(FETCH_USER_LOGGED_IN);
+  const { data: useditemsIPicked } = useQuery<
+    Pick<IQuery, "fetchUseditemsIPicked">,
+    IQueryFetchUseditemsIPickedArgs
+  >(FETCH_USEDITEMS_IPICK, { variables: { search: "" } });
   const [createPointLoading] = useMutation<
     Pick<IMutation, "createPointTransactionOfLoading">,
     IMutationCreatePointTransactionOfLoadingArgs
   >(CREATE_POINT_LOADING);
   const [point, setPoint] = useState(0);
+  console.log(useditemsIPicked);
 
   function onChangePoint(event) {
     setPoint(event?.target.value);
@@ -59,6 +70,7 @@ export default function MyPageContainer() {
   return (
     <MyPageUI
       data={data}
+      useditemsIPicked={useditemsIPicked}
       onClickPayment={onClickPayment}
       onChangePoint={onChangePoint}
     />

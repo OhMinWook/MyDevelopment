@@ -11,6 +11,7 @@ import {
   StackWrapper,
 } from "./mypage.styles";
 import Head from "next/head";
+import Paginations01 from "../../../commons/pagination/pagination.container";
 
 export default function MyPageUI(props) {
   return (
@@ -44,6 +45,14 @@ export default function MyPageUI(props) {
           <Box>이메일</Box>
           <Box>내 장바구니</Box>
         </BoxWrapper>
+        {props.useditemsIPicked?.fetchUseditemsIPicked.map((el, index) => (
+          <div key={el._id}>
+            <div>{index + 1}</div>
+            <div>{el.seller.name}</div>
+            <div>{el.contents}</div>
+            <div>{el.price}</div>
+          </div>
+        ))}
       </Wrapper>
     </>
   );

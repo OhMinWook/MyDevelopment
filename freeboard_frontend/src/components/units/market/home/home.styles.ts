@@ -36,3 +36,9 @@ export const Price = styled.div`
 export const Seller = styled.span`
   font-size: 16px;
 `;
+
+export const Like = styled.img`
+  width: 20px;
+  height: 20px;
+  margin-bottom: 10px;
+`;
