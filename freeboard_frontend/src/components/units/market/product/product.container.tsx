@@ -9,7 +9,6 @@ import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/Router";
 import { FETCH_USED_ITEM } from "../pddetail/pddetail.queries";
 
-// 타입스크립트
 interface FormValues {
   name: string;
   remarks: string;
@@ -17,6 +16,7 @@ interface FormValues {
   price: number;
   tags: string[];
   images: string[];
+  useditemAddress: any;
 }
 
 export default function Product() {
@@ -25,7 +25,11 @@ export default function Product() {
   const [createUseditem] = useMutation(CREATE_USED_ITEM);
   const [updateUseditem] = useMutation(UPDATE_USED_ITEM);
   const [images, setImages] = useState([]);
+  const [zipcode, setZipcode] = useState("");
+  const [address, setAddress] = useState("");
+  const [addressDetail, setaddressDetail] = useState("");
   const [uploadFile] = useMutation(UPLOAD_FILE);
+  const [isopen, setIsopen] = useState(false);
 
   const { data } = useQuery(FETCH_USED_ITEM, {
     variables: {
@@ -60,6 +64,19 @@ export default function Product() {
   const onClickImages = () => {
     fileRef.current?.click();
   };
+  const onClickAddressSearch = () => {
+    setIsopen(true);
+  };
+
+  const onCompleteAddressSearch = (data) => {
+    setZipcode(data.zonecode);
+    setAddress(data.address);
+    setIsopen(false);
+  };
+
+  const onChangeAddressDetil = (event) => {
+    setaddressDetail(event.target.value);
+  };
 
   async function onClick(data: FormValues) {
     const result = await createUseditem({
@@ -71,6 +88,11 @@ export default function Product() {
           price: Number(data.price),
           tags: [data.tags],
           images: images,
+          useditemAddress: {
+            zipcode,
+            address,
+            addressDetail,
+          },
         },
       },
     });
@@ -106,10 +128,16 @@ export default function Product() {
       onClick={onClick}
       onChangeFile={onChangeFile}
       images={images}
+      isopen={isopen}
       onClickImages={onClickImages}
       fileRef={fileRef}
       data={data}
+      zipcode={zipcode}
+      address={address}
       onClickEdit={onClickEdit}
+      onCompleteAddressSearch={onCompleteAddressSearch}
+      onChangeAddressDetil={onChangeAddressDetil}
+      onClickAddressSearch={onClickAddressSearch}
     />
   );
 }

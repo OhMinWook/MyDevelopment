@@ -12,8 +12,6 @@ export default function ReviewList() {
   const router = useRouter();
   const [keyword, setKeyword] = useState("");
   const [startpage, setStartPage] = useState(1);
-  const { data: dataBoardsCount, refetch: refetchBoardCount } =
-    useQuery(FETCH_BOARDS_COUNT);
   const { data, refetch } = useQuery<
     Pick<IQuery, "fetchBoards">,
     IQueryFetchBoardsArgs
@@ -22,10 +20,13 @@ export default function ReviewList() {
       page: startpage,
     },
   });
-  console.log(data);
+  const { data: dataBoardsCount, refetch: refetchBoardsCount } =
+    useQuery(FETCH_BOARDS_COUNT);
+  console.log(dataBoardsCount);
 
-  function onChangeKeyword(value: string) {
+  function onChangeSearch(value) {
     setKeyword(value);
+    console.log(value);
   }
 
   function onClickReview() {
@@ -47,10 +48,10 @@ export default function ReviewList() {
       keyword={keyword}
       onClickReview={onClickReview}
       onClickMoveToReviewDetail={onClickMoveToReviewDetail}
-      onChangeKeyword={onChangeKeyword}
-      count={dataBoardsCount?.fetchBoardsCount}
+      onChangeSearch={onChangeSearch}
+      count={dataBoardsCount}
       refetch={refetch}
-      refetchBoardCount={refetchBoardCount}
+      refetchBoardsCount={refetchBoardsCount}
       startpage={startpage}
       setStartPage={setStartPage}
       onClickMoveToReview={onClickMoveToReview}

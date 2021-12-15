@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import KakaoMap from "../../../commons/map/map.container";
 
 export const Wrapper = styled.div`
   display: flex;
@@ -52,4 +53,9 @@ export const Edit = styled.button`
   color: white;
   cursor: pointer;
   margin-top: 270px;
+`;
+
+export const KaKaoMap = styled(KakaoMap)`
+  width: 200px;
+  height: 200px;
 `;

@@ -12,6 +12,7 @@ import {
   Submit,
   Subject,
 } from "./product.styles";
+import DaumPostcode from "react-daum-postcode";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup/dist/yup";
@@ -19,6 +20,7 @@ import { useContext } from "react";
 import { Context } from "../../../../../pages/pddetail/[useditemId]/edit";
 import "react-quill/dist/quill.snow.css";
 import dynamic from "next/dynamic";
+import { Modal } from "antd";
 
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 const schema = yup.object().shape({
@@ -44,6 +46,11 @@ export default function ProductUI(props) {
 
   return (
     <form onSubmit={handleSubmit(props.onClick)}>
+      {props.isopen && (
+        <Modal visible={true}>
+          <DaumPostcode onComplete={props.onCompleteAddressSearch} />
+        </Modal>
+      )}
       <Wrapper>
         <div>
           <Title>{isEdit ? "상품 수정" : "상품 등록"}</Title>
@@ -102,6 +109,41 @@ export default function ProductUI(props) {
               <div>{formState.errors.tag?.message}</div>
             </InputWrapper>
           </InnerWrapper>
+          <div>
+            <div>우편번호</div>
+            <input
+              value={
+                props.zipcode ||
+                props.data?.fetchUseditem.useditemAddress.zipcode ||
+                ""
+              }
+            />
+            <input
+              type="button"
+              value="우편번호"
+              onClick={props.onClickAddressSearch}
+            />
+          </div>
+          <div>
+            <div>주소</div>
+            <input
+              readOnly
+              value={
+                props.address ||
+                props.data?.fetchUseditem.useditemAddress.address ||
+                ""
+              }
+            />
+          </div>
+          <div>
+            <div>상세 주소</div>
+            <input
+              onChange={props.onChangeAddressDetil}
+              defaultValue={
+                props.data?.fetchUseditem.useditemAddress?.addressDetail
+              }
+            />
+          </div>
           <ImageWrapper>
             <Subject>사진 첨부</Subject>
             <ButtonWrapper>
@@ -118,7 +160,7 @@ export default function ProductUI(props) {
                 onChange={props.onChangeFile}
                 ref={props.fileRef}
               />
-              <div>{formState.errors.images?.message}</div>
+              {/* <div>{formState.errors.images?.message}</div> */}
             </ButtonWrapper>
           </ImageWrapper>
         </div>

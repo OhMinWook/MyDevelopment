@@ -1,4 +1,4 @@
-// import KakaoMap from "../../../commons/map/map.container";
+import KakaoMap from "../../../commons/map/map.container";
 import {
   Remarks,
   Wrapper,
@@ -20,7 +20,11 @@ export default function ProductDetailUI(props) {
           <Name>{props.data?.fetchUseditem.name}</Name>
           <Remarks>{props.data?.fetchUseditem.remarks}</Remarks>
           <Price>{props.data?.fetchUseditem.price}</Price>
-          {/* <KakaoMap /> */}
+          <div>
+            <KakaoMap
+              address={props.data?.fetchUseditem.useditemAddress.address}
+            />
+          </div>
           {process.browser ? (
             <Contents
               dangerouslySetInnerHTML={{

@@ -19,6 +19,7 @@ export default function ImageUploadPage() {
     console.log(myFile);
 
     // mutation 사용
+    // 스토리지에 저장하고 url을 반환하는 역할을 하는 곳
     const result = await uploadFile({
       variables: {
         file: myFile,

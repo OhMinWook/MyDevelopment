@@ -22,13 +22,13 @@ import SearchPage from "../../../commons/search/01/search01.container";
 export default function ReviewListUI(props) {
   return (
     <Wrapper>
-      <SearchPage
-        refetch={props.refetch}
-        refetchBoardsCount={props.refetchBoardsCount}
-        onChageKeyword={props.onChangeKeyword}
-      />
       <HeadWrapper>
         <Title>베스트 후기</Title>
+        <SearchPage
+          refetch={props.refetch}
+          refetchBoardsCount={props.refetchBoardsCount}
+          onChangeSearch={props.onChangeSearch}
+        />
       </HeadWrapper>
       <TableTop />
       <Row>
@@ -45,8 +45,8 @@ export default function ReviewListUI(props) {
           <ColumnBasic>{el.writer}</ColumnBasic>
           <ColumnContents id={el._id} onClick={props.onClickMoveToReviewDetail}>
             {el.contents
-              .replaceAll(props.keyword, `@#$%{props.keyword}@#$%`)
-              .split("@#$%")
+              .replaceAll(props.keyword, `###${props.keyword}###`)
+              .split("###")
               .map((el) => (
                 <TextToken key={uuidv4()} isMatched={props.keyword === el}>
                   {el}
