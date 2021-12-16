@@ -29,3 +29,15 @@ export const TOGGLE_USEDITEM_PICK = gql`
     toggleUseditemPick(useditemId: $useditemId)
   }
 `;
+
+export const FETCH_USEDITEM = gql`
+  query fetchUseditem($useditemId: ID!) {
+    fetchUseditem(useditemId: $useditemId) {
+      _id
+      name
+      contents
+      price
+      tags
+    }
+  }
+`;

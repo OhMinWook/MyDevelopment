@@ -1,3 +1,4 @@
+import * as Sentry from "@sentry/nextjs";
 import {
   ApolloClient,
   ApolloProvider,
@@ -13,7 +14,6 @@ import Layout from "../src/components/commons/layout";
 import { createUploadLink } from "apollo-upload-client";
 // import Head from "next/head";
 
-// Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import {
   createContext,
@@ -23,10 +23,7 @@ import {
   SetStateAction,
 } from "react";
 import { getAccessToken } from "../src/commons/libraries/getAccessToken";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
 
-// Your web app's Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyC8MkBjwRVZjdylnLnyHsImf6VS8Q-gXsY",
   authDomain: "codecamp-04-3ad57.firebaseapp.com",
@@ -38,6 +35,10 @@ const firebaseConfig = {
 
 // Initialize Firebase
 export const firebaseapp = initializeApp(firebaseConfig);
+
+Sentry.init({
+  dsn: "https://9e1942a23dd4452480888793cbe4c517@o1091867.ingest.sentry.io/6109521",
+});
 
 interface IGlobalContext {
   accessToken?: string;

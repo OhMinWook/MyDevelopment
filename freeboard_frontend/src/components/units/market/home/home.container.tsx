@@ -4,6 +4,7 @@ import {
   IMutation,
   IMutationCreatePointTransactionOfLoadingArgs,
   IQuery,
+  IQueryFetchUseditemArgs,
   IQueryFetchUseditemsArgs,
 } from "../../../../commons/types/generated/types";
 import HomeUI from "./home.presenter";
@@ -12,12 +13,17 @@ import {
   FETCH_USED_ITEMS,
   TOGGLE_USEDITEM_PICK,
 } from "./home.queries";
-import { useRouter } from "next/Router";
+import { useRouter } from "next/router";
 import { useState } from "react";
+import { FETCH_USED_ITEM } from "../pddetail/pddetail.queries";
 
 export default function Home() {
   const router = useRouter();
   const [keyword, setKeyword] = useState("");
+  const { data: uesditemPick } = useQuery<
+    Pick<IQuery, "fetchUseditem">,
+    IQueryFetchUseditemArgs
+  >(FETCH_USED_ITEM);
   const [createPointBuyingandSelling] = useMutation<
     Pick<IMutation, "createPointTransactionOfLoading">,
     IMutationCreatePointTransactionOfLoadingArgs
@@ -93,22 +99,40 @@ export default function Home() {
   };
 
   const onClickLike = (id) => async () => {
-    await toggleUseditemPick({
+    const result = await toggleUseditemPick({
       variables: {
         useditemId: id,
       },
-      refetchQueries: [{ query: FETCH_USED_ITEMS }],
+      optimisticResponse: {
+        toggleUseditemPick: uesditemPick?.fetchUseditem.pickedCount || 0,
+      },
+      update(cache, { data }) {
+        cache.writeQuery({
+          query: FETCH_USED_ITEM,
+          variables: { useditemId: id },
+          data: {
+            fetchUseditem: {
+              _id: id,
+              _typename: "Useditem",
+              pickedCount: data?.toggleUseditemPick,
+            },
+          },
+        });
+      },
     });
+    refetch();
+    console.log(result);
   };
 
   return (
     <HomeUI
       data={data}
+      uesditemPick={uesditemPick}
       keyword={keyword}
       refetch={refetch}
       onChangeSearch={onChangeSearch}
       onClickpdDetail={onClickpdDetail}
-      loadMore={onLoadMore}
+      onLoadMore={onLoadMore}
       onClickBasket={onClickBasket}
       onClickBuying={onClickBuying}
       onClickLike={onClickLike}

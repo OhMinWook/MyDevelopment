@@ -28,8 +28,6 @@ const schema = yup.object().shape({
   remarks: yup.string().required("입력하세요"),
   contents: yup.string().required("입력하세요"),
   price: yup.number().positive().integer().required("입력하세요"),
-  tags: yup.string().required("입력하세요"),
-  // images: yup.string().required("입력하세요"),
 });
 
 export default function ProductUI(props) {
@@ -101,12 +99,18 @@ export default function ProductUI(props) {
           <InnerWrapper>
             <Subject>태그</Subject>
             <InputWrapper>
+              {props.hashArr.map((el, idx) => (
+                <span key={idx} onClick={props.deleteHash(el.index)}>
+                  {el}
+                </span>
+              ))}
               <Input
                 type="text"
-                {...register("tags")}
+                onKeyUp={props.onKeyUp}
                 defaultValue={props.data?.fetchUseditem.tags}
+                {...register("tags")}
               />
-              <div>{formState.errors.tag?.message}</div>
+              {/* <div>{formState.errors.tags?.message}</div> */}
             </InputWrapper>
           </InnerWrapper>
           <div>

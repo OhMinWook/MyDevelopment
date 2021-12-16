@@ -24,6 +24,7 @@ export default function Product() {
   const fileRef = useRef(null);
   const [createUseditem] = useMutation(CREATE_USED_ITEM);
   const [updateUseditem] = useMutation(UPDATE_USED_ITEM);
+  const [hashArr, setHashArr] = useState<String[]>([]);
   const [images, setImages] = useState([]);
   const [zipcode, setZipcode] = useState("");
   const [address, setAddress] = useState("");
@@ -61,6 +62,18 @@ export default function Product() {
     console.log(value.data.uploadFile.url);
   }
 
+  const onKeyUp = (event) => {
+    if (event.keyCode === 32 && event.target.value !== " ") {
+      setHashArr([...hashArr, `#${event.target.value}`]);
+      event.target.value = "";
+    }
+  };
+
+  const deleteHash = (index) => () => {
+    hashArr.splice(index, 1);
+    setHashArr([...hashArr]);
+  };
+
   const onClickImages = () => {
     fileRef.current?.click();
   };
@@ -79,6 +92,7 @@ export default function Product() {
   };
 
   async function onClick(data: FormValues) {
+    alert("test");
     const result = await createUseditem({
       variables: {
         createUseditemInput: {
@@ -86,8 +100,8 @@ export default function Product() {
           remarks: data.remarks,
           contents: data.contents,
           price: Number(data.price),
-          tags: [data.tags],
-          images: images,
+          tags: hashArr,
+          images,
           useditemAddress: {
             zipcode,
             address,
@@ -108,8 +122,8 @@ export default function Product() {
           remarks: data.remarks,
           contents: data.contents,
           price: Number(data.price),
-          tags: [data.tags],
-          images: images,
+          tags: hashArr,
+          images,
         },
         useditemId: String(router.query.useditemId),
       },
@@ -118,6 +132,7 @@ export default function Product() {
     router.push(`/pddetail/${router.query.useditemId}`);
     alert("상품 수정이 완료되었습니다.");
   }
+
   useEffect(() => {
     const Previmages = data?.fetchUseditem.images;
     Previmages && setImages([...Previmages]);
@@ -138,6 +153,9 @@ export default function Product() {
       onCompleteAddressSearch={onCompleteAddressSearch}
       onChangeAddressDetil={onChangeAddressDetil}
       onClickAddressSearch={onClickAddressSearch}
+      onKeyUp={onKeyUp}
+      deleteHash={deleteHash}
+      hashArr={hashArr}
     />
   );
 }

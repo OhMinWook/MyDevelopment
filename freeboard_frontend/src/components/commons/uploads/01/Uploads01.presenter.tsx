@@ -8,11 +8,11 @@ export default function UploadUI(props) {
   return (
     <>
       {/* 이미지 첨부하는 태그, 클릭시 이미지를 올릴 수 있다. */}
-      {props.fileUrl ? (
+      {props.imageUrls ? (
         <UploadImage
           onClick={props.onClickUpload}
           src={
-            props.fileUrl
+            props.imageUrls
               ? `https://storage.googleapis.com/${props.fileUrl}`
               : `https://storage.googleapis.com/${props.defaultFileUrl}`
           }

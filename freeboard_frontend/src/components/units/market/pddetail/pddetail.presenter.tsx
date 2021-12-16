@@ -34,6 +34,7 @@ export default function ProductDetailUI(props) {
           ) : (
             <div />
           )}
+          <div>{props.data?.fetchUseditem.tags}</div>
           <Edit onClick={props.onClickEdit}>수정하기</Edit>
         </div>
       </Wrapper>

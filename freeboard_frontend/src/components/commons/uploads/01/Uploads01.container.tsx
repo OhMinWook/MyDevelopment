@@ -18,13 +18,25 @@ export default function UploadPage(props) {
     const file = checkValidationImage(event.target.file?.[0]);
     if (!file) return;
 
+    const fileReader = new FileReader();
+    fileReader.readAsDataURL(props.file);
+    fileReader.onload = (data) => {
+      console.log(data.target.result);
+      props.setImageUrl(data.target?.result);
+      props.setFile(props.file);
+    };
+
     try {
-      const result = await uploadfile({
-        variables: {
-          file,
-        },
-      });
-      props.onChangeFilrUrls(result.data.uploadfile.url, props.index);
+      let myImageUrl = [];
+      if (props.file) {
+        const result = await uploadfile({
+          variables: {
+            file: props.file,
+          },
+        });
+        myImageUrl = result.data?.uploadFile.url || "";
+        props.onChangeFilrUrls(result.data.uploadfile.url, props.index);
+      }
     } catch (error) {
       Modal.error({ content: error.message });
     }

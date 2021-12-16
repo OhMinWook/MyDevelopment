@@ -26,29 +26,20 @@ function ReviewUI(props) {
         <Title>상품 후기</Title>
         <TopWrapper>
           <Writer>작성자</Writer>
-          <input type="text" onChange={props.onChangeInputs} name="writer" />
+          <input type="text" onChange={props.onChangeInputs("writer")} />
 
           <Password>비밀번호</Password>
-          <input
-            type="password"
-            onChange={props.onChangeInputs}
-            name="password"
-          />
+          <input type="password" onChange={props.onChangeInputs("password")} />
         </TopWrapper>
         <TitleWrapper>
           <Subject>제목</Subject>
-          <TitleInput
-            type="text"
-            onChange={props.onChangeInputs}
-            name="title"
-          />
+          <TitleInput type="text" onChange={props.onChangeInputs("title")} />
         </TitleWrapper>
         <ContentWrpper>
           <Content>내용</Content>
           <ContentInput
             type="text"
-            onChange={props.onChangeInputs}
-            name="contents"
+            onChange={props.onChangeInputs("contents")}
           />
         </ContentWrpper>
         <Pictures>
@@ -63,7 +54,9 @@ function ReviewUI(props) {
             />
           ))}
         </Pictures>
-        <Signup onClick={props.onClickSubmit}>등록</Signup>
+        <Signup onClick={props.onClickSubmit} disabled={props.isSubmitting}>
+          등록
+        </Signup>
       </Wrapper>
     </>
   );

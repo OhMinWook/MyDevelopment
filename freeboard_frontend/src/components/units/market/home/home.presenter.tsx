@@ -20,9 +20,9 @@ export default function HomeUI(props) {
 
       <InfiniteScroll
         pageStart={0}
-        loadMore={props.loadMore}
+        loadMore={props.onLoadMore}
         hasMore={true}
-        useWindow={false}
+        // useWindow={false}
       >
         <div>상품검색하기</div>
         <SearchPage
@@ -31,7 +31,7 @@ export default function HomeUI(props) {
         />
         <Wrapper>
           {props.data?.fetchUseditems.map((el) => (
-            <Card key={el._id}>
+            <Card key={uuidv4()}>
               <Image
                 onClick={props.onClickpdDetail(el._id)}
                 src={`https://storage.googleapis.com/${el.images[0]}`}
