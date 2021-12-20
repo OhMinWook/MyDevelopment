@@ -1,11 +1,14 @@
 import { useMutation } from "@apollo/client";
+import { useState } from "react";
 import {
   IMutation,
   IMutationDeleteUseditemQuestionArgs,
 } from "../../../../commons/types/generated/types";
 import { DELETE_USEDITEM_QUESTION } from "./list.queries";
+import ProductComment from "../write/write.container";
 
 export default function ProductQuestionListItem(props) {
+  const [isEdit, setIsEdit] = useState(false);
   const [deleteUseditemQuestion] = useMutation<
     Pick<IMutation, "deleteUseditemQuestion">,
     IMutationDeleteUseditemQuestionArgs
@@ -32,13 +35,22 @@ export default function ProductQuestionListItem(props) {
     });
     console.log(result);
   };
+
+  const onClickChange = () => {
+    setIsEdit(true);
+  };
   return (
     <>
-      <div>
-        <div>{props.el?.contents}</div>
-        {/* <button onClick={onClickUpdate}>수정하기</button> */}
-        <button onClick={onClickDelete(props.el._id)}>삭제하기</button>
-      </div>
+      {!isEdit && (
+        <div>
+          <div>{props.el?.contents}</div>
+          <button onClick={onClickDelete(props.el._id)}>삭제하기</button>
+          <button onClick={onClickChange}>수정하기</button>
+        </div>
+      )}
+      {isEdit && (
+        <ProductComment isEdit={true} setIsEdit={setIsEdit} el={props.el} />
+      )}
     </>
   );
 }

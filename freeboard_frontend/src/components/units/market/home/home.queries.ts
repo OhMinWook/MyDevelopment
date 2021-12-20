@@ -30,14 +30,10 @@ export const TOGGLE_USEDITEM_PICK = gql`
   }
 `;
 
-export const FETCH_USEDITEM = gql`
+export const FETCH_USED_ITEM = gql`
   query fetchUseditem($useditemId: ID!) {
     fetchUseditem(useditemId: $useditemId) {
-      _id
-      name
-      contents
-      price
-      tags
+      pickedCount
     }
   }
 `;

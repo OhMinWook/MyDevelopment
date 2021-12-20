@@ -17,8 +17,16 @@ export default function ProductCommentUI(props) {
   // }
   return (
     <>
-      <input onChange={props.onChangeContents} />
-      <button onClick={props.onClickComment}>등록하기</button>
+      <input
+        onChange={props.onChangeContents}
+        placeholder="내용을 작성하세요"
+        defaultValue={props.el?.contents}
+      />
+      <button
+        onClick={props.isEdit ? props.onClickUpdate : props.onClickComment}
+      >
+        {props.isEdit ? "수정하기" : "등록하기"}
+      </button>
     </>
   );
 }

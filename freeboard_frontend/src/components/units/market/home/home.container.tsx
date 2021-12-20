@@ -12,10 +12,10 @@ import {
   CREATE_POINT_BUYING_AND_SELLING,
   FETCH_USED_ITEMS,
   TOGGLE_USEDITEM_PICK,
+  FETCH_USED_ITEM,
 } from "./home.queries";
 import { useRouter } from "next/router";
 import { useState } from "react";
-import { FETCH_USED_ITEM } from "../pddetail/pddetail.queries";
 
 export default function Home() {
   const router = useRouter();
@@ -70,7 +70,6 @@ export default function Home() {
     console.log(result);
     alert("구매를 완료했습니다.");
   };
-  // console.log(data);
   // 장바구니에 담기 위한 온클릭 함수
   const onClickBasket = (el: IBoard) => () => {
     console.log(el);
@@ -121,7 +120,7 @@ export default function Home() {
       },
     });
     refetch();
-    console.log(result);
+    // console.log(result);
   };
 
   return (
