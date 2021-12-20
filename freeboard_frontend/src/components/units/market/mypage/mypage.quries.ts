@@ -28,6 +28,9 @@ export const FETCH_USEDITEMS_IPICK = gql`
       name
       contents
       price
+      seller {
+        name
+      }
     }
   }
 `;

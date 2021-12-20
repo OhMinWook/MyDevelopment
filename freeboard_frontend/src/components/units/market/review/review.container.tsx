@@ -2,17 +2,24 @@ import { useMutation } from "@apollo/client";
 import { useRouter } from "next/Router";
 import { useEffect, useState, useCallback, ChangeEvent } from "react";
 import ReviewUI from "./review.presenter";
-import { CREATE_BOARD } from "./review.queries";
+import { CREATE_BOARD, UPDATE_BOARD } from "./review.queries";
 import { Modal } from "antd";
+import {
+  IMutation,
+  IMutationCreateBoardArgs,
+  IMutationUpdateBoardArgs,
+} from "../../../../commons/types/generated/types";
 
 export default function Review(props) {
   const router = useRouter();
-  const [isSubmitting, setIsSubmitting] = useState(false);
   const [createBoard] = useMutation(CREATE_BOARD);
+  const [updateBoard] = useMutation(UPDATE_BOARD);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [password, setPassword] = useState("");
+  const [imageUrls, setImageUrls] = useState(["", "", ""]);
+  const [writer, setWriter] = useState("");
 
   const [inputs, setInputs] = useState({
-    writer: "",
-    password: "",
     title: "",
     contents: "",
   });
@@ -24,9 +31,6 @@ export default function Review(props) {
   //   contenterror: "",
   // });
 
-  const [imageUrls, setImageUrl] = useState(["", "", ""]);
-  const [file, setFile] = useState();
-
   const onChangeInputs = useCallback(
     (id: string) => (event: ChangeEvent<HTMLInputElement>) => {
       setInputs((prev) => ({
@@ -36,18 +40,12 @@ export default function Review(props) {
     },
     []
   );
-
-  function onChangeFIleUrl(fileUrl: string, index: number) {
-    const newFileUrls = [...imageUrls];
-    newFileUrls[index] = fileUrl;
-    setImageUrl(newFileUrls);
-  }
-
-  useEffect(() => {
-    if (props.data?.fetchBoard.images?.length) {
-      setImageUrl([...props.data?.fetchBoard.images]);
-    }
-  }, [props.data]);
+  const onChangeWriter = (event) => {
+    setWriter(event.target.value);
+  };
+  const onChangePassword = (event) => {
+    setPassword(event.target.value);
+  };
 
   // function onChangeError(event) {
   //   setError({
@@ -66,8 +64,10 @@ export default function Review(props) {
       const result = await createBoard({
         variables: {
           createBoardInput: {
+            writer,
             ...inputs,
             images: imageUrls,
+            password,
           },
         },
       });
@@ -79,16 +79,50 @@ export default function Review(props) {
       Modal.error({ content: error.message });
     }
   };
+  function onChangeFileUrls(fileUrl: string, index: number) {
+    const newFileUrls = [...imageUrls];
+    newFileUrls[index] = fileUrl;
+    setImageUrls(newFileUrls);
+  }
+
+  useEffect(() => {
+    if (props.data?.fetchBoard.imageUrls?.length) {
+      setImageUrls([...props.data?.fetchBoard.images]);
+    }
+  });
+
+  const onClickUpdate = async () => {
+    try {
+      const result = await updateBoard({
+        variables: {
+          boardId: String(router.query.boardId),
+          updateBoardInput: {
+            ...inputs,
+            images: imageUrls,
+          },
+          password,
+        },
+      });
+      console.log(result);
+      router.push(`/reviewdetail/${router.query.boardId}`);
+      alert("수정을 완료하였습니다.");
+    } catch (error) {
+      alert(error.message);
+    }
+  };
 
   return (
     <ReviewUI
       onChangeInputs={onChangeInputs}
       onClickSubmit={onClickSubmit}
       // onChangeError={onChangeError}
-      onChangeFIleUrl={onChangeFIleUrl}
-      onChangeFile={props.onChangeFile}
+      onChangeFileUrls={onChangeFileUrls}
+      // onChangeFile={props.onChangeFile}
       imageUrls={imageUrls}
       isSubmitting={isSubmitting}
+      onClickUpdate={onClickUpdate}
+      onChangePassword={onChangePassword}
+      onChangeWriter={onChangeWriter}
     />
   );
 }

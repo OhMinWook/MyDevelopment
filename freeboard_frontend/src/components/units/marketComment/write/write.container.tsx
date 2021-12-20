@@ -1,7 +1,7 @@
 import { useMutation } from "@apollo/client";
 import { PinDropSharp } from "@mui/icons-material";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   IMutation,
   IMutationCreateBoardCommentArgs,

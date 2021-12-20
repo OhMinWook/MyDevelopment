@@ -14,33 +14,20 @@ export default function UploadPage(props) {
   }
 
   // 이미지를 등록하는 함수
-  async function onChangeFile(event) {
-    const file = checkValidationImage(event.target.file?.[0]);
-    if (!file) return;
 
-    const fileReader = new FileReader();
-    fileReader.readAsDataURL(props.file);
-    fileReader.onload = (data) => {
-      console.log(data.target.result);
-      props.setImageUrl(data.target?.result);
-      props.setFile(props.file);
-    };
-
+  const onChangeFile = async (event) => {
+    const file = checkValidationImage(event.target.files?.[0]);
     try {
-      let myImageUrl = [];
-      if (props.file) {
-        const result = await uploadfile({
-          variables: {
-            file: props.file,
-          },
-        });
-        myImageUrl = result.data?.uploadFile.url || "";
-        props.onChangeFilrUrls(result.data.uploadfile.url, props.index);
-      }
+      const result = await uploadfile({
+        variables: {
+          file,
+        },
+      });
+      props.onChangeFileUrls(result.data?.uploadFile.url, props.index);
     } catch (error) {
-      Modal.error({ content: error.message });
+      console.log(error.message);
     }
-  }
+  };
 
   return (
     <UploadUI

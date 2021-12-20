@@ -68,7 +68,7 @@ export default function ReviewDetail() {
   }
 
   function onClickMoveToReview() {
-    router.push("/review");
+    router.push(`/reviewdetail/${router.query.boardId}/edit`);
   }
 
   return (

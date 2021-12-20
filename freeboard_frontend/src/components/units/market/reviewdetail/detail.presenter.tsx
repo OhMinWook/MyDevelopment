@@ -34,7 +34,7 @@ export default function ReviewDetailUI(props) {
       </Wrapper>
       <Buttons>
         <button onClick={props.onClickMoveToList}>후기 목록</button>
-        <button onClick={props.onClickMoveToSubmit}>후기 작성</button>
+        <button onClick={props.onClickMoveToReview}>후기 수정</button>
       </Buttons>
     </>
   );

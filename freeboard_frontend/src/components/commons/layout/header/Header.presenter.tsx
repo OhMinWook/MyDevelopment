@@ -6,6 +6,7 @@ export default function HeaderUI(props) {
       <TopHeader>
         <Button1 onClick={props.onClickSignup}>회원가입</Button1>
         <Button2 onClick={props.onClickLogin}>로그인</Button2>
+        <button onClick={props.onClickLogout}>로그아웃</button>
       </TopHeader>
       <Header>
         <Logo onClick={props.onClickHome} src={"/images/headerlogo.jpg"} />

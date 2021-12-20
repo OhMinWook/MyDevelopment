@@ -65,7 +65,7 @@ export default function ProductComment(props) {
         },
         refetchQueries: [
           {
-            query: FETCH_USEDITEMb_QUESTIONS,
+            query: FETCH_USEDITEM_QUESTIONS,
             variables: { useditemId: router.query.useditemId },
           },
         ],

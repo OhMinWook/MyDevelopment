@@ -21,6 +21,7 @@ import { Context } from "../../../../../pages/pddetail/[useditemId]/edit";
 import "react-quill/dist/quill.snow.css";
 import dynamic from "next/dynamic";
 import { Modal } from "antd";
+import KakaoMap from "../../../commons/map/map.container";
 
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 const schema = yup.object().shape({
@@ -113,6 +114,7 @@ export default function ProductUI(props) {
               {/* <div>{formState.errors.tags?.message}</div> */}
             </InputWrapper>
           </InnerWrapper>
+          <KakaoMap address={props.address} />
           <div>
             <div>우편번호</div>
             <input

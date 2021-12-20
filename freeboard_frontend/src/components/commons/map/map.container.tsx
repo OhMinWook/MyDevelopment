@@ -20,25 +20,25 @@ export default function KakaoMap(props) {
             level: 3,
           };
 
-        var map = new window.kakao.maps.Map(mapContainer, mapOption);
+        let map = new window.kakao.maps.Map(mapContainer, mapOption);
 
-        var geocoder = new window.kakao.maps.services.Geocoder();
+        let geocoder = new window.kakao.maps.services.Geocoder();
 
         geocoder.addressSearch(
-          props.address,
+          props.address || props.data?.fetchUseditem.useditemAddress.address,
           function (result: any, status: any) {
             if (status === window.kakao.maps.services.Status.OK) {
-              var coords = new window.kakao.maps.LatLng(
+              let coords = new window.kakao.maps.LatLng(
                 result[0].y,
                 result[0].x
               );
 
-              var marker = new window.kakao.maps.Marker({
+              let marker = new window.kakao.maps.Marker({
                 map: map,
                 position: coords,
               });
 
-              var infowindow = new window.kakao.maps.InfoWindow({
+              let infowindow = new window.kakao.maps.InfoWindow({
                 content:
                   '<div style="width:150px;text-align:center;padding:6px 0;">우리집</div>',
               });
@@ -50,6 +50,6 @@ export default function KakaoMap(props) {
         );
       });
     };
-  }, [props.address]);
+  }, [props.address || props.data?.fetchUseditem.useditemAddress.address]);
   return <KakaoMapUI />;
 }
