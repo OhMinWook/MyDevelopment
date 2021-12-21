@@ -30,14 +30,13 @@ function ReviewUI(props) {
           <input
             type="text"
             onChange={props.onChangeWriter}
-            defaultValue={isEdit ? props.data?.fetchBoard.writer : ""}
+            defaultValue={props.data?.fetchBoard.writer}
           />
-
           <Password>비밀번호</Password>
           <input
             type="password"
             onChange={props.onChangePassword}
-            defaultValue={isEdit ? props.data?.fetchBoard.password : ""}
+            defaultValue={props.data?.fetchBoard.password}
           />
         </TopWrapper>
         <TitleWrapper>
@@ -45,7 +44,7 @@ function ReviewUI(props) {
           <TitleInput
             type="text"
             onChange={props.onChangeInputs("title")}
-            defaultValue={isEdit ? props.data?.fetchBoard.title : ""}
+            defaultValue={props.data?.fetchBoard.title}
           />
         </TitleWrapper>
         <ContentWrpper>
@@ -53,7 +52,7 @@ function ReviewUI(props) {
           <ContentInput
             type="text"
             onChange={props.onChangeInputs("contents")}
-            defaultValue={isEdit ? props.data?.fetchBoard.contents : ""}
+            defaultValue={props.data?.fetchBoard.contents}
           />
         </ContentWrpper>
         <Pictures>

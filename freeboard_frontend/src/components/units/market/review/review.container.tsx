@@ -1,4 +1,4 @@
-import { useMutation } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 import { useRouter } from "next/Router";
 import { useEffect, useState, useCallback, ChangeEvent } from "react";
 import ReviewUI from "./review.presenter";
@@ -9,6 +9,7 @@ import {
   IMutationCreateBoardArgs,
   IMutationUpdateBoardArgs,
 } from "../../../../commons/types/generated/types";
+import { FETCH_BOARD } from "../reviewdetail/detail.queries";
 
 export default function Review(props) {
   const router = useRouter();
@@ -24,12 +25,11 @@ export default function Review(props) {
     contents: "",
   });
 
-  // const [error, setError] = useState({
-  //   writererror: "",
-  //   passworderror: "",
-  //   titleerror: "",
-  //   contenterror: "",
-  // });
+  const { data } = useQuery(FETCH_BOARD, {
+    variables: {
+      boardId: router.query.boardId,
+    },
+  });
 
   const onChangeInputs = useCallback(
     (id: string) => (event: ChangeEvent<HTMLInputElement>) => {
@@ -46,17 +46,6 @@ export default function Review(props) {
   const onChangePassword = (event) => {
     setPassword(event.target.value);
   };
-
-  // function onChangeError(event) {
-  //   setError({
-  //     ...error,
-  //     [event.target.name]: event.target.value,
-  //   });
-  //   if (inputs.writer === "") setError("작성자를 입력해 주세요");
-  //   if (inputs.password === "") setError("비밀번호를 입력해 주세요");
-  //   if (inputs.title === "") setError("제목을 입력해 주세요");
-  //   if (inputs.contents === "") setError("내용을 입력해 주세요");
-  // }
 
   const onClickSubmit = async () => {
     setIsSubmitting(true);
@@ -113,11 +102,10 @@ export default function Review(props) {
 
   return (
     <ReviewUI
+      data={data}
       onChangeInputs={onChangeInputs}
       onClickSubmit={onClickSubmit}
-      // onChangeError={onChangeError}
       onChangeFileUrls={onChangeFileUrls}
-      // onChangeFile={props.onChangeFile}
       imageUrls={imageUrls}
       isSubmitting={isSubmitting}
       onClickUpdate={onClickUpdate}
