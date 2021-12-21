@@ -10,7 +10,6 @@ import {
   IMutationUpdateBoardArgs,
 } from "../../../../commons/types/generated/types";
 import { FETCH_BOARD } from "../reviewdetail/detail.queries";
-
 export default function Review(props) {
   const router = useRouter();
   const [createBoard] = useMutation(CREATE_BOARD);
