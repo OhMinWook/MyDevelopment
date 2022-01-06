@@ -12,7 +12,7 @@ import {
 export default function BasketUI(props) {
   return (
     <Wrapper>
-      <Title>장바구니</Title>
+      <Title>장바구니!!</Title>
       {props.basketItems.map((el, index) => (
         <InnerWrapper key={el._id}>
           <Index>{index + 1}</Index>
