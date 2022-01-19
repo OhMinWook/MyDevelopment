@@ -12,12 +12,18 @@ import {
 import { FETCH_BOARD } from "../reviewdetail/detail.queries";
 export default function Review(props) {
   const router = useRouter();
-  const [createBoard] = useMutation(CREATE_BOARD);
-  const [updateBoard] = useMutation(UPDATE_BOARD);
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [password, setPassword] = useState("");
+  const [createBoard] = useMutation<
+    Pick<IMutation, "createBoard">,
+    IMutationCreateBoardArgs
+  >(CREATE_BOARD);
+  const [updateBoard] = useMutation<
+    Pick<IMutation, "updateBoard">,
+    IMutationUpdateBoardArgs
+  >(UPDATE_BOARD);
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
+  const [password, setPassword] = useState<string>("");
   const [imageUrls, setImageUrls] = useState(["", "", ""]);
-  const [writer, setWriter] = useState("");
+  const [writer, setWriter] = useState<string>("");
 
   const [inputs, setInputs] = useState({
     title: "",
@@ -39,10 +45,10 @@ export default function Review(props) {
     },
     []
   );
-  const onChangeWriter = (event) => {
+  const onChangeWriter = (event: ChangeEvent<HTMLInputElement>) => {
     setWriter(event.target.value);
   };
-  const onChangePassword = (event) => {
+  const onChangePassword = (event: ChangeEvent<HTMLInputElement>) => {
     setPassword(event.target.value);
   };
 
