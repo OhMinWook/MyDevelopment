@@ -8,6 +8,8 @@ import {
   IMutation,
   IMutationCreateBoardArgs,
   IMutationUpdateBoardArgs,
+  IQuery,
+  IQueryFetchBoardArgs,
 } from "../../../../commons/types/generated/types";
 import { FETCH_BOARD } from "../reviewdetail/detail.queries";
 export default function Review(props) {
@@ -30,11 +32,14 @@ export default function Review(props) {
     contents: "",
   });
 
-  const { data } = useQuery(FETCH_BOARD, {
-    variables: {
-      boardId: router.query.boardId,
-    },
-  });
+  const { data } = useQuery<Pick<IQuery, "fetchBoard">, IQueryFetchBoardArgs>(
+    FETCH_BOARD,
+    {
+      variables: {
+        boardId: router.query.boardId,
+      },
+    }
+  );
 
   const onChangeInputs = useCallback(
     (id: string) => (event: ChangeEvent<HTMLInputElement>) => {
