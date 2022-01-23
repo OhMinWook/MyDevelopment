@@ -106,7 +106,7 @@ export default function Review(props) {
       router.push(`/reviewdetail/${router.query.boardId}`);
       alert("수정을 완료하였습니다.");
     } catch (error) {
-      alert(error.message);
+      if (error instanceof Error) alert(error.message);
     }
   };
 
