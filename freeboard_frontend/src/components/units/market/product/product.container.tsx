@@ -25,7 +25,7 @@ export default function Product() {
   const [createUseditem] = useMutation(CREATE_USED_ITEM);
   const [updateUseditem] = useMutation(UPDATE_USED_ITEM);
   const [hashArr, setHashArr] = useState<String[]>([]);
-  const [images, setImages] = useState([]);
+  const [images, setImages] = useState<String[]>([]);
   const [zipcode, setZipcode] = useState("");
   const [address, setAddress] = useState("");
   const [addressDetail, setaddressDetail] = useState("");
