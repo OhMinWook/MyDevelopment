@@ -13,7 +13,7 @@ export default function BasketUI(props) {
   return (
     <Wrapper>
       <Title>장바구니!!</Title>
-      {props.basketItems.map((el, index) => (
+      {props.basketItems.map((el: any, index: any) => (
         <InnerWrapper key={el._id}>
           <Index>{index + 1}</Index>
           <Image src={`https://storage.googleapis.com/${el.images[0]}`} />
