@@ -12,7 +12,6 @@ import { Global } from "@emotion/react";
 import { globalStyles } from "../src/commons/styles/globalStyles";
 import Layout from "../src/components/commons/layout";
 import { createUploadLink } from "apollo-upload-client";
-
 import { getAccessToken } from "../src/commons/libraries/getAccessToken";
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";

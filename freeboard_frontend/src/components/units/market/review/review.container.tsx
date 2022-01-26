@@ -36,7 +36,7 @@ export default function Review(props) {
     FETCH_BOARD,
     {
       variables: {
-        boardId: router.query.boardId,
+        boardId: String(router.query.boardId),
       },
     }
   );

@@ -14,7 +14,6 @@ export default function UploadPage(props) {
   }
 
   // 이미지를 등록하는 함수
-
   const onChangeFile = async (event) => {
     const file = checkValidationImage(event.target.files?.[0]);
     try {

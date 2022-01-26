@@ -28,6 +28,7 @@ export const Button1 = styled.button`
   cursor: pointer;
   margin-left: 10px;
   color: purple;
+  font-size: 11px;
 `;
 
 export const Button2 = styled.button`
@@ -37,6 +38,7 @@ export const Button2 = styled.button`
   cursor: pointer;
   margin-left: 10px;
   color: black;
+  font-size: 11px;
 `;
 
 export const Logo = styled.img`

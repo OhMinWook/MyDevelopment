@@ -13,6 +13,7 @@ import {
   FETCH_USED_ITEMS,
   TOGGLE_USEDITEM_PICK,
   FETCH_USED_ITEM,
+  FETCH_USED_ITEMS_OF_THE_BEST,
 } from "./home.queries";
 import { useRouter } from "next/router";
 import { useState } from "react";
@@ -37,6 +38,7 @@ export default function Home() {
       search: keyword,
     },
   });
+  const { data: best } = useQuery(FETCH_USED_ITEMS_OF_THE_BEST);
 
   function onLoadMore() {
     if (!data) return;
@@ -60,7 +62,7 @@ export default function Home() {
     console.log(value);
   }
 
-  const onClickBuying = (id) => async () => {
+  const onClickBuying = (id: any) => async () => {
     const result = await createPointBuyingandSelling({
       variables: {
         useritemId: id,
@@ -120,12 +122,12 @@ export default function Home() {
       },
     });
     refetch();
-    // console.log(result);
   };
 
   return (
     <HomeUI
       data={data}
+      best={best}
       uesditemPick={uesditemPick}
       keyword={keyword}
       refetch={refetch}

@@ -2,7 +2,7 @@ import { useMutation } from "@apollo/client";
 import { useRouter } from "next/Router";
 import HeaderUI from "./Header.presenter";
 import { LOG_OUT } from "./Header.queries";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function Header(props) {
   const [logout, setLogout] = useState(false);
@@ -26,7 +26,13 @@ export default function Header(props) {
     const result = await logoutUser();
     alert("로그아웃되었습니다.");
     router.push("/home");
+    console.log(result);
   };
+
+  useEffect(() => {
+    const item = localStorage.getItem("refreshToken");
+    console.log(item);
+  }, []);
 
   return (
     <HeaderUI

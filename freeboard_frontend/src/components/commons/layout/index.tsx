@@ -22,7 +22,7 @@ const BodyWrapper = styled.div`
   display: flex;
 `;
 
-const HiddenFooter = ["detail/6194d8b633bb5c002919e116"];
+const HiddenHeader = ["detail/6194d8b633bb5c002919e116"];
 
 interface ILayoutProps {
   children: ReactChild;
@@ -32,7 +32,7 @@ export default function Layout(props: ILayoutProps) {
   const router = useRouter();
   console.log(router.asPath);
 
-  const isHiddenFooter = HiddenFooter.includes(router.asPath);
+  const isHiddenHeader = HiddenHeader.includes(router.asPath);
 
   return (
     <Wrapper>
