@@ -8,16 +8,7 @@ import {
 import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/Router";
 import { FETCH_USED_ITEM } from "../pddetail/pddetail.queries";
-
-interface FormValues {
-  name: string;
-  remarks: string;
-  contents: string;
-  price: number;
-  tags: string[];
-  images: string[];
-  useditemAddress: any;
-}
+import { FormValues } from "./product.types";
 
 export default function Product() {
   const router = useRouter();
@@ -79,6 +70,14 @@ export default function Product() {
   };
   const onClickAddressSearch = () => {
     setIsopen(true);
+  };
+
+  const onHandleOk = () => {
+    setIsopen(false);
+  };
+
+  const onHandleCancle = () => {
+    setIsopen(false);
   };
 
   const onCompleteAddressSearch = (data) => {
@@ -156,6 +155,8 @@ export default function Product() {
       onKeyUp={onKeyUp}
       deleteHash={deleteHash}
       hashArr={hashArr}
+      onHandleOk={onHandleOk}
+      onHandleCancle={onHandleCancle}
     />
   );
 }

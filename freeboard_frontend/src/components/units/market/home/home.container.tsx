@@ -17,10 +17,11 @@ import {
 } from "./home.queries";
 import { useRouter } from "next/router";
 import { useState } from "react";
+import { IHome } from "./home.types";
 
 export default function Home() {
   const router = useRouter();
-  const [keyword, setKeyword] = useState("");
+  const [keyword, setKeyword] = useState<String>("");
   const { data: uesditemPick } = useQuery<
     Pick<IQuery, "fetchUseditem">,
     IQueryFetchUseditemArgs
@@ -35,7 +36,7 @@ export default function Home() {
     IQueryFetchUseditemsArgs
   >(FETCH_USED_ITEMS, {
     variables: {
-      search: keyword,
+      search: String(keyword),
     },
   });
   const { data: best } = useQuery(FETCH_USED_ITEMS_OF_THE_BEST);
@@ -57,7 +58,7 @@ export default function Home() {
     });
   }
 
-  function onChangeSearch(value) {
+  function onChangeSearch(value: String) {
     setKeyword(value);
     console.log(value);
   }
@@ -95,11 +96,11 @@ export default function Home() {
     localStorage.setItem("basket", JSON.stringify(baskets));
   };
 
-  const onClickpdDetail = (id) => () => {
+  const onClickpdDetail = (id: any) => () => {
     router.push(`/pddetail/${id}`);
   };
 
-  const onClickLike = (id) => async () => {
+  const onClickLike = (id: any) => async () => {
     const result = await toggleUseditemPick({
       variables: {
         useditemId: id,

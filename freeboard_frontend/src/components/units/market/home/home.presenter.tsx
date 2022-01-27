@@ -20,10 +20,11 @@ import InfiniteScroll from "react-infinite-scroller";
 import Head from "next/head";
 import { v4 as uuidv4 } from "uuid";
 import SearchPage from "../../../commons/search/01/search01.container";
-import React from "react";
+import React, { ChangeEvent } from "react";
 import Slider from "react-slick";
+import { IHomeUIProps } from "./home.types";
 
-export default function HomeUI(props) {
+export default function HomeUI(props: IHomeUIProps) {
   const settings = {
     className: "center",
     centerMode: true,
@@ -33,7 +34,7 @@ export default function HomeUI(props) {
     speed: 500,
   };
 
-  const onError = (event) => {
+  const onError = (event: React.SyntheticEvent<HTMLImageElement, Event>) => {
     event.target.src =
       "https://i.pinimg.com/564x/a4/3e/e6/a43ee6d3e310564af22b71bdfb1a52e7.jpg";
   };
@@ -65,7 +66,7 @@ export default function HomeUI(props) {
           <Items>Best Items</Items>
           <BestLine />
           <Slider {...settings}>
-            {props.best?.fetchUseditemsOfTheBest.map((el) => (
+            {props.best?.fetchUseditemsOfTheBest.map((el: any) => (
               <BestCard key={uuidv4()}>
                 <Image
                   onClick={props.onClickpdDetail(el._id)}
