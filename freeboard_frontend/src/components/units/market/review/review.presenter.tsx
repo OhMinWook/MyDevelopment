@@ -20,7 +20,7 @@ import { useContext } from "react";
 import { Context } from "../../../../../pages/reviewdetail/[boardId]/edit";
 
 function ReviewUI(props) {
-  const { isEdit } = useContext(Context);
+  const { isEdit } = useContext<any>(Context);
   return (
     <>
       <Wrapper>

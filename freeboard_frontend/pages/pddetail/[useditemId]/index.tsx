@@ -5,7 +5,7 @@ import ProductComment from "../../../src/components/units/productComment/write/w
 export default function ProductDetailPage() {
   return (
     <>
-      <ProductDetail />;
+      <ProductDetail />
       <ProductComment />
       <ProductQuestion />
     </>

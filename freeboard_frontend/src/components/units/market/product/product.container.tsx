@@ -5,33 +5,52 @@ import {
   UPDATE_USED_ITEM,
   UPLOAD_FILE,
 } from "./product.queries";
-import { useEffect, useRef, useState } from "react";
+import { ChangeEvent, useEffect, useRef, useState } from "react";
 import { useRouter } from "next/Router";
 import { FETCH_USED_ITEM } from "../pddetail/pddetail.queries";
 import { FormValues } from "./product.types";
+import {
+  IMutation,
+  IMutationCreateUseditemArgs,
+  IMutationUpdateUseditemArgs,
+  IMutationUploadFileArgs,
+  IQuery,
+  IQueryFetchUseditemArgs,
+} from "../../../../commons/types/generated/types";
 
 export default function Product() {
   const router = useRouter();
   const fileRef = useRef(null);
-  const [createUseditem] = useMutation(CREATE_USED_ITEM);
-  const [updateUseditem] = useMutation(UPDATE_USED_ITEM);
-  const [hashArr, setHashArr] = useState<String[]>([]);
-  const [images, setImages] = useState<String[]>([]);
-  const [zipcode, setZipcode] = useState("");
-  const [address, setAddress] = useState("");
-  const [addressDetail, setaddressDetail] = useState("");
-  const [uploadFile] = useMutation(UPLOAD_FILE);
-  const [isopen, setIsopen] = useState(false);
+  const [createUseditem] = useMutation<
+    Pick<IMutation, "createUseditem">,
+    IMutationCreateUseditemArgs
+  >(CREATE_USED_ITEM);
+  const [updateUseditem] = useMutation<
+    Pick<IMutation, "updateUseditem">,
+    IMutationUpdateUseditemArgs
+  >(UPDATE_USED_ITEM);
+  const [hashArr, setHashArr] = useState<string[]>([]);
+  const [images, setImages] = useState<string[]>([]);
+  const [zipcode, setZipcode] = useState<string>("");
+  const [address, setAddress] = useState<string>("");
+  const [addressDetail, setaddressDetail] = useState<string>("");
+  const [uploadFile] = useMutation<
+    Pick<IMutation, "uploadFile">,
+    IMutationUploadFileArgs
+  >(UPLOAD_FILE);
+  const [isopen, setIsopen] = useState<boolean>(false);
 
-  const { data } = useQuery(FETCH_USED_ITEM, {
+  const { data } = useQuery<
+    Pick<IQuery, "fetchUseditem">,
+    IQueryFetchUseditemArgs
+  >(FETCH_USED_ITEM, {
     variables: {
-      useditemId: router.query.useditemId,
+      useditemId: String(router.query.useditemId),
     },
   });
 
-  async function onChangeFile(event) {
+  async function onChangeFile(event: ChangeEvent<HTMLInputElement>) {
     const myFile = event.target.files?.[0];
-    console.log(myFile);
     if (!myFile?.size) {
       alert("파일이 없습니다.");
       return;
@@ -50,17 +69,16 @@ export default function Product() {
       },
     });
     setImages([value.data.uploadFile.url]);
-    console.log(value.data.uploadFile.url);
   }
 
-  const onKeyUp = (event) => {
+  const onKeyUp = (event: any) => {
     if (event.keyCode === 32 && event.target.value !== " ") {
       setHashArr([...hashArr, `#${event.target.value}`]);
       event.target.value = "";
     }
   };
 
-  const deleteHash = (index) => () => {
+  const deleteHash = (index: number) => () => {
     hashArr.splice(index, 1);
     setHashArr([...hashArr]);
   };
@@ -76,22 +94,21 @@ export default function Product() {
     setIsopen(false);
   };
 
-  const onHandleCancle = () => {
+  const onHandleCancel = () => {
     setIsopen(false);
   };
 
-  const onCompleteAddressSearch = (data) => {
+  const onCompleteAddressSearch = (data: any) => {
     setZipcode(data.zonecode);
     setAddress(data.address);
     setIsopen(false);
   };
 
-  const onChangeAddressDetil = (event) => {
+  const onChangeAddressDetil = (event: ChangeEvent<HTMLInputElement>) => {
     setaddressDetail(event.target.value);
   };
 
-  async function onClick(data: FormValues) {
-    alert("test");
+  async function onClickSubmit(data: FormValues) {
     const result = await createUseditem({
       variables: {
         createUseditemInput: {
@@ -110,7 +127,7 @@ export default function Product() {
       },
     });
     console.log(result);
-    router.push(`/pddetail/${result.data.createUseditem._id}`);
+    router.push(`/pddetail/${result.data?.createUseditem._id}`);
   }
 
   async function onClickEdit(data: FormValues) {
@@ -139,24 +156,24 @@ export default function Product() {
 
   return (
     <ProductUI
-      onClick={onClick}
+      onClickSubmit={onClickSubmit}
       onChangeFile={onChangeFile}
+      fileRef={fileRef}
+      onCompleteAddressSearch={onCompleteAddressSearch}
+      onChangeAddressDetil={onChangeAddressDetil}
+      onKeyUp={onKeyUp}
+      onClickImages={onClickImages}
+      onClickEdit={onClickEdit}
+      onClickAddressSearch={onClickAddressSearch}
+      onHandleOk={onHandleOk}
+      onHandleCancel={onHandleCancel}
       images={images}
       isopen={isopen}
-      onClickImages={onClickImages}
-      fileRef={fileRef}
       data={data}
       zipcode={zipcode}
       address={address}
-      onClickEdit={onClickEdit}
-      onCompleteAddressSearch={onCompleteAddressSearch}
-      onChangeAddressDetil={onChangeAddressDetil}
-      onClickAddressSearch={onClickAddressSearch}
-      onKeyUp={onKeyUp}
       deleteHash={deleteHash}
       hashArr={hashArr}
-      onHandleOk={onHandleOk}
-      onHandleCancle={onHandleCancle}
     />
   );
 }

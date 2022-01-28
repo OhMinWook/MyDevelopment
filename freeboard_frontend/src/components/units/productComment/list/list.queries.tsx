@@ -5,6 +5,10 @@ export const FETCH_USEDITEM_QUESTIONS = gql`
     fetchUseditemQuestions(page: $page, useditemId: $useditemId) {
       _id
       contents
+      createdAt
+      user {
+        name
+      }
     }
   }
 `;

@@ -1,32 +1,20 @@
 import KakaoMap from "../../../commons/map/map.container";
-import {
-  Remarks,
-  Wrapper,
-  Name,
-  Price,
-  Contents,
-  Image,
-  Edit,
-} from "./pddetail.styles";
+import * as D from "./pddetail.styles";
 
 export default function ProductDetailUI(props) {
   return (
     <>
-      <Wrapper>
-        <Image
+      <D.Wrapper>
+        <D.Image
           src={`https://storage.googleapis.com/${props.data?.fetchUseditem.images[0]}`}
         />
         <div>
-          <Name>{props.data?.fetchUseditem.name}</Name>
-          <Remarks>{props.data?.fetchUseditem.remarks}</Remarks>
-          <Price>{props.data?.fetchUseditem.price}</Price>
-          <div>
-            <KakaoMap
-              address={props.data?.fetchUseditem.useditemAddress.address}
-            />
-          </div>
+          <D.Name>{props.data?.fetchUseditem.name}</D.Name>
+          <D.Remarks>{props.data?.fetchUseditem.remarks}</D.Remarks>
+          <D.Tag>{props.data?.fetchUseditem.tags}</D.Tag>
+          <D.Price>{props.data?.fetchUseditem.price}원</D.Price>
           {process.browser ? (
-            <Contents
+            <D.Contents
               dangerouslySetInnerHTML={{
                 __html: String(props.data?.fetchUseditem.contents),
               }}
@@ -34,10 +22,26 @@ export default function ProductDetailUI(props) {
           ) : (
             <div />
           )}
-          <div>{props.data?.fetchUseditem.tags}</div>
-          <Edit onClick={props.onClickEdit}>수정하기</Edit>
+          <D.MapWrapper>
+            <KakaoMap
+              address={props.data?.fetchUseditem.useditemAddress.address}
+            />
+            <D.ZipcodeWrapper>
+              <D.ZipcodeTitle>우편번호: </D.ZipcodeTitle>
+              <D.Zipcode>
+                {props.data?.fetchUseditem.useditemAddress.zipcode}
+              </D.Zipcode>
+            </D.ZipcodeWrapper>
+            <D.ZipcodeWrapper>
+              <D.ZipcodeTitle>상세주소: </D.ZipcodeTitle>
+              <D.Zipcode>
+                {props.data?.fetchUseditem.useditemAddress.addressDetail}
+              </D.Zipcode>
+            </D.ZipcodeWrapper>
+          </D.MapWrapper>
+          <D.Edit onClick={props.onClickEdit}>수정하기</D.Edit>
         </div>
-      </Wrapper>
+      </D.Wrapper>
     </>
   );
 }

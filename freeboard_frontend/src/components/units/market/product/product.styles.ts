@@ -86,7 +86,7 @@ export const ButtonWrapper = styled.div`
 `;
 
 export const Image = styled.input`
-  /* display: none; */
+  display: none;
 `;
 
 export const ImageClick = styled.div`

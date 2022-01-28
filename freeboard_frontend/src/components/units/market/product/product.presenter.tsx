@@ -9,27 +9,28 @@ import dynamic from "next/dynamic";
 import { Modal } from "antd";
 import KakaoMap from "../../../commons/map/map.container";
 import { schema } from "./product.validation";
+import { IProductPropsUI } from "./product.types";
 
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
-export default function ProductUI(props) {
-  const { isEdit } = useContext(Context);
+export default function ProductUI(props: IProductPropsUI) {
+  const { isEdit } = useContext<any>(Context);
   const { handleSubmit, register, formState, setValue, trigger } = useForm({
     mode: "onChange",
     resolver: yupResolver(schema),
   });
-  function handleChange(value: String) {
+  function handleChange(value: string) {
     console.log(value);
     setValue("contents", value === "<p><br></p>" ? "" : value);
     trigger("contents");
   }
 
   return (
-    <form onSubmit={handleSubmit(props.onClick)}>
+    <form onSubmit={handleSubmit(props.onClickSubmit)}>
       {props.isopen && (
         <Modal
           visible={true}
           onOk={props.onHandleOk}
-          onCancel={props.onHandleCancle}
+          onCancel={props.onHandleCancel}
         >
           <DaumPostcode onComplete={props.onCompleteAddressSearch} />
         </Modal>
@@ -75,7 +76,7 @@ export default function ProductUI(props) {
           <P.InnerWrapper>
             <P.Subject>태그</P.Subject>
             <P.InputWrapper>
-              {props.hashArr.map((el, idx) => (
+              {props.hashArr.map((el: any, idx: number) => (
                 <span key={idx} onClick={props.deleteHash(el.index)}>
                   {el}
                 </span>
@@ -151,6 +152,7 @@ export default function ProductUI(props) {
               {props.images[0] ? (
                 <P.Picture
                   src={`https://storage.googleapis.com/${props.images[0]}`}
+                  onClick={props.onClickImages}
                 />
               ) : (
                 <P.ImageClick onClick={props.onClickImages}>Image</P.ImageClick>
