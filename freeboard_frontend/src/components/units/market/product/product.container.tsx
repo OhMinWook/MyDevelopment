@@ -52,7 +52,7 @@ export default function Product() {
   async function onChangeFile(event: ChangeEvent<HTMLInputElement>) {
     const myFile = event.target.files?.[0];
     if (!myFile?.size) {
-      alert("파일이 없습니다.");
+      alert("해당 파일이 없습니다.");
       return;
     }
     if (myFile.size > 5 * 1024 * 1024) {
