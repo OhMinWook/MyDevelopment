@@ -9,7 +9,7 @@ export default function ProductDetailUI(props) {
           src={`https://storage.googleapis.com/${props.data?.fetchUseditem.images[0]}`}
         />
         <div>
-          <D.Name>{props.data?.fetchUseditem.name}</D.Name>
+          <D.Name>{props.data?.fetchUseditem.name}님</D.Name>
           <D.Remarks>{props.data?.fetchUseditem.remarks}</D.Remarks>
           <D.Tag>{props.data?.fetchUseditem.tags}</D.Tag>
           <D.Price>{props.data?.fetchUseditem.price}원</D.Price>
