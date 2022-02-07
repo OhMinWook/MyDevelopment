@@ -18,8 +18,9 @@ import Uploads01 from "../../../commons/uploads/01/Uploads01.container";
 import { v4 as uuidv4 } from "uuid";
 import { useContext } from "react";
 import { Context } from "../../../../../pages/reviewdetail/[boardId]/edit";
+import { IReviewUIProps } from "./review.types";
 
-function ReviewUI(props) {
+function ReviewUI(props: IReviewUIProps) {
   const { isEdit } = useContext<any>(Context);
   return (
     <>
@@ -43,7 +44,7 @@ function ReviewUI(props) {
           <Subject>제목</Subject>
           <TitleInput
             type="text"
-            onChange={props.onChangeInputs("title")}
+            onChange={props.onChangeInputs}
             defaultValue={props.data?.fetchBoard.title}
           />
         </TitleWrapper>
@@ -51,7 +52,7 @@ function ReviewUI(props) {
           <Content>내용</Content>
           <ContentInput
             type="text"
-            onChange={props.onChangeInputs("contents")}
+            onChange={props.onChangeInputs}
             defaultValue={props.data?.fetchBoard.contents}
           />
         </ContentWrpper>

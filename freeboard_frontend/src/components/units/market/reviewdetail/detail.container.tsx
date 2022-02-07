@@ -40,7 +40,7 @@ export default function ReviewDetail() {
         {
           query: FETCH_BOARD,
           variables: {
-            boardId: router.query.boardId,
+            boardId: String(router.query.boardId),
           },
         },
       ],
@@ -56,7 +56,7 @@ export default function ReviewDetail() {
         {
           query: FETCH_BOARD,
           variables: {
-            boardId: router.query.boardId,
+            boardId: String(router.query.boardId),
           },
         },
       ],

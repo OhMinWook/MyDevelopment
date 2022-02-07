@@ -2,7 +2,7 @@ import { useMutation, useQuery } from "@apollo/client";
 import {
   IBoard,
   IMutation,
-  IMutationCreatePointTransactionOfLoadingArgs,
+  IMutationCreatePointTransactionOfBuyingAndSellingArgs,
   IQuery,
   IQueryFetchUseditemArgs,
   IQueryFetchUseditemsArgs,
@@ -17,18 +17,17 @@ import {
 } from "./home.queries";
 import { useRouter } from "next/router";
 import { useState } from "react";
-import { IHome } from "./home.types";
 
 export default function Home() {
   const router = useRouter();
-  const [keyword, setKeyword] = useState<String>("");
+  const [keyword, setKeyword] = useState<string>("");
   const { data: uesditemPick } = useQuery<
     Pick<IQuery, "fetchUseditem">,
     IQueryFetchUseditemArgs
   >(FETCH_USED_ITEM);
   const [createPointBuyingandSelling] = useMutation<
-    Pick<IMutation, "createPointTransactionOfLoading">,
-    IMutationCreatePointTransactionOfLoadingArgs
+    Pick<IMutation, "createPointTransactionOfBuyingAndSelling">,
+    IMutationCreatePointTransactionOfBuyingAndSellingArgs
   >(CREATE_POINT_BUYING_AND_SELLING);
   const [toggleUseditemPick] = useMutation(TOGGLE_USEDITEM_PICK);
   const { data, fetchMore, refetch } = useQuery<
@@ -58,12 +57,11 @@ export default function Home() {
     });
   }
 
-  function onChangeSearch(value: String) {
+  function onChangeSearch(value: string) {
     setKeyword(value);
-    console.log(value);
   }
 
-  const onClickBuying = (id: any) => async () => {
+  const onClickBuying = (id: string) => async () => {
     const result = await createPointBuyingandSelling({
       variables: {
         useritemId: id,
@@ -100,7 +98,7 @@ export default function Home() {
     router.push(`/pddetail/${id}`);
   };
 
-  const onClickLike = (id: any) => async () => {
+  const onClickLike = (id: string) => async () => {
     const result = await toggleUseditemPick({
       variables: {
         useditemId: id,

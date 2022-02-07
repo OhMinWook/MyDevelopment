@@ -4,27 +4,30 @@ import { useState } from "react";
 import {
   IQuery,
   IQueryFetchBoardsArgs,
+  IQueryFetchBoardsCountArgs,
 } from "../../../../commons/types/generated/types";
 import ReviewListUI from "./list.presenter";
 import { FETCH_BOARDS, FETCH_BOARDS_COUNT } from "./list.queries";
 
 export default function ReviewList() {
   const router = useRouter();
-  const [keyword, setKeyword] = useState("");
-  const [startpage, setStartPage] = useState(1);
+  const [keyword, setKeyword] = useState<string>("");
+  const [startpage, setStartPage] = useState<number>(1);
   const { data, refetch } = useQuery<
     Pick<IQuery, "fetchBoards">,
     IQueryFetchBoardsArgs
   >(FETCH_BOARDS, {
     variables: {
-      page: startpage,
+      page: Number(startpage),
     },
   });
-  const { data: dataBoardsCount, refetch: refetchBoardsCount } =
-    useQuery(FETCH_BOARDS_COUNT);
+  const { data: dataBoardsCount, refetch: refetchBoardsCount } = useQuery<
+    Pick<IQuery, "fetchBoardsCount">,
+    IQueryFetchBoardsCountArgs
+  >(FETCH_BOARDS_COUNT);
   console.log(dataBoardsCount);
 
-  function onChangeSearch(value) {
+  function onChangeSearch(value: any) {
     setKeyword(value);
     console.log(value);
   }

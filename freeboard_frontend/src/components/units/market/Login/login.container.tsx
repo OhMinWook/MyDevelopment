@@ -29,10 +29,6 @@ export default function Login() {
         ...input,
       },
     });
-    // localStorage.setItem(
-    //   "accessToken",
-    //   result.data?.loginUser.accessToken || ""
-    // );
     localStorage.setItem("refreshToken", "true");
     setAccessToken?.(result.data?.loginUser.accessToken || "");
     alert("로그인에 성공했습니다.");

@@ -17,8 +17,9 @@ import { v4 as uuidv4 } from "uuid";
 import Paginations01 from "../../../commons/pagination/pagination.container";
 import { getDate } from "../../../../commons/libraries/utils";
 import SearchPage from "../../../commons/search/01/search01.container";
+import { IReviewListPropsUI } from "./list.types";
 
-export default function ReviewListUI(props) {
+export default function ReviewListUI(props: IReviewListPropsUI) {
   return (
     <Wrapper>
       <Title>베스트 후기</Title>
@@ -44,7 +45,7 @@ export default function ReviewListUI(props) {
             {el.contents
               .replaceAll(props.keyword, `###${props.keyword}###`)
               .split("###")
-              .map((el) => (
+              .map((el: any) => (
                 <TextToken key={uuidv4()} isMatched={props.keyword === el}>
                   {el}
                 </TextToken>

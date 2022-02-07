@@ -3,7 +3,6 @@ import { useRouter } from "next/Router";
 import { useEffect, useState, useCallback, ChangeEvent } from "react";
 import ReviewUI from "./review.presenter";
 import { CREATE_BOARD, UPDATE_BOARD } from "./review.queries";
-import { Modal } from "antd";
 import {
   IMutation,
   IMutationCreateBoardArgs,
@@ -12,7 +11,8 @@ import {
   IQueryFetchBoardArgs,
 } from "../../../../commons/types/generated/types";
 import { FETCH_BOARD } from "../reviewdetail/detail.queries";
-export default function Review(props) {
+import { IReviewProps } from "./review.types";
+export default function Review(props: IReviewProps) {
   const router = useRouter();
   const [createBoard] = useMutation<
     Pick<IMutation, "createBoard">,
@@ -24,7 +24,7 @@ export default function Review(props) {
   >(UPDATE_BOARD);
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [password, setPassword] = useState<string>("");
-  const [imageUrls, setImageUrls] = useState(["", "", ""]);
+  const [imageUrls, setImageUrls] = useState<string[]>(["", "", ""]);
   const [writer, setWriter] = useState<string>("");
 
   const [inputs, setInputs] = useState({
@@ -75,7 +75,7 @@ export default function Review(props) {
       router.push(`/reviewdetail/${result.data?.createBoard._id}`);
       setIsSubmitting(false);
     } catch (error) {
-      Modal.error({ content: error.message });
+      if (error instanceof Error) error.message;
     }
   };
   function onChangeFileUrls(fileUrl: string, index: number) {
