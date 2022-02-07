@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup/dist/yup";
 import "react-quill/dist/quill.snow.css";
 import dynamic from "next/dynamic";
+import * as C from "./write.styles";
 
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 export default function ReviewCommnetUI(props) {
@@ -22,15 +23,24 @@ export default function ReviewCommnetUI(props) {
         props.isEdit ? props.onClickUpdate : props.onClickComment
       )}
     >
-      <div>
-        <div>
-          <input type="text" {...register("writer")} />
-          <input type="password" {...register("password")} />
-          <Star onChange={props.onChangeStar} />
-        </div>
-        <ReactQuill onChange={handleChange} />
-      </div>
-      <button>{props.isEdit ? "수정하기" : "등록하기"}</button>
+      <C.Wrapper>
+        <C.CommentWrapper>
+          <C.Comment>Comment</C.Comment>
+          <C.InnerWrapper>
+            <C.WriterWrapper>
+              <C.Title>작성자</C.Title>
+              <input type="text" {...register("writer")} />
+            </C.WriterWrapper>
+            <C.WriterWrapper>
+              <C.Password>비밀번호</C.Password>
+              <C.PasswordInput type="password" {...register("password")} />
+            </C.WriterWrapper>
+            <Star onChange={props.onChangeStar} />
+          </C.InnerWrapper>
+          <ReactQuill onChange={handleChange} style={{ height: 100 }} />
+          <C.Button>{props.isEdit ? "수정하기" : "등록하기"}</C.Button>
+        </C.CommentWrapper>
+      </C.Wrapper>
     </form>
   );
 }

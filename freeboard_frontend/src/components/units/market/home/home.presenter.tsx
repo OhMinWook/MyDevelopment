@@ -15,6 +15,7 @@ import {
   Price,
   Seller,
   Wrapper,
+  BestTitleWrapper,
 } from "./home.styles";
 import InfiniteScroll from "react-infinite-scroller";
 import Head from "next/head";
@@ -52,18 +53,15 @@ export default function HomeUI(props: IHomeUIProps) {
         ></script>
       </Head>
 
-      <InfiniteScroll
-        pageStart={0}
-        loadMore={props.onLoadMore}
-        hasMore={true}
-        // useWindow={false}
-      >
-        <SearchPage
-          refetch={props.refetch}
-          onChangeSearch={props.onChangeSearch}
-        />
+      <InfiniteScroll pageStart={0} loadMore={props.onLoadMore} hasMore={true}>
         <BestWrapper>
-          <Items>Best Items</Items>
+          <BestTitleWrapper>
+            <Items>Best Items</Items>
+            <SearchPage
+              refetch={props.refetch}
+              onChangeSearch={props.onChangeSearch}
+            />
+          </BestTitleWrapper>
           <BestLine />
           <Slider {...settings}>
             {props.best?.fetchUseditemsOfTheBest.map((el: any) => (

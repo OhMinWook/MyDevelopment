@@ -15,6 +15,7 @@ export const UploadButton = styled.button`
   outline: none;
   border: none;
   cursor: pointer;
+  margin-left: 25px;
 `;
 
 export const UploadFileHidden = styled.input`

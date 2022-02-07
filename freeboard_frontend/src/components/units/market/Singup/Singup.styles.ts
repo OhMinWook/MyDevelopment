@@ -1,25 +1,14 @@
 import styled from "@emotion/styled";
-import { style } from "@mui/system";
-
-// export const SignUpSection = styled.section`
-//   display: flex;
-//   align-items: center;
-//   width: 100%;
-// `;
 
 export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  width: 80%;
+  width: 100%;
   padding: 100px;
   margin: 0 auto;
 `;
-
-// export const Line = styled.div`
-//   border-bottom: 3px solid #000000;
-// `;
 
 export const Title = styled.h3`
   width: 50%;

@@ -3,7 +3,7 @@ import styled from "@emotion/styled";
 export const Wrapper = styled.div`
   width: 65%;
   margin: 0 auto;
-  margin-top: 80px;
+  margin-top: 70px;
 `;
 
 export const TableTop = styled.div`
@@ -24,7 +24,7 @@ export const Row = styled.div`
 `;
 
 export const ColumnHeaderBasic = styled.div`
-  width: 35%;
+  width: 32%;
   text-align: center;
 `;
 
@@ -35,7 +35,7 @@ export const ColumnHeaderContents = styled.div`
 `;
 
 export const ColumnBasic = styled.div`
-  width: 30%;
+  width: 23%;
   text-align: center;
 `;
 
@@ -57,8 +57,8 @@ export const ColumnContents = styled.div`
 export const Title = styled.div`
   font-size: 40px;
   color: purple;
-  width: 1050px;
   margin-left: 20px;
+  position: absolute;
 `;
 
 export const Footer = styled.div`
@@ -67,17 +67,16 @@ export const Footer = styled.div`
   margin: 20px 60px 20px 400px;
 `;
 
-export const HeadWrapper = styled.div`
-  display: flex;
-`;
-
-export const Search = styled.input`
-  margin-top: 50px;
-  width: 400px;
-  height: 50px;
-  padding-left: 10px;
-`;
-
 export const TextToken = styled.span`
   color: ${(props) => (props.isMatched ? "red" : "black")};
+`;
+
+export const Button = styled.button`
+  width: 100px;
+  height: 30px;
+  border-radius: 10px;
+  margin-right: 10px;
+  background-color: purple;
+  color: white;
+  font-size: 13px;
 `;

@@ -5,7 +5,6 @@ export const Wrapper = styled.div`
   display: flex;
   width: 950px;
   align-items: center;
-  /* justify-content: space-between; */
   border: 5px solid #660099;
   border-radius: 20px;
   margin: 0 auto;
@@ -13,7 +12,6 @@ export const Wrapper = styled.div`
   margin-bottom: 80px;
   padding: 50px;
   padding-right: 20px;
-  /* background-color: #e3dbeb; */
 `;
 
 export const Name = styled.div`

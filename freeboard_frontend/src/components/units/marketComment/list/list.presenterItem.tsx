@@ -9,6 +9,8 @@ import { useState } from "react";
 import { useRouter } from "next/Router";
 import { Modal } from "antd";
 import ReviewCommnet from "../write/write.container";
+import * as C from "./list.styles";
+import { getDate } from "../../../../commons/libraries/utils";
 
 export default function ReviewCommnetListUIItem(props) {
   const router = useRouter();
@@ -60,17 +62,37 @@ export default function ReviewCommnetListUIItem(props) {
         </Modal>
       )}
       {!isEdit && (
-        <div>
-          <div>
-            <div>{props.el?.writer}</div>
-            <Star value={props.el?.rating} disabled />
-          </div>
-          <div>{props.el?.contents}</div>
-          <button onClick={onClickUpdate}>수정하기</button>
-          <button id={props.el._id} onClick={onClickOpenDeleteModal}>
-            삭제하기
-          </button>
-        </div>
+        <C.Wrapper>
+          <C.InnerWrapper>
+            <C.Image src="https://i.pinimg.com/564x/cb/5c/56/cb5c56e8a65649a9925b41548070eae1.jpg" />
+            <C.WholeWrapper>
+              <C.TitleWrapper>
+                <C.LeftWrapper>
+                  <C.WriterWrapper>
+                    <div>{props.el?.writer}</div>
+                    <C.Time>{getDate(props.el?.createdAt)}</C.Time>
+                  </C.WriterWrapper>
+                  <Star value={props.el?.rating} disabled />
+                </C.LeftWrapper>
+                <C.ButtonWrapper>
+                  <C.Button onClick={onClickUpdate}>수정</C.Button>
+                  <C.Button id={props.el._id} onClick={onClickOpenDeleteModal}>
+                    삭제
+                  </C.Button>
+                </C.ButtonWrapper>
+              </C.TitleWrapper>
+              {process.browser ? (
+                <C.Contents
+                  dangerouslySetInnerHTML={{
+                    __html: String(props.el?.contents),
+                  }}
+                />
+              ) : (
+                <div />
+              )}
+            </C.WholeWrapper>
+          </C.InnerWrapper>
+        </C.Wrapper>
       )}
       {isEdit && (
         <ReviewCommnet isEdit={true} setIsEdit={setIsEdit} el={props.el} />

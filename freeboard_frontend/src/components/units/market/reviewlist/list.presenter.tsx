@@ -10,9 +10,8 @@ import {
   ColumnContents,
   Title,
   Footer,
-  HeadWrapper,
-  Search,
   TextToken,
+  Button,
 } from "./list.styles";
 import { v4 as uuidv4 } from "uuid";
 import Paginations01 from "../../../commons/pagination/pagination.container";
@@ -22,17 +21,15 @@ import SearchPage from "../../../commons/search/01/search01.container";
 export default function ReviewListUI(props) {
   return (
     <Wrapper>
-      <HeadWrapper>
-        <Title>베스트 후기</Title>
-        <SearchPage
-          refetch={props.refetch}
-          refetchBoardsCount={props.refetchBoardsCount}
-          onChangeSearch={props.onChangeSearch}
-        />
-      </HeadWrapper>
+      <Title>베스트 후기</Title>
+      <SearchPage
+        refetch={props.refetch}
+        refetchBoardsCount={props.refetchBoardsCount}
+        onChangeSearch={props.onChangeSearch}
+      />
       <TableTop />
       <Row>
-        <ColumnHeaderBasic>번호</ColumnHeaderBasic>
+        <ColumnHeaderBasic>No</ColumnHeaderBasic>
         <ColumnHeaderBasic>제목</ColumnHeaderBasic>
         <ColumnHeaderBasic>작성자</ColumnHeaderBasic>
         <ColumnHeaderContents>내용</ColumnHeaderContents>
@@ -64,7 +61,7 @@ export default function ReviewListUI(props) {
           startpage={props.startpage}
           setStartPage={props.setStartPage}
         />
-        <button onClick={props.onClickMoveToReview}>상품 등록하기</button>
+        <Button onClick={props.onClickMoveToReview}>상품 등록</Button>
       </Footer>
     </Wrapper>
   );

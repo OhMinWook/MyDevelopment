@@ -108,9 +108,14 @@ export const Items = styled.div`
   color: purple;
   font-size: 35px;
   margin-left: 20px;
+  margin-top: 50px;
 `;
 
 export const BestLine = styled.hr`
   border: 1px solid purple;
   margin: 10px 0px;
+`;
+
+export const BestTitleWrapper = styled.div`
+  display: flex;
 `;

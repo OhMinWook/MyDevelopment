@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 
 export const Searchbar = styled.div`
-  width: 560px;
+  width: 380px;
   height: 52px;
   border-radius: 15px;
   background-color: #f5f2fc;

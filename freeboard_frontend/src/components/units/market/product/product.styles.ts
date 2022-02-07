@@ -93,7 +93,6 @@ export const ImageClick = styled.div`
   width: 100px;
   height: 100px;
   background-color: #d3d3d3;
-  /* border: 2px solid #000000; */
   margin-left: 30px;
   font-size: 17px;
   text-align: center;
