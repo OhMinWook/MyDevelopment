@@ -1,5 +1,5 @@
 import { useMutation, useQuery } from "@apollo/client";
-import { useState } from "react";
+import { useState, useEffect, ChangeEvent } from "react";
 import {
   IMutation,
   IMutationCreatePointTransactionOfLoadingArgs,
@@ -14,7 +14,13 @@ import {
 } from "./mypage.quries";
 
 export default function MyPageContainer() {
-  const { data } = useQuery(FETCH_USER_LOGGED_IN);
+  const [basketItems, setBasketItems] = useState<string[]>([]);
+  const [coin, setCoin] = useState<boolean>(false);
+  const [address, setAddress] = useState<string>("");
+  const [addressDetail, setAddressDetail] = useState<string>("");
+  const [isopen, setIsopen] = useState<boolean>(false);
+  const { data: userLoggedIn } =
+    useQuery<Pick<IQuery, "fetchUserLoggedIn">>(FETCH_USER_LOGGED_IN);
   const { data: useditemsIPicked } = useQuery<
     Pick<IQuery, "fetchUseditemsIPicked">,
     IQueryFetchUseditemsIPickedArgs
@@ -23,14 +29,42 @@ export default function MyPageContainer() {
     Pick<IMutation, "createPointTransactionOfLoading">,
     IMutationCreatePointTransactionOfLoadingArgs
   >(CREATE_POINT_LOADING);
-  const [point, setPoint] = useState(0);
-  console.log(useditemsIPicked);
+  const [point, setPoint] = useState<string>("");
 
-  function onChangePoint(event) {
+  function onChangePoint(event: ChangeEvent<HTMLInputElement>) {
     setPoint(event?.target.value);
   }
 
-  function onClickPayment() {
+  const onClickDelete = (id: string) => () => {
+    const baskets = JSON.parse(localStorage.getItem("basket") || "[]");
+    const newBaskets = baskets.filter((el: any) => el._id !== id);
+    localStorage.setItem("basket", JSON.stringify(newBaskets));
+    setBasketItems(newBaskets);
+    alert("삭제가 완료되었습니다.");
+  };
+  useEffect(() => {
+    const baskets = JSON.parse(localStorage.getItem("basket") || "[]");
+    setBasketItems(baskets);
+  }, []);
+
+  const onClickAddressSearch = () => {
+    setIsopen(true);
+  };
+
+  const onHandleOk = () => {
+    setIsopen(false);
+  };
+
+  const onHandleCancle = () => {
+    setIsopen(false);
+  };
+
+  const onCompleteAddressSearch = (data: any) => {
+    setAddress(data.address);
+    setIsopen(false);
+  };
+
+  const onClickPayment = () => {
     const IMP = window.IMP;
     IMP.init("imp49910675");
     IMP.request_pay(
@@ -47,7 +81,7 @@ export default function MyPageContainer() {
         buyer_postcode: "01181",
         m_redirect_url: "",
       },
-      async (rsp) => {
+      async (rsp: any) => {
         if (rsp.success) {
           console.log(rsp);
           try {
@@ -58,19 +92,29 @@ export default function MyPageContainer() {
             });
             console.log(result);
           } catch (error) {
-            alert(error.message);
+            if (error instanceof Error) error.message;
           }
         } else {
           // 결제 실패시
         }
       }
     );
-  }
+  };
 
   return (
     <MyPageUI
-      data={data}
+      coin={coin}
+      basketItems={basketItems}
+      userLoggedIn={userLoggedIn}
       useditemsIPicked={useditemsIPicked}
+      isopen={isopen}
+      address={address}
+      addressDetail={addressDetail}
+      onHandleOk={onHandleOk}
+      onCompleteAddressSearch={onCompleteAddressSearch}
+      onHandleCancle={onHandleCancle}
+      onClickAddressSearch={onClickAddressSearch}
+      onClickDelete={onClickDelete}
       onClickPayment={onClickPayment}
       onChangePoint={onChangePoint}
     />

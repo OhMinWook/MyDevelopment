@@ -14,7 +14,11 @@ export const CREATE_POINT_LOADING = gql`
 export const FETCH_USER_LOGGED_IN = gql`
   query fetchUserLoggedIn {
     fetchUserLoggedIn {
+      _id
+      name
+      email
       userPoint {
+        _id
         amount
       }
     }
@@ -30,6 +34,17 @@ export const FETCH_USEDITEMS_IPICK = gql`
       price
       seller {
         name
+      }
+    }
+  }
+`;
+
+export const CREATE_USED_ITEM = gql`
+  mutation createUseditem($createUseditemInput: CreateUseditemInput!) {
+    createUseditem(createUseditemInput: $createUseditemInput) {
+      useditemAddress {
+        address
+        addressDetail
       }
     }
   }
