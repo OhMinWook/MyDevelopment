@@ -13,7 +13,7 @@ export interface IPropsMyPageUI {
   onClickDelete: (id: string) => () => void;
   onClickAddressSearch: () => void;
   address: string;
-  onChangeAddressDetail: () => void;
+  onChangeAddressDetail: (event: ChangeEvent<HTMLInputElement>) => void;
   userPoint?: IUserPoint | undefined;
   useditemsIPicked?: Pick<IQuery, "fetchUseditemsIPicked"> | undefined;
   isopen: boolean;

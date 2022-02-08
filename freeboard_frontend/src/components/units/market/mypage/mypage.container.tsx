@@ -64,6 +64,10 @@ export default function MyPageContainer() {
     setIsopen(false);
   };
 
+  const onChangeAddressDetail = (event: ChangeEvent<HTMLInputElement>) => {
+    setAddressDetail(event?.target.value);
+  };
+
   const onClickPayment = () => {
     const IMP = window.IMP;
     IMP.init("imp49910675");
@@ -116,6 +120,7 @@ export default function MyPageContainer() {
       onClickAddressSearch={onClickAddressSearch}
       onClickDelete={onClickDelete}
       onClickPayment={onClickPayment}
+      onChangeAddressDetail={onChangeAddressDetail}
       onChangePoint={onChangePoint}
     />
   );
