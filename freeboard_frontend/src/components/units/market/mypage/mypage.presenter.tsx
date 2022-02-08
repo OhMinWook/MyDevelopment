@@ -45,7 +45,7 @@ export default function MyPageUI(props: IPropsMyPageUI) {
               <M.Available>현재 사용 가능한 포인트</M.Available>
               {props.coin ? (
                 <M.Balance>
-                  {props.userLoggedIn?.fetchUserLoggedIn.userPoint.amount}
+                  {props.userLoggedIn?.fetchUserLoggedIn.userPoint?.amount}
                 </M.Balance>
               ) : (
                 <MonetizationOnIcon></MonetizationOnIcon>

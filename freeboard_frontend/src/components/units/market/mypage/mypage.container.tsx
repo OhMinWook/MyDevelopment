@@ -13,6 +13,11 @@ import {
   FETCH_USEDITEMS_IPICK,
 } from "./mypage.quries";
 
+declare const window: Window &
+  typeof globalThis & {
+    IMP: any;
+  };
+
 export default function MyPageContainer() {
   const [basketItems, setBasketItems] = useState<string[]>([]);
   const [coin, setCoin] = useState<boolean>(false);
@@ -75,11 +80,11 @@ export default function MyPageContainer() {
       {
         pg: "html5_inicis",
         pay_method: "card",
-        name: "초코파이",
+        name: "Ponit Charge",
         amount: point,
         // fetchuserloggedin에 있는 정보 기입
         buyer_email: "gildong@gmail.com",
-        buyer_name: "홍길동",
+        buyer_name: userLoggedIn?.fetchUserLoggedIn.name,
         buyer_tel: "010-4242-4242",
         buyer_addr: "서울특별시 강남구 신사동",
         buyer_postcode: "01181",
