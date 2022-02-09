@@ -37,7 +37,7 @@ export default function MyPageUI(props: IPropsMyPageUI) {
             <M.NameBox>
               {props.userLoggedIn?.fetchUserLoggedIn.name}님
             </M.NameBox>
-            <M.Modify>회원정보 수정</M.Modify>
+            <M.Modify onClick={props.onClickEdit}>회원정보 수정</M.Modify>
           </M.SideWrapper>
           <M.Box>
             <M.Amount>적립금</M.Amount>

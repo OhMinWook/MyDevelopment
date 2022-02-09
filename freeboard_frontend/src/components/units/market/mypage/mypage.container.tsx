@@ -1,4 +1,5 @@
 import { useMutation, useQuery } from "@apollo/client";
+import { useRouter } from "next/router";
 import { useState, useEffect, ChangeEvent } from "react";
 import {
   IMutation,
@@ -19,6 +20,7 @@ declare const window: Window &
   };
 
 export default function MyPageContainer() {
+  const router = useRouter();
   const [basketItems, setBasketItems] = useState<string[]>([]);
   const [coin, setCoin] = useState<boolean>(false);
   const [address, setAddress] = useState<string>("");
@@ -73,6 +75,10 @@ export default function MyPageContainer() {
     setAddressDetail(event?.target.value);
   };
 
+  const onClickEdit = () => {
+    router.push("/edit");
+  };
+
   const onClickPayment = () => {
     const IMP = window.IMP;
     IMP.init("imp49910675");
@@ -120,6 +126,7 @@ export default function MyPageContainer() {
       address={address}
       addressDetail={addressDetail}
       onHandleOk={onHandleOk}
+      onClickEdit={onClickEdit}
       onCompleteAddressSearch={onCompleteAddressSearch}
       onHandleCancle={onHandleCancle}
       onClickAddressSearch={onClickAddressSearch}

@@ -20,7 +20,7 @@ import {
 
 export default function Product() {
   const router = useRouter();
-  const fileRef = useRef(null);
+  const fileRef = useRef<>(null);
   const [createUseditem] = useMutation<
     Pick<IMutation, "createUseditem">,
     IMutationCreateUseditemArgs

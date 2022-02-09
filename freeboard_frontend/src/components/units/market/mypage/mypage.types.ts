@@ -18,4 +18,5 @@ export interface IPropsMyPageUI {
   useditemsIPicked?: Pick<IQuery, "fetchUseditemsIPicked"> | undefined;
   isopen: boolean;
   addressDetail: string;
+  onClickEdit: () => void;
 }
