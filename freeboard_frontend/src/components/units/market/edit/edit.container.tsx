@@ -53,7 +53,6 @@ export default function EditContainer() {
             },
           },
         });
-        console.log(result);
       } catch (error) {
         if (error instanceof Error) error.message;
       }
