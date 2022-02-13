@@ -67,7 +67,6 @@ export default function EditContainer() {
             password,
           },
         });
-        console.log(Edit);
       } catch (error) {
         if (error instanceof Error) error.message;
       }
