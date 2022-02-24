@@ -71,7 +71,7 @@ export default function EditContainer() {
         if (error instanceof Error) error.message;
       }
     } else if (password !== checkpassword) {
-      alert("올바른 비밀번호를 입력하세요");
+      alert("알맞은 비밀번호를 입력하세요");
     } else if (!password && !checkpassword) {
       alert("비밀번호가 같은지 확인해 주세요");
     }
