@@ -57,7 +57,7 @@ export default function EditContainer() {
         if (error instanceof Error) error.message;
       }
     } else {
-      alert("닉네임을 올바르게 입력해 주세요");
+      alert("닉네임을 알맞은지 입력해 주세요");
     }
 
     if (password && checkpassword && password === checkpassword) {
