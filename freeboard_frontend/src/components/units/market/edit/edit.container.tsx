@@ -75,7 +75,7 @@ export default function EditContainer() {
     } else if (!password && !checkpassword) {
       alert("비밀번호가 같은지 확인하세요");
     }
-    alert("변경사항의 저장이 완료되었습니다.");
+    alert("정보사항의 저장이 완료되었습니다.");
     router.push("./mypage");
   };
 
