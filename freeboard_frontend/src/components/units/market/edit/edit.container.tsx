@@ -73,7 +73,7 @@ export default function EditContainer() {
     } else if (password !== checkpassword) {
       alert("알맞은 비밀번호를 입력해주세요");
     } else if (!password && !checkpassword) {
-      alert("비밀번호가 같은지 확인하세요");
+      alert("비밀번호가 알맞은지 확인하세요");
     }
     alert("정보사항의 저장이 완료되었습니다.");
     router.push("./mypage");
