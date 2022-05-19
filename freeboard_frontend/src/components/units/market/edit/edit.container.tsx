@@ -75,7 +75,7 @@ export default function EditContainer() {
     } else if (!password && !checkpassword) {
       alert("비번이 알맞은지 확인해주세요");
     }
-    alert("정보가 입력되었습니다.");
+    alert("정보가 저장되었습니다.");
     router.push("./mypage");
   };
 
